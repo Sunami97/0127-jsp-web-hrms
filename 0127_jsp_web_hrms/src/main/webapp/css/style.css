@@ -1,0 +1,14 @@
+.main-container {
+	min-height: 75vh; /* 뷰포트 세로 전체 채우기 */
+	display: flex; /* flexbox 적용 */
+	justify-content: center; /* 수평 중앙 */
+	align-items: center; /* 수직 중앙 */
+	
+	max-width: 600px;
+	margin: 50px auto;
+	padding: 10px 10px;
+	background-color: #fff;
+	border-radius: 10px;
+	box-shadow: 0 5px 8px rgba(0, 0, 0, 0.1);
+	text-align: center;
+}
