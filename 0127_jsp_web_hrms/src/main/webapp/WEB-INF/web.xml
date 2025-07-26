@@ -7,7 +7,7 @@
 
 	<listener>
 		<listener-class>jdbc.DBCPInitListener</listener-class>
-	</listener>
+	</listener> 
 
 	<context-param>
 		<param-name>poolConfig</param-name>

@@ -8,6 +8,6 @@ public class ConnectionProvider {
 
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(
-                "jdbc:apache:commons:dbcp:0127_jsp_web_hrms");
+                "jdbc:apache:commons:dbcp:0127_jsp_web_hrms"); 
     }
 }

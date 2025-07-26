@@ -9,7 +9,7 @@ import user.model.UserDTO;
 public class UserDAO {
 
 	public UserDTO login(Connection conn, String user_id, String password) throws Exception{
-		String sql = "SELECT * FROM user_tbl WHERE user_id = ? AND password = ?";
+		String sql = "SELECT * FROM user_tbl WHERE user_id = ? AND password = ?"; 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)){
 			pstmt.setString(1, user_id);
 			pstmt.setString(2, password);
