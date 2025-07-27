@@ -15,7 +15,16 @@
         <input type="text" id="user_id" name="user_id" placeholder="ID" required /><br><br>
         <label for="password"><i class="fa fa-lock"></i></label>
         <input type="password" id="password" name="password" placeholder="PASSWORD" required /><br><br>
-        <button type="submit">SIGN IN</button>
+        <%	
+    String msg = (String) request.getAttribute("msg");
+    if (msg != null) {
+%>
+    <div style="color:red;"><%=msg%></div><br/>
+<%
+    }
+%>
+		<input type="submit" value="SIGN IN" class="btn1">
+        
     </form>
 </div>  
 </body>

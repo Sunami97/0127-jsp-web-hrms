@@ -22,19 +22,27 @@ public class LoginHandler implements CommandHandler {
 
             try (Connection conn = ConnectionProvider.getConnection()) {
                 UserService userService = new UserService();
-                UserDTO user = userService.login(conn, user_id, password);
-
-                if (user != null) {
-                    HttpSession session = request.getSession();
-                    session.setAttribute("loginUser", user);
-
-                    // 로그인 상태 플래그 수정 필요시 추가
-                    // 토큰/세션 타임아웃 등도 추후 확장 가능
-
-                    return "/WEB-INF/view/main.jsp"; // 로그인 성공시 메인화면
-                } else {
-                    request.setAttribute("msg", "아이디 또는 비밀번호가 틀렸습니다.");
+                
+                // 1. 아이디 존재여부 확인
+                boolean userExist = userService.isUserExist(conn, user_id);
+                
+                if (!userExist) {
+                    request.setAttribute("msg", "존재하지 않는 아이디입니다.");
                     return "/index.jsp";
+                } else {
+                	UserDTO user = userService.login(conn, user_id, password);
+
+                	if (user != null) {
+                		HttpSession session = request.getSession();
+                		session.setAttribute("loginUser", user);
+
+                		// 로그인 상태 플래그 수정 필요시 추가
+                		// 토큰/세션 타임아웃 등도 추후 확장 가능
+                		return "/WEB-INF/view/main.jsp"; // 로그인 성공시 메인화면
+                	} else {
+                		request.setAttribute("msg", "비밀번호가 틀렸습니다.");
+                		return "/index.jsp";
+                	}
                 }
             }
         }
