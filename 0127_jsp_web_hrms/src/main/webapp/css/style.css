@@ -80,5 +80,47 @@
 
 
 
+.menu-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    margin-top: 120px;
+    margin-bottom: 60px;
+}
+.menu-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 180px;
+    height: 210px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(60,60,60,0.08);
+    text-decoration: none;
+    color: #2a3f54;
+    font-size: 1.08rem;
+    font-weight: 500;
+    transition: box-shadow .2s, transform .2s;
+    cursor: pointer;
+    gap: 14px;
+}
+.menu-box:hover {
+    box-shadow: 0 10px 20px rgba(44,62,80,0.19);
+    transform: translateY(-8px) scale(1.04);
+}
+.menu-box i {
+    font-size: 4.5rem;
+    margin-bottom: 22px;
+    color: #4090db;
+}
+.menu-box span {
+    margin-top: 20px;
+    font-size: 1.18rem;
+    font-weight: 600;
+}
+
+
 
 
