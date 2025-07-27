@@ -36,10 +36,11 @@ public class UserDAO {
 			}
 		}
 		
+		
+		
 		return null;
 	}
 	
-	//로그인 시 아이디존재 체크
 	public boolean isUserExist(Connection conn, String user_id) throws Exception {
 	    String sql = "SELECT COUNT(*) FROM user_tbl WHERE user_id=?";
 	    try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -52,4 +53,5 @@ public class UserDAO {
 	    }
 	    return false;
 	}
+
 }
