@@ -19,7 +19,7 @@
 			validationQuery=select 1
 			minIdle=3
 			maxTotal=30
-			poolName=board
+			poolName=0127_jsp_web_hrms
 		</param-value>
 	</context-param>
 
