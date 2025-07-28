@@ -282,7 +282,7 @@ return;
                     <th>이름</th>
                     <td>
                         <input type="text" name="name" value="<%=user.getName()%>"readonly
-                            style="padding:5px 10px;font-size:15px;width:85%;">
+                            style="background:#f2f3f8;border:none;color:#888;padding:5px 10px;font-size:15px;width:85%;">
                     </td>
                 </tr>
                 <tr>
@@ -304,7 +304,7 @@ return;
                     <td>
                         <input type="date" name="birthDate"
                                value="<%=user.getBirthDate()==null?"":user.getBirthDate().toString()%>"readonly
-                               style="padding:5px 10px;font-size:15px;width:85%;">
+                            style="background:#f2f3f8;border:none;color:#888;padding:5px 10px;font-size:15px;width:85%;">
                     </td>
                 </tr>
                 <tr>
@@ -312,7 +312,7 @@ return;
                     <td>
                         <input type="date" name="joinDate"
                                value="<%=user.getJoinDate()==null?"":user.getJoinDate().toString()%>"readonly
-                               style="padding:5px 10px;font-size:15px;width:85%;">
+                            style="background:#f2f3f8;border:none;color:#888;padding:5px 10px;font-size:15px;width:85%;">
                     </td>
                 </tr>
                 <tr>
@@ -320,7 +320,7 @@ return;
                     <td>
                         <input type="date" name="retireDate"
                                value="<%=user.getRetireDate()==null?"":user.getRetireDate().toString()%>"readonly
-                               style="padding:5px 10px;font-size:15px;width:85%;">
+                            style="background:#f2f3f8;border:none;color:#888;padding:5px 10px;font-size:15px;width:85%;">
                     </td>
                 </tr>
                 <tr>
