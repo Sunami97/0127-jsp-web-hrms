@@ -351,23 +351,25 @@ return;
                 <span>비밀번호 변경</span>
                 <span class="pw-modal-close" onclick="closePwModal()">&times;</span>
             </div>
-            <form method="post" action="<%=request.getContextPath()%>/pwUpdatePro.do" style="margin-top:12px;">
-                <div class="pw-form-row">
-                    <label>기존 비밀번호</label>
-                    <input type="password" name="currentPw" required autocomplete="current-password">
-                </div>
-                <div class="pw-form-row">
-                    <label>새 비밀번호</label>
-                    <input type="password" name="newPw" required autocomplete="new-password">
-                </div>
-                <div class="pw-form-row">
-                    <label>새 비밀번호 확인</label>
-                    <input type="password" name="newPw2" required autocomplete="new-password">
-                </div>
-                <div style="text-align:center; margin-top:24px;">
-                    <button type="submit" class="pw-modal-btn">변경</button>
-                </div>
-            </form>
+         <form method="post" action="<%=request.getContextPath()%>/pwUpdatePro.do" style="margin-top:12px;">
+    <input type="hidden" name="userId" value="<%=user.getUserId()%>">
+    <div class="pw-form-row">
+        <label>기존 비밀번호</label>
+        <input type="password" name="currentPw" required autocomplete="current-password">
+    </div>
+    <div class="pw-form-row">
+        <label>새 비밀번호</label>
+        <input type="password" name="newPw" required autocomplete="new-password">
+    </div>
+    <div class="pw-form-row">
+        <label>새 비밀번호 확인</label>
+        <input type="password" name="newPw2" required autocomplete="new-password">
+    </div>
+    <div style="text-align:center; margin-top:24px;">
+        <button type="submit" class="pw-modal-btn">변경</button>
+    </div>
+</form>
+
         </div>
     </div>
 </body>

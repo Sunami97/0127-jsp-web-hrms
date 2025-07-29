@@ -73,5 +73,15 @@ public class UserDAO {
 			throw new Exception("사용자 정보 업데이트 중 오류 발생", e);
 		}
 	}
+	// 비밀번호 변경 메소드
+	public int updatePassword(Connection conn, String userId, String currentPw, String newPw) throws SQLException {
+	    String sql = "UPDATE user_tbl SET password=? WHERE user_id=? AND password=?";
+	    try (PreparedStatement ps = conn.prepareStatement(sql)) {
+	        ps.setString(1, newPw);
+	        ps.setString(2, userId);
+	        ps.setString(3, currentPw);
+	        return ps.executeUpdate();
+	    }
+	}
 
 }
