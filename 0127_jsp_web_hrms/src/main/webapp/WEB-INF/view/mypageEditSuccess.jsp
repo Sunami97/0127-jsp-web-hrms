@@ -7,7 +7,7 @@
     <style>
         body { font-family: 'Segoe UI', Arial, sans-serif; background: #f6f8fc; }
         .popup-bg {
-            position: fixed; left: 0; top: 0; width: 100vw; height: 100vh;
+            position: relative; 
             background: rgba(0,0,0,0.22); display: flex; align-items: center; justify-content: center; z-index: 50;
         }
         .popup-box {
