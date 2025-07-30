@@ -2,9 +2,10 @@ package myPage.command;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import myPage.service.UserService;
-import myPage.dto.UserDepartmentDTO;
+
 import mvc.command.CommandHandler;
+import myPage.model.UserDepartmentDTO;
+import myPage.service.UserService;
 
 public class MypageEditProHandler implements CommandHandler {
     @Override

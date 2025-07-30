@@ -1,4 +1,4 @@
-package myPage.dto;
+package myPage.model;
 
 import java.sql.Date;
 

@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import jdbc.connection.ConnectionProvider;
 import myPage.dao.UserDAO;
-import myPage.dto.UserDepartmentDTO;
+import myPage.model.UserDepartmentDTO;
 
 public class UserService {
 

@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import jdbc.connection.ConnectionProvider;
 import mvc.command.CommandHandler;
 import myPage.dao.UserDAO;
-import myPage.dto.UserDepartmentDTO;
+import myPage.model.UserDepartmentDTO;
 
 public class MypageHandler implements CommandHandler {
     @Override

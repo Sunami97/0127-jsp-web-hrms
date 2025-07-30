@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="myPage.dto.UserDepartmentDTO"%>
+<%@ page import="myPage.model.UserDepartmentDTO"%>
 <%
 UserDepartmentDTO user = (UserDepartmentDTO) request.getAttribute("user");
 if (user == null) {
