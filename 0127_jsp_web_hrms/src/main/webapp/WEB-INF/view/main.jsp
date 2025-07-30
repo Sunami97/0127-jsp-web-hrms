@@ -17,17 +17,11 @@
 </head>
 <body>
 <div class="menu-container">
-    <% if (isAdmin) { %>
-        <a href="empManage.do" class="menu-box">
-            <i class="ri-team-fill"></i>
-            <span>사원 관리</span>
-        </a>
-    <% } else { %>
         <a href="myInfo.do" class="menu-box">
             <i class="ri-user-3-fill"></i>
             <span>내 정보</span>
         </a>
-    <% } %>
+    
     <a href="orgChart.do" class="menu-box">
         <i class="ri-organization-chart"></i>
         <span>조직도 조회</span>
@@ -40,6 +34,12 @@
         <i class="ri-calendar-check-fill"></i>
         <span>연차 관리</span>
     </a>
+    <% if (isAdmin) { %>
+        <a href="empManage.do" class="menu-box">
+            <i class="ri-team-fill"></i>
+            <span>사원 관리</span>
+        </a>
+    <% } %>
 </div>
 <%@ include file="common/footer.jsp" %>
 </body>
