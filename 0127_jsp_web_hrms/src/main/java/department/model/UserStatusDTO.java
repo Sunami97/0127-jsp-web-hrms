@@ -1,53 +1,50 @@
 package department.model;
 
 public class UserStatusDTO {
-    private String name;
-    private String position;
-    private String statusType;
-    private String isCurrent;
-    private String departmentName;
+	private String departmentName;
+	private String position;
+	private String name;
+	private String statusType;
+	private String isCurrent;
 
-    // 생성자
-    public UserStatusDTO() {}
+	// Getter/Setter
+	public String getDepartmentName() {
+		return departmentName;
+	}
 
-    // Getter/Setter
-    public String getName() {
-        return name;
-    }
+	public void setDepartmentName(String departmentName) {
+		this.departmentName = departmentName;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getPosition() {
+		return position;
+	}
 
-    public String getPosition() {
-        return position;
-    }
+	public void setPosition(String position) {
+		this.position = position;
+	}
 
-    public void setPosition(String position) {
-        this.position = position;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public String getStatusType() {
-        return statusType;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setStatusType(String statusType) {
-        this.statusType = statusType;
-    }
+	public String getStatusType() {
+		return statusType;
+	}
 
-    public String getIsCurrent() {
-        return isCurrent;
-    }
+	public void setStatusType(String statusType) {
+		this.statusType = statusType;
+	}
 
-    public void setIsCurrent(String isCurrent) {
-        this.isCurrent = isCurrent;
-    }
+	public String getIsCurrent() {
+		return isCurrent;
+	}
 
-    public String getDepartmentName() {
-        return departmentName;
-    }
-
-    public void setDepartmentName(String departmentName) {
-        this.departmentName = departmentName;
-    }
+	public void setIsCurrent(String isCurrent) {
+		this.isCurrent = isCurrent;
+	}
 }

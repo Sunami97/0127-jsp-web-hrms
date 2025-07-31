@@ -6,5 +6,6 @@
 </head>
 <body>
 	人事管理 プログラム
+	<a href="department.do">조직도</a>
 </body>
 </html>
