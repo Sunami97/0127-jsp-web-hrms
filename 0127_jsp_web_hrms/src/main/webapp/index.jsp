@@ -6,5 +6,10 @@
 </head>
 <body>
 	人事管理 プログラム
+	
+		<form>
+		<button type="submit" onclick="javascript: form.action='adminForm.do'">관리창</button>
+		</form>
+	
 </body>
 </html>
