@@ -6,5 +6,6 @@
 </head>
 <body>
 	人事管理 プログラム
+	<a href="contacts.do">연락망</a>
 </body>
 </html>
