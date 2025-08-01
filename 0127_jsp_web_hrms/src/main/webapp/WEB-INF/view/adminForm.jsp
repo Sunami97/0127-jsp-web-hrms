@@ -34,8 +34,9 @@ img {
 				<tr> 
 					<td><select name="keyField">
 						<option value="name">이름</option>
-						<option value="userId">아이디</option>
-						<option value="position">직책</option>
+						<option value="user_id">아이디</option>
+						<option value="position">직급</option>
+						<option value="phone">연락처</option>
 						</select>
 					 <input class="search-txt" type="text" name="keyWord" placeholder="검색어를 입력하세요.">
 					<button type="submit">조회</button></td>

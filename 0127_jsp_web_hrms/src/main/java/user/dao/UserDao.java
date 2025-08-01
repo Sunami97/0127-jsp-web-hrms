@@ -37,20 +37,7 @@ public class UserDao {
 			System.out.print(sql);
 			pstmt.executeUpdate();
 			
-			/*
-			 * pstmt = conn.
-			 * prepareStatement("insert into user_tbl(user_id, password, name, email, phone, birth_date, join_date,position, department_id, is_admin, emp_status, work_status, login_status) values (?,?,?,?,?,?,?,?,?,?,?,?,?)"
-			 * ); pstmt.setString(1, userDto.getUserId()); pstmt.setString(2,
-			 * userDto.getPassword()); pstmt.setString(3, userDto.getName());
-			 * pstmt.setString(4, userDto.getEmail()); pstmt.setString(5,
-			 * userDto.getPhone()); pstmt.setDate(6,
-			 * java.sql.Date.valueOf(userDto.getBirthDate())); pstmt.setDate(7,
-			 * java.sql.Date.valueOf(userDto.getJoinDate())); pstmt.setString(8,
-			 * userDto.getPosition()); pstmt.setInt(9, userDto.getDepartmentId());
-			 * pstmt.setString(10, userDto.getIsAdmin()); pstmt.setString(11,
-			 * userDto.getEmpStatus()); pstmt.setString(12, userDto.getWorkStatus());
-			 * pstmt.setString(13, userDto.getLoginStatus());
-			 */
+		
 
 		} finally {
 			JdbcUtil.close(pstmt);

@@ -73,7 +73,7 @@ body {
 						<td>
 							<c:choose>
 									<c:when test="${empty user.retireDate}">
-								 		<%-- <input type="hidden" name="userId" value="${user.userId}"> --%>
+								 		<input type="hidden" name="userId" value="${user.userId}">
    										 <button type="submit" onclick="javascript: form.action='fire.do'">퇴사</button>
    									 </c:when>
    									 <c:otherwise>
