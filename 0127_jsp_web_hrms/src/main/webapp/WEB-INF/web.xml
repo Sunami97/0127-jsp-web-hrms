@@ -7,7 +7,7 @@
 
 	<listener>
 		<listener-class>jdbc.DBCPInitListener</listener-class>
-	</listener>
+	</listener> 
 
 	<context-param>
 		<param-name>poolConfig</param-name>
@@ -54,6 +54,19 @@
 		<servlet-name>ControllerUsingURI</servlet-name>
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
+
+	<filter>
+		<filter-name>LoginCheckFilter</filter-name>
+		<filter-class>filter.LoginCheckFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>LoginCheckFilter</filter-name>
+		<url-pattern>/orgChart.do</url-pattern>
+		<url-pattern>/myInfo.do</url-pattern>
+		<url-pattern>/contactList.do</url-pattern>
+		<url-pattern>/leaveManage.do</url-pattern>
+		<url-pattern>/empManage.do</url-pattern>
+	</filter-mapping>
 
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
