@@ -33,6 +33,7 @@ img {
 		<table >
 				<tr> 
 					<td><select name="keyField">
+						<option>전체</option>
 						<option value="name">이름</option>
 						<option value="user_id">아이디</option>
 						<option value="position">직급</option>
