@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="myPage.model.UserDepartmentDTO"%>
 <%
-UserDepartmentDTO user = (UserDepartmentDTO) request.getAttribute("user");
-if (user == null) {
+    // 🌸 유저 정보 받아오기 (컨트롤러에서 setAttribute로 넘겨준 거야!)
+    UserDepartmentDTO user = (UserDepartmentDTO) request.getAttribute("user");
+    // 😢 유저 정보가 없으면(로그인 안 했거나 세션 만료!) 안내 메시지 뿅!
+    if (user == null) {
 %>
 <h2>개인정보 수정</h2>
 <p style="color: red;">
@@ -10,7 +12,8 @@ if (user == null) {
     <a href="<%=request.getContextPath()%>/login.jsp" style="color: #007bff;">로그인 페이지로 이동</a>
 </p>
 <%
-return;
+    // 여기서 끝내버리기!
+    return;
 }
 %>
 <!DOCTYPE html>
@@ -18,23 +21,26 @@ return;
 <head>
     <title>개인정보 수정</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- FontAwesome for camera icon -->
+    <!-- 🎨 예쁜 아이콘 가져오는 링크 (카메라 등) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
+        /* 🖼️ 전체 배경, 글씨 스타일 */
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
             background: #f5f7fa;
         }
+        /* 🃏 카드형 프로필 박스 */
         .profile-card {
-            display: flex;
+            display: flex;                   /* 좌우 나눔! */
             max-width: 700px;
-            margin: 40px auto;
+            margin: 40px auto;               /* 가운데로~ */
             background: #fff;
             border-radius: 18px;
             box-shadow: 0 2px 16px rgba(0,0,0,0.11);
             overflow: hidden;
             min-height: 340px;
         }
+        /* 왼쪽(사진/버튼 영역) */
         .profile-left {
             background: #f0f4fa;
             padding: 36px 18px 24px 18px;
@@ -45,6 +51,7 @@ return;
             width: 230px;
             position: relative;
         }
+        /* 프로필 사진 */
         .profile-img-wrapper {
             position: relative;
             width: 140px;
@@ -54,11 +61,12 @@ return;
         .profile-img {
             width: 140px;
             height: 140px;
-            border-radius: 50%;
+            border-radius: 50%;    /* 동글동글 */
             object-fit: cover;
             background: #d6e0f7;
             box-shadow: 0 2px 10px #dde3ee;
         }
+        /* 카메라 버튼 (사진 변경용) */
         .profile-img-edit {
             position: absolute;
             right: 6px;
@@ -81,6 +89,7 @@ return;
             left: 0; top: 0; width: 100%; height: 100%;
             opacity: 0; cursor: pointer;
         }
+        /* 이름/직책/부서 */
         .profile-name {
             font-size: 1.3em;
             font-weight: bold;
@@ -93,6 +102,7 @@ return;
             font-size: 16px;
             text-align: center;
         }
+        /* 버튼 그룹 (비번변경/저장) */
         .btn-group {
             width: 100%;
             margin-top: 38px;
@@ -115,6 +125,7 @@ return;
         .my-btn:hover {
             background: #003bb8;
         }
+        /* 오른쪽(내정보 폼) */
         .profile-right {
             flex: 1;
             padding: 38px 32px;
@@ -123,6 +134,7 @@ return;
             flex-direction: column;
             justify-content: center;
         }
+        /* 테이블 */
         .profile-table {
             width: 100%;
             border-collapse: collapse;
@@ -141,10 +153,11 @@ return;
             color: #7682a0;
             font-weight: 600;
         }
+        /* 마지막 줄까지 줄 그어줌 */
         .profile-table tr:last-child td, .profile-table tr:last-child th {
             border-bottom: 1px solid #e0e3ea !important;
         }
-        /* --- 비밀번호 변경 모달 스타일 --- */
+        /* --- 🧡비밀번호 변경 모달 스타일🧡 --- */
         .pw-modal {
             display: none; position: fixed; z-index: 9999;
             left: 0; top: 0; width: 100vw; height: 100vh;
@@ -199,6 +212,7 @@ return;
             transition: background 0.14s;
         }
         .pw-modal-btn:hover { background: #003bb8; }
+        /* 📱 반응형(모바일 예쁘게) */
         @media (max-width: 700px) {
             .profile-card {
                 flex-direction: column;
@@ -219,7 +233,7 @@ return;
         }
     </style>
     <script>
-        // 미리보기 (프론트 Only, 실제 업로드는 구현 필요)
+        // 📸 프로필 사진 미리보기 (백엔드 저장은 구현 필요!)
         function previewProfileImg(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
@@ -229,13 +243,15 @@ return;
                 reader.readAsDataURL(input.files[0]);
             }
         }
-        // 비밀번호 변경 모달 열기/닫기
+        // 🛎️ 비밀번호 변경 모달 열기!
         function openPwModal() {
             document.getElementById('pwModal').style.display = 'block';
         }
+        // ❌ 모달 닫기!
         function closePwModal() {
             document.getElementById('pwModal').style.display = 'none';
         }
+        // 모달 바깥 클릭하면 닫히게!
         window.onclick = function(event) {
             var modal = document.getElementById('pwModal');
             if (event.target == modal) { modal.style.display = "none"; }
@@ -243,8 +259,10 @@ return;
     </script>
 </head>
 <body>
+    <!-- 📝 정보수정 form (저장버튼 누르면 /mypageEditPro.do로 POST 요청) -->
     <form action="<%=request.getContextPath()%>/mypageEditPro.do" method="post">
     <div class="profile-card">
+        <!-- 왼쪽: 프로필/이름/버튼 -->
         <div class="profile-left">
             <div class="profile-img-wrapper">
                 <img src="https://cdn-icons-png.flaticon.com/512/1946/1946429.png"
@@ -262,13 +280,16 @@ return;
                     / <%= user.getPosition() %>
                 <% } %>
             </div>
+            <!-- 🟣 비밀번호 변경 모달 띄우기 -->
             <div class="btn-group">
                 <button type="button" class="my-btn" onclick="openPwModal()">비밀번호 변경</button>
             </div>
+            <!-- 💾 정보 저장(수정) 버튼 -->
             <div class="btn-group" style="margin-top:12px;">
                 <button type="submit" class="my-btn">저장</button>
             </div>
         </div>
+        <!-- 오른쪽: 내 정보 입력폼 (일부는 readonly) -->
         <div class="profile-right">
             <table class="profile-table">
                 <tr>
@@ -351,25 +372,25 @@ return;
                 <span>비밀번호 변경</span>
                 <span class="pw-modal-close" onclick="closePwModal()">&times;</span>
             </div>
-         <form method="post" action="<%=request.getContextPath()%>/pwUpdatePro.do" style="margin-top:12px;">
-    <input type="hidden" name="userId" value="<%=user.getUserId()%>">
-    <div class="pw-form-row">
-        <label>기존 비밀번호</label>
-        <input type="password" name="currentPw" required autocomplete="current-password">
-    </div>
-    <div class="pw-form-row">
-        <label>새 비밀번호</label>
-        <input type="password" name="newPw" required autocomplete="new-password">
-    </div>
-    <div class="pw-form-row">
-        <label>새 비밀번호 확인</label>
-        <input type="password" name="newPw2" required autocomplete="new-password">
-    </div>
-    <div style="text-align:center; margin-top:24px;">
-        <button type="submit" class="pw-modal-btn">변경</button>
-    </div>
-</form>
-
+            <!-- ✨ 비밀번호 변경 폼! (POST로 pwUpdatePro.do로 감) -->
+            <form method="post" action="<%=request.getContextPath()%>/pwUpdatePro.do" style="margin-top:12px;">
+                <input type="hidden" name="userId" value="<%=user.getUserId()%>">
+                <div class="pw-form-row">
+                    <label>기존 비밀번호</label>
+                    <input type="password" name="currentPw" required autocomplete="current-password">
+                </div>
+                <div class="pw-form-row">
+                    <label>새 비밀번호</label>
+                    <input type="password" name="newPw" required autocomplete="new-password">
+                </div>
+                <div class="pw-form-row">
+                    <label>새 비밀번호 확인</label>
+                    <input type="password" name="newPw2" required autocomplete="new-password">
+                </div>
+                <div style="text-align:center; margin-top:24px;">
+                    <button type="submit" class="pw-modal-btn">변경</button>
+                </div>
+            </form>
         </div>
     </div>
 </body>
