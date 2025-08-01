@@ -3,7 +3,7 @@ package paidLeave.model;
 import java.util.Date;
 
 public class PaidLeave {
-    private Integer leaveId;            // 연차 내역 고유 ID
+    private Integer leaveId;        // 연차 내역 고유 ID
     private String userId;          // 신청자 ID
     private Date startDate;         // 연차 시작일
     private Date endDate;           // 연차 종료일

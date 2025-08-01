@@ -1,7 +1,9 @@
 package paidLeave.dao;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import jdbc.JdbcUtil;
 import paidLeave.model.PaidLeave;
@@ -20,22 +22,11 @@ public class PaidLeaveDao {
             pstmt.setDouble(4, paidleave.getDays());
             pstmt.setString(5, paidleave.getStatus());
             pstmt.setString(6, paidleave.getReason());
-
-            // appliedAt이 null이면 현재 시간으로 대체 가능 (DB에서 DEFAULT SYSDATE도 처리되지만 명시 가능)
-            if (paidleave.getAppliedAt() != null) {
-                pstmt.setTimestamp(7, toTimestamp(paidleave.getAppliedAt()));
-            } else {
-                pstmt.setTimestamp(7, new Timestamp(System.currentTimeMillis()));
-            }
+            pstmt.setTimestamp(7, toTimestamp(paidleave.getAppliedAt()));
 
             // approved_by와 approved_at은 null 허용
             pstmt.setString(8, paidleave.getApprovedBy());
-
-            if (paidleave.getApprovedAt() != null) {
-                pstmt.setTimestamp(9, toTimestamp(paidleave.getApprovedAt()));
-            } else {
-                pstmt.setNull(9, Types.TIMESTAMP);
-            }
+            pstmt.setTimestamp(9, toTimestamp(paidleave.getApprovedAt()));
 
             int insertedCount = pstmt.executeUpdate();
 

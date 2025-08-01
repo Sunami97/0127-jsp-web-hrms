@@ -1,0 +1,6 @@
+/build/
+.classpath
+.project
+.settings
+pom.xml
+/src/main/webapp/WEB-INF/lib

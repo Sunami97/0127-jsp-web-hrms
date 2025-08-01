@@ -3,6 +3,9 @@ package user.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import user.model.UserDTO;
 
@@ -52,6 +55,19 @@ public class UserDAO {
 	        }
 	    }
 	    return false;
+	}
+
+	// 관리자
+	public List<String> getAdminUsernames(Connection conn) throws SQLException {
+		String sql = "SELECT name FROM user WHERE is_admin='Y'" ;
+		try (PreparedStatement pstmt = conn.prepareStatement(sql);
+			 ResultSet rs = pstmt.executeQuery()) {
+			List<String> names = new ArrayList<>();
+			while (rs.next()) {
+				names.add(rs.getString("username"));
+			}
+			return names;
+		}
 	}
 
 }

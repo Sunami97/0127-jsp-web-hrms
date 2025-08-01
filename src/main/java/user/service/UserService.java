@@ -1,7 +1,11 @@
 package user.service;
 
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
+import jdbc.connection.ConnectionProvider;
 import user.dao.UserDAO;
 import user.model.UserDTO;
 
@@ -16,4 +20,12 @@ public class UserService {
         return userDAO.isUserExist(conn, user_id);
     }
 
-} 
+    public List<String> getAdminUsernames() {
+        try (Connection conn = ConnectionProvider.getConnection()) {
+            return userDAO.getAdminUsernames(conn);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+}
