@@ -30,9 +30,10 @@ public class UserSelectHandler implements CommandHandler{
 	private String processSubmit(HttpServletRequest req, HttpServletResponse res) {
 		String keyWord = req.getParameter("keyWord");
 		String keyField = req.getParameter("keyField");
-		List<UserDto> user = userService.Select(keyWord,keyField);
+		String date = req.getParameter("date");
+		String[] sDate = req.getParameterValues("sDate");
+		List<UserDto> user = userService.Select(keyWord,keyField,date,sDate);
 		int count = user.size();
-		
 		req.setAttribute("count", count);
 		req.setAttribute("user", user);
 		return "WEB-INF/view/adminForm.jsp";

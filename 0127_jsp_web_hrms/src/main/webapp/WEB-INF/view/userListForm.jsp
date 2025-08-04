@@ -74,6 +74,7 @@ body {
 							<c:choose>
 									<c:when test="${empty user.retireDate}">
 								 		<input type="hidden" name="userId" value="${user.userId}">
+								 		<input type="date" name="date">
    										 <button type="submit" onclick="javascript: form.action='fire.do'">퇴사</button>
    									 </c:when>
    									 <c:otherwise>
@@ -82,7 +83,7 @@ body {
 							</c:choose>
 						</td>
 						<td>${user.position}</td>
-						<td>${user.departmentId}</td>
+						<td>${user.departmentName}</td>
 						<td>${user.isAdmin}</td>
 						<td>${user.empStatus}</td>
 						<td>${user.workStatus}</td>

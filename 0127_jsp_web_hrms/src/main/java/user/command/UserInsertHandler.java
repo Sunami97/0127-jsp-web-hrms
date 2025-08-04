@@ -39,12 +39,6 @@ public class UserInsertHandler implements CommandHandler {
 		int i;
 
 		
-		/*
-		 * String[] resizedArray = { "user_id", "password", "name","login_Status"};
-		 * String[] reqArray = { "b", "b", "c","n" };
-		 */
-		 
-
 		for (i = 0; i < 13; i++) {
 			if (req.getParameter("userId") != "" && req.getParameter("userId") != null
 					&& !Arrays.toString(insertList).contains("user_id")) {
@@ -118,16 +112,6 @@ public class UserInsertHandler implements CommandHandler {
 		String[] resizedArray = Arrays.copyOf(insertList, i);
 		String[] reqArray = Arrays.copyOf(reqVal, i);
 
-		/*
-		 * UserDto userDto = new UserDto( req.getParameter("userId"),
-		 * req.getParameter("password"), req.getParameter("name"),
-		 * req.getParameter("email"), req.getParameter("phone"),
-		 * req.getParameter("birthDate"), req.getParameter("joinDate"),
-		 * req.getParameter("position"),
-		 * Integer.parseInt(req.getParameter("departmentId")),
-		 * req.getParameter("isAdmin"), req.getParameter("empStatus"),
-		 * req.getParameter("workStatus"), req.getParameter("loginStatus") );
-		 */
 
 		userRequest.serviceInsert(resizedArray, reqArray);
 		return "WEB-INF/view/adminForm.jsp";

@@ -27,11 +27,9 @@ public class UserFireHandler implements CommandHandler {
 	}
 
 	private String processSubmit(HttpServletRequest req, HttpServletResponse res) {
+		String date = req.getParameter("date");
 		String userId = req.getParameter("userId");
-		
-		userService.fire(userId);
-		
-		
+		userService.fire(userId, date);
 		
 		return "WEB-INF/view/adminForm.jsp";
 	}

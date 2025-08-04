@@ -12,13 +12,13 @@ import user.dto.UserDto;
 public class UserSelectService {
 	private UserDao userDao = new UserDao();
 	
-	public List<UserDto> Select(String keyWord, String keyField) {
+	public List<UserDto> Select(String keyWord, String keyField,String date, String[] sDate) {
 		Connection conn = null;
 		try {
 			conn = ConnectionProvider.getConnection();
 			conn.setAutoCommit(false);
 			
-			List<UserDto> user = userDao.selectList(conn, keyWord, keyField);
+			List<UserDto> user = userDao.selectList(conn, keyWord, keyField,date,sDate);
 			
 			conn.commit();
 			return user;

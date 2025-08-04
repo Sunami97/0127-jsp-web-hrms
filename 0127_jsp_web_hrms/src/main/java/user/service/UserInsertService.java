@@ -13,13 +13,13 @@ import user.dto.UserDto;
 public class UserInsertService {
 	private UserDao userDao = new UserDao();
 	
-	public void serviceInsert(/* UserDto userDto */String[] insertList, String[] reqVal) {
+	public void serviceInsert(String[] insertList, String[] reqVal) {
 		Connection conn = null;
 		try {
 			conn = ConnectionProvider.getConnection();
 			conn.setAutoCommit(false);
 			
-			userDao.insert(conn/* , userDto */,insertList,reqVal);
+			userDao.insert(conn,insertList,reqVal);
 			
 			conn.commit();
 		}catch(SQLException e) {

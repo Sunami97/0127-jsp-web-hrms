@@ -16,6 +16,11 @@ public class UserDto {
 	  private String empStatus; 
 	  private String workStatus;
 	  private String loginStatus;
+	  private String departmentName;
+	  
+	public String getDepartmentName() {
+		return departmentName;
+	}
 	public String getUserId() {
 		return userId;
 	}
@@ -58,9 +63,10 @@ public class UserDto {
 	public String getLoginStatus() {
 		return loginStatus;
 	}
+
 	public UserDto(String userId, String password, String name, String email, String phone, String birthDate,
 			String joinDate, String retireDate, String position, int departmentId, String isAdmin, String empStatus,
-			String workStatus, String loginStatus) {
+			String workStatus, String loginStatus, String departmentName) {
 		super();
 		this.userId = userId;
 		this.password = password;
@@ -76,10 +82,11 @@ public class UserDto {
 		this.empStatus = empStatus;
 		this.workStatus = workStatus;
 		this.loginStatus = loginStatus;
+		this.departmentName = departmentName;
 	}
 	public UserDto(String userId, String password, String name, String email, String phone, String birthDate,
 			String joinDate, String position, int departmentId, String isAdmin, String empStatus, String workStatus,
-			String loginStatus) {
+			String loginStatus, String departmentName) {
 		super();
 		this.userId = userId;
 		this.password = password;
@@ -94,6 +101,7 @@ public class UserDto {
 		this.empStatus = empStatus;
 		this.workStatus = workStatus;
 		this.loginStatus = loginStatus;
+		this.departmentName = departmentName;
 	}
 	public UserDto() {
 		super();

@@ -13,7 +13,7 @@ import jdbc.JdbcUtil;
 import user.dto.UserDto;
 
 public class UserDao {
-	public void insert(Connection conn/* , UserDto userDto */, String[] insertList, String[] reqVal)
+	public void insert(Connection conn, String[] insertList, String[] reqVal)
 			throws SQLException {
 		PreparedStatement pstmt = null;
 
@@ -25,16 +25,13 @@ public class UserDao {
 
 			pstmt = conn.prepareStatement(sql.toString());
 
-			// 값 바인딩
 			for (int i = 0; i < reqVal.length; i++) {
 			    try {
-			        // 정수면 setInt, 아니면 setString
 			        pstmt.setInt(i + 1, Integer.parseInt(reqVal[i]));
 			    } catch (NumberFormatException e) {
 			        pstmt.setString(i + 1, reqVal[i]);
 			    }
 			}
-			System.out.print(sql);
 			pstmt.executeUpdate();
 			
 		
@@ -46,31 +43,57 @@ public class UserDao {
 
 	}
 
-	public List<UserDto> selectList(Connection conn, String keyWord, String keyField) throws SQLException {
+	public List<UserDto> selectList(Connection conn, String keyWord, String keyField, String date, String[] sDate) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		if (keyWord == "" || keyWord == null) {
-			try {
-				pstmt = conn.prepareStatement("Select * from user_tbl");
-				rs = pstmt.executeQuery();
-				List<UserDto> result = new ArrayList<>();
-				while (rs.next()) {
-					result.add(convertUser(rs));
+		
+		if (keyWord == "" || keyWord == null && sDate.length != 0 ) {
+				try {
+					pstmt = conn.prepareStatement(
+							"Select u.*,d.department_name from user_tbl u, department_tbl d where u.department_id = d.department_id(+) and "+date+" between ? and ?");
+					pstmt.setString(1, sDate[0]);
+					pstmt.setString(2, sDate[1]);
+					rs = pstmt.executeQuery();
+					
+					List<UserDto> result = new ArrayList<>();
 
+					while (rs.next()) {
+						result.add(convertUser(rs));
+					}
+					return result;
+				} finally {
+					JdbcUtil.close(rs);
+					JdbcUtil.close(pstmt);
 				}
-
-				return result;
-			} finally {
-				JdbcUtil.close(rs);
-				JdbcUtil.close(pstmt);
-			}
-		} else {
-
-			try {
-				pstmt = conn.prepareStatement("Select * from user_tbl where " + keyField + " = ?");
+				
+		} else if(sDate.length == 0 && keyWord != null && keyWord != ""){
+				try {pstmt = conn.prepareStatement("Select u.*,d.department_name from user_tbl u, department_tbl d where u.department_id = d.department_id(+) and "
+														+keyField+" = ?");
 				pstmt.setString(1, keyWord);
 				rs = pstmt.executeQuery();
 				List<UserDto> result = new ArrayList<>();
+				while (rs.next()) {
+					result.add(convertUser(rs));
+
+				}
+
+				return result;
+			} finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
+			}
+				
+		} else if(sDate.length != 0 && keyWord != null && keyWord != "") {	
+				try {
+				pstmt = conn.prepareStatement(
+						"Select u.*,d.department_name from user_tbl u, department_tbl d where u.department_id = d.department_id(+) and "
+								+keyField+" = ? and "+date+" between ? and ?");
+				pstmt.setString(1, keyWord);
+				pstmt.setString(2, sDate[0]);
+				pstmt.setString(3, sDate[1]);
+				rs = pstmt.executeQuery();
+				
+				List<UserDto> result = new ArrayList<>();
 
 				while (rs.next()) {
 					result.add(convertUser(rs));
@@ -80,8 +103,25 @@ public class UserDao {
 				JdbcUtil.close(rs);
 				JdbcUtil.close(pstmt);
 			}
+		} else {	
+			try {
+			pstmt = conn.prepareStatement("Select u.*,d.department_name from user_tbl u, department_tbl d where u.department_id = d.department_id(+)");
+			rs = pstmt.executeQuery();
+			List<UserDto> result = new ArrayList<>();
+			while (rs.next()) {
+				result.add(convertUser(rs));
+
+			}
+
+			return result;
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+		
 		}
 	}
+
 
 	private UserDto convertUser(ResultSet rs) throws SQLException {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -104,7 +144,7 @@ public class UserDao {
 		return new UserDto(rs.getString("user_id"), rs.getString("password"), rs.getString("name"),
 				rs.getString("email"), rs.getString("phone"), birthDate, joinDate, retireDate, rs.getString("position"),
 				rs.getInt("department_id"), rs.getString("is_admin"), rs.getString("emp_status"),
-				rs.getString("work_status"), rs.getString("login_status"));
+				rs.getString("work_status"), rs.getString("login_status"),rs.getString("department_name"));
 	}
 
 	public void Delete(Connection conn, String[] userId) throws SQLException {
@@ -147,12 +187,13 @@ public class UserDao {
 
 	}
 	
-	public void fire(Connection conn, String userId) {
+	public void fire(Connection conn, String userId, String date) {
 		PreparedStatement pstmt = null;
 		try {
 			System.out.print(userId);
-			pstmt = conn.prepareStatement("update user_tbl set retire_date = sysdate where user_id = ?");
-			pstmt.setString(1, userId);
+			pstmt = conn.prepareStatement("update user_tbl set retire_date = ? where user_id = ?");
+			pstmt.setString(1, date);
+			pstmt.setString(2, userId);
 			pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();

@@ -10,12 +10,12 @@ import user.dao.UserDao;
 public class UserFireService {
 UserDao userDao = new UserDao();
 	
-	public void fire(String userId) {
+	public void fire(String userId, String date) {
 		Connection conn = null;
 		try {
 		conn = ConnectionProvider.getConnection();
 		conn.setAutoCommit(false);
-		userDao.fire(conn, userId);
+		userDao.fire(conn, userId, date);
 		conn.commit();
 		
 	}catch(SQLException e) {

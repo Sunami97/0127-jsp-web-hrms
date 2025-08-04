@@ -39,8 +39,15 @@ img {
 						<option value="position">직급</option>
 						<option value="phone">연락처</option>
 						</select>
+						<select name="date">
+						<option value="join_date">입사일</option>
+						<option value="retire_date">퇴사일</option>
+						</select>
+						<input type="date" name="sDate">~ 
+						<input type="date" name="sDate"> 
 					 <input class="search-txt" type="text" name="keyWord" placeholder="검색어를 입력하세요.">
-					<button type="submit">조회</button></td>
+					<button type="submit">조회</button>
+					</td>
 					
 				</tr>
 			
