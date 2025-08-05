@@ -28,15 +28,16 @@ public class UserSelectHandler implements CommandHandler{
 		return FORM_VIEW;
 	}
 	private String processSubmit(HttpServletRequest req, HttpServletResponse res) {
-		String keyWord = req.getParameter("keyWord");
+		String keyWord = req.getParameter("keyWord");	
 		String keyField = req.getParameter("keyField");
-		String date = req.getParameter("date");
-		String[] sDate = req.getParameterValues("sDate");
+		String date = req.getParameter("date");				
+		String[] sDate = req.getParameterValues("sDate");	//검색할 키워드,속성,날짜유형,날짜 범위 받아옴
 		List<UserDto> user = userService.Select(keyWord,keyField,date,sDate);
-		int count = user.size();
+		//셀럭트서비스의 메소드 호출후 유저리스트에 담음 セレクトサービスのメソッド呼び出し後、ユーザーリストに入れる
+		int count = user.size();	//count변수에 검색된 인원 수를 담음 count変数に検索された人数を含める
 		req.setAttribute("count", count);
-		req.setAttribute("user", user);
-		return "WEB-INF/view/adminForm.jsp";
+		req.setAttribute("user", user);	//리퀘스트 객체에 count,user 저장 リクエストオブジェクトにcount、userを保存
+		return "WEB-INF/view/adminForm.jsp"; //관리자 페이지로 리턴 管理者ページにリターン
 	}
 
 }

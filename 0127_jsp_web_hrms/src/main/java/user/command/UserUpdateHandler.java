@@ -35,8 +35,11 @@ public class UserUpdateHandler implements CommandHandler {
 	private String processSubmit(HttpServletRequest req, HttpServletResponse res) {
 		String userId = req.getParameter("userId");
 		String[] reqVal = new String[6];
-		String[] updateList = new String[6];
-		for (int i = 0; i < 6; i++) {
+		String[] updateList = new String[6];	//넣을 항목과 값을 담을 배열 객체 入れる項目と数値を入れる配列オブジェクト
+		int i;// 반복문에 사용할 변수 反復文に使用する変数
+
+		//  입력한 값이 있다면 그 항목과 값을 배열에 넣음 그걸 반복문으로 반복 入力した数値があれば、その項目と数値を配列に入れて、それを繰り返します
+		for (i = 0; i < 6; i++) {
 			if (req.getParameter("email") != "" && req.getParameter("email") != null
 					&& !Arrays.toString(updateList).contains("email")) {
 				reqVal[i] = req.getParameter("email");
@@ -71,10 +74,12 @@ public class UserUpdateHandler implements CommandHandler {
 				break;
 			}
 		}
+		String[] resizedArray = Arrays.copyOf(updateList, i);
+		String[] reqArray = Arrays.copyOf(reqVal, i);	//반복한 횟수에 맞쳐 배열 수 조절 繰り返した回数に合わせて配列数を調節
+		
+		userService.userUpdate(userId, resizedArray, reqArray);	//수정서비스의 메소드 호출 修正サービスのメソッド呼び出し
 
-		userService.userUpdate(userId, updateList, reqVal);
-
-		return "WEB-INF/view/adminForm.jsp";
+		return "WEB-INF/view/adminForm.jsp"; //관리자 페이지로 리턴 管理者ページにリターン
 	}
 
 }

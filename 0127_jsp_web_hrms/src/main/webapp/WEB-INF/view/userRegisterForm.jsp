@@ -22,7 +22,7 @@
 					<option value="部長">部長</option>
 					<option value="社長">社長</option>
 				</select><br>			
-		부서코드	<select name="departmentId">
+		부서	<select name="departmentId">
 					<option value="1">생산</option>
 					<option value="2">회계</option>
 					<option value="3">인사</option>

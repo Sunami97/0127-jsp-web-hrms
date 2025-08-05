@@ -40,6 +40,7 @@ img {
 						<option value="phone">연락처</option>
 						</select>
 						<select name="date">
+						<option	value="null" selected>기간</option>
 						<option value="join_date">입사일</option>
 						<option value="retire_date">퇴사일</option>
 						</select>

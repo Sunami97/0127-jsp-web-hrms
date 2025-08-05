@@ -47,26 +47,28 @@ public class UserDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		if (keyWord == "" || keyWord == null && sDate.length != 0 ) {
-				try {
-					pstmt = conn.prepareStatement(
-							"Select u.*,d.department_name from user_tbl u, department_tbl d where u.department_id = d.department_id(+) and "+date+" between ? and ?");
-					pstmt.setString(1, sDate[0]);
-					pstmt.setString(2, sDate[1]);
-					rs = pstmt.executeQuery();
-					
-					List<UserDto> result = new ArrayList<>();
+		if (!date.equals("null") && keyWord != null && keyWord != "") {	
+			try {
+			pstmt = conn.prepareStatement(
+					"Select u.*,d.department_name from user_tbl u, department_tbl d where u.department_id = d.department_id(+) and "
+							+keyField+" = ? and "+date+" between ? and ?");
+			pstmt.setString(1, keyWord);
+			pstmt.setString(2, sDate[0]);
+			pstmt.setString(3, sDate[1]);
+			rs = pstmt.executeQuery();
+			
+			List<UserDto> result = new ArrayList<>();
 
-					while (rs.next()) {
-						result.add(convertUser(rs));
-					}
-					return result;
-				} finally {
-					JdbcUtil.close(rs);
-					JdbcUtil.close(pstmt);
-				}
+			while (rs.next()) {
+				result.add(convertUser(rs));
+			}
+			return result;
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
 				
-		} else if(sDate.length == 0 && keyWord != null && keyWord != ""){
+		} else if(date.equals("null")  && keyWord != null && keyWord != ""){
 				try {pstmt = conn.prepareStatement("Select u.*,d.department_name from user_tbl u, department_tbl d where u.department_id = d.department_id(+) and "
 														+keyField+" = ?");
 				pstmt.setString(1, keyWord);
@@ -76,21 +78,18 @@ public class UserDao {
 					result.add(convertUser(rs));
 
 				}
-
 				return result;
 			} finally {
 				JdbcUtil.close(rs);
 				JdbcUtil.close(pstmt);
 			}
 				
-		} else if(sDate.length != 0 && keyWord != null && keyWord != "") {	
-				try {
+		} else if((keyWord == "" || keyWord == null) && !date.equals("null") ) {
+			try {
 				pstmt = conn.prepareStatement(
-						"Select u.*,d.department_name from user_tbl u, department_tbl d where u.department_id = d.department_id(+) and "
-								+keyField+" = ? and "+date+" between ? and ?");
-				pstmt.setString(1, keyWord);
-				pstmt.setString(2, sDate[0]);
-				pstmt.setString(3, sDate[1]);
+						"Select u.*,d.department_name from user_tbl u, department_tbl d where u.department_id = d.department_id(+) and "+date+" between ? and ?");
+				pstmt.setString(1, sDate[0]);
+				pstmt.setString(2, sDate[1]);
 				rs = pstmt.executeQuery();
 				
 				List<UserDto> result = new ArrayList<>();
@@ -112,7 +111,6 @@ public class UserDao {
 				result.add(convertUser(rs));
 
 			}
-
 			return result;
 		} finally {
 			JdbcUtil.close(rs);

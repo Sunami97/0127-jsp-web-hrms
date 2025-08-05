@@ -28,9 +28,9 @@ public class UserFireHandler implements CommandHandler {
 
 	private String processSubmit(HttpServletRequest req, HttpServletResponse res) {
 		String date = req.getParameter("date");
-		String userId = req.getParameter("userId");
-		userService.fire(userId, date);
+		String userId = req.getParameter("userId");	//날짜와 유저아이디를 받음 日付とユーザーIDを受け取る
+		userService.fire(userId, date);	//퇴사 서비스의 퇴사 메서드 호출 退社サービスの退社メソッド呼び出し
 		
-		return "WEB-INF/view/adminForm.jsp";
+		return "WEB-INF/view/adminForm.jsp"; //관리자 페이지로 리턴 管理者ページにリターン
 	}
 }

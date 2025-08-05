@@ -51,7 +51,7 @@ body {
 					<th width="120" class="text-center">입사일</th>
 					<th width="120" class="text-center">퇴사일</th>
 					<th width="20" class="text-center">직급</th>
-					<th width="20" class="text-center">부서번호</th>
+					<th width="20" class="text-center">부서</th>
 					<th width="20" class="text-center">관리자 여부</th>
 					<th width="20" class="text-center">상태</th>
 					<th width="20" class="text-center">근무상태</th>
@@ -97,7 +97,6 @@ body {
 			</tbody>
 		</table>
 		<button type="submit" onclick="javascript: form.action='delete.do'">삭제</button>
-
 		<button type="submit"
 			onclick="javascript: form.action='updateForm.do'">수정</button>
 
