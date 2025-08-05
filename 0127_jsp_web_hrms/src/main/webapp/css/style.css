@@ -26,7 +26,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 100;
+    z-index: 999;
 }
 
 .header-left .logo {
@@ -83,10 +83,13 @@
 .menu-container {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     align-items: center;
     gap: 40px;
     margin-top: 120px;
     margin-bottom: 60px;
+    margin-left:200px;
+    
 }
 .menu-box {
     display: flex;
@@ -120,7 +123,6 @@
     font-size: 1.18rem;
     font-weight: 600;
 }
-
 
 
 

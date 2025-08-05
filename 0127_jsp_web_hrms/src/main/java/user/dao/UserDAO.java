@@ -3,6 +3,7 @@ package user.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import user.model.UserDTO;
 
@@ -53,5 +54,16 @@ public class UserDAO {
 	    }
 	    return false;
 	}
+	
+	
+	public void updateLoginStatus(Connection conn, String userId, String status) throws SQLException {
+	    String sql = "UPDATE user_tbl SET login_status = ? WHERE user_id = ?";
+	    try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+	        pstmt.setString(1, status);
+	        pstmt.setString(2, userId);
+	        pstmt.executeUpdate();
+	    }
+	}
+
 
 }

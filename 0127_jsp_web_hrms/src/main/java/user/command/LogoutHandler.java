@@ -1,16 +1,28 @@
 package user.command;
 
+import java.sql.Connection;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import jdbc.connection.ConnectionProvider;
 import mvc.command.CommandHandler;
+import user.model.UserDTO;
+import user.service.UserService;
 
 public class LogoutHandler implements CommandHandler {
     @Override
     public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
         HttpSession session = request.getSession(false);
         if (session != null) {
+        	UserDTO user = (UserDTO) session.getAttribute("loginUser");
+            if (user != null) {
+                try (Connection conn = ConnectionProvider.getConnection()) {
+                    UserService userService = new UserService();
+                    userService.updateLoginStatus(conn, user.getUser_id(), "N");
+                }
+            }
             session.invalidate(); // 세션 무효화 (로그아웃)
         }
         // 로그인 페이지로 리다이렉트

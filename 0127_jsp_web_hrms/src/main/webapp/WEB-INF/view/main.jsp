@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="common/header.jsp" %>
+<%@ include file="common/nav.jsp" %>
 
 <%
     user.model.UserDTO User = (user.model.UserDTO) session.getAttribute("loginUser");
@@ -13,6 +14,7 @@
 <meta charset="UTF-8"> 
 <title>메인</title>
 <link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/nav.css">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 </head>
 <body>

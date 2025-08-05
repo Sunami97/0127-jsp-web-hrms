@@ -33,6 +33,8 @@ public class LoginHandler implements CommandHandler {
                     // 2. 아이디는 있는데 비밀번호 일치 여부 확인
                     UserDTO user = userService.login(conn, user_id, password);
                     if (user != null) {
+                    	userService.updateLoginStatus(conn, user_id, "Y");
+                    	
                         HttpSession session = request.getSession();
                         session.setAttribute("loginUser", user);
                         return "/WEB-INF/view/main.jsp"; // 로그인 성공시 메인화면
