@@ -1,13 +1,15 @@
 package department.model;
 
 public class UserStatusDTO {
-	private String departmentName;
-	private String position;
-	private String name;
-	private String statusType;
-	private String isCurrent;
+	private String departmentName; // 부서 이름 // 部署名
+	private String position;       // 직책 // 職位
+	private String name;           // 사용자 이름 // ユーザー名
+	private String statusType;     // 상태 종류 (예: 근무중) // 状態タイプ（例：勤務中）
+	private String isCurrent;      // 현재 상태 여부 (Y/N) // 現在の状態かどうか（Y/N）
 
-	// Getter/Setter
+	// Getter / Setter
+	// ゲッター / セッター
+
 	public String getDepartmentName() {
 		return departmentName;
 	}
