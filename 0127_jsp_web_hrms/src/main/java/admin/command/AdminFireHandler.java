@@ -1,14 +1,14 @@
-package user.command;
+package admin.command;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import admin.service.AdminFireService;
 import mvc.command.CommandHandler;
-import user.service.UserFireService;
 
-public class UserFireHandler implements CommandHandler {
+public class AdminFireHandler implements CommandHandler {
 	private static final String FORM_VIEW = "/WEB-INF/adminForm.jsp";
-	private UserFireService userService = new UserFireService();
+	private AdminFireService userService = new AdminFireService();
 
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {

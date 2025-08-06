@@ -1,7 +1,7 @@
-package user.dto;
+package admin.dto;
 
 
-public class UserDto {
+public class AdminDto {
 	  private String userId; 
 	  private String password; 
 	  private String name; 
@@ -64,7 +64,7 @@ public class UserDto {
 		return loginStatus;
 	}
 
-	public UserDto(String userId, String password, String name, String email, String phone, String birthDate,
+	public AdminDto(String userId, String password, String name, String email, String phone, String birthDate,
 			String joinDate, String retireDate, String position, int departmentId, String isAdmin, String empStatus,
 			String workStatus, String loginStatus, String departmentName) {
 		super();
@@ -84,7 +84,7 @@ public class UserDto {
 		this.loginStatus = loginStatus;
 		this.departmentName = departmentName;
 	}
-	public UserDto(String userId, String password, String name, String email, String phone, String birthDate,
+	public AdminDto(String userId, String password, String name, String email, String phone, String birthDate,
 			String joinDate, String position, int departmentId, String isAdmin, String empStatus, String workStatus,
 			String loginStatus, String departmentName) {
 		super();
@@ -103,7 +103,7 @@ public class UserDto {
 		this.loginStatus = loginStatus;
 		this.departmentName = departmentName;
 	}
-	public UserDto() {
+	public AdminDto() {
 		super();
 	}
 	

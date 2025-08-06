@@ -1,27 +1,24 @@
-package user.service;
+package admin.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.List;
 
+import admin.dao.AdminDao;
 import jdbc.JdbcUtil;
 import jdbc.connection.ConnectionProvider;
-import user.dao.UserDao;
-import user.dto.UserDto;
 
-public class UserSelectService {
-	private UserDao userDao = new UserDao();
+public class AdminInsertService {
+	private AdminDao userDao = new AdminDao();
 	
-	public List<UserDto> Select(String keyWord, String keyField,String date, String[] sDate) {
+	public void serviceInsert(String[] insertList, String[] reqVal) {
 		Connection conn = null;
 		try {
 			conn = ConnectionProvider.getConnection();
 			conn.setAutoCommit(false);
 			
-			List<UserDto> user = userDao.selectList(conn, keyWord, keyField,date,sDate);
+			userDao.insert(conn,insertList,reqVal);
 			
 			conn.commit();
-			return user;
 		}catch(SQLException e) {
 			JdbcUtil.rollback(conn);
 			System.out.print(e.getMessage());
@@ -29,6 +26,5 @@ public class UserSelectService {
 		}finally {
 			JdbcUtil.close(conn);
 		}
-		return null;
 	}
 }

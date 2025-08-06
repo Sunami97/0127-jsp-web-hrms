@@ -1,17 +1,14 @@
-package user.command;
-
-import java.util.List;
+package admin.command;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import admin.service.AdminDeleteService;
 import mvc.command.CommandHandler;
-import user.dto.UserDto;
-import user.service.UserDeleteService;
 
-public class UserDeleteHandler implements CommandHandler{
+public class AdminDeleteHandler implements CommandHandler{
 	private static final String FORM_VIEW = "/WEB-INF/adminForm.jsp";
-	private UserDeleteService userService = new UserDeleteService();
+	private AdminDeleteService userService = new AdminDeleteService();
 	
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {

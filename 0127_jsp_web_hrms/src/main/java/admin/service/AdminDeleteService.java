@@ -1,14 +1,14 @@
-package user.service;
+package admin.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import admin.dao.AdminDao;
 import jdbc.JdbcUtil;
 import jdbc.connection.ConnectionProvider;
-import user.dao.UserDao;
 
-public class UserDeleteService {
-	private UserDao user = new UserDao();
+public class AdminDeleteService {
+	private AdminDao user = new AdminDao();
 			public void Delete(String[] userId) {
 		
 				Connection conn = null;

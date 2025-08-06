@@ -1,20 +1,17 @@
-package user.command;
+package admin.command;
 
 import java.util.Arrays;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import admin.service.AdminUpdateService;
 import mvc.command.CommandHandler;
-import oracle.sql.ARRAY;
-import user.dto.UserDto;
-import user.service.UserUpdateService;
 
-public class UserUpdateHandler implements CommandHandler {
+public class AdminUpdateHandler implements CommandHandler {
 
 	private static final String FORM_VIEW = "/WEB-INF/adminForm.jsp";
-	private UserUpdateService userService = new UserUpdateService();
+	private AdminUpdateService userService = new AdminUpdateService();
 
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {

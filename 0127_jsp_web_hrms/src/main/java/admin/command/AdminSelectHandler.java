@@ -1,17 +1,17 @@
-package user.command;
+package admin.command;
 
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import admin.dto.AdminDto;
+import admin.service.AdminSelectService;
 import mvc.command.CommandHandler;
-import user.dto.UserDto;
-import user.service.UserSelectService;
 
-public class UserSelectHandler implements CommandHandler{
+public class AdminSelectHandler implements CommandHandler{
 	private static final String FORM_VIEW = "/WEB-INF/adminForm.jsp";
-	private UserSelectService userService = new UserSelectService();
+	private AdminSelectService userService = new AdminSelectService();
 	
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
@@ -32,7 +32,7 @@ public class UserSelectHandler implements CommandHandler{
 		String keyField = req.getParameter("keyField");
 		String date = req.getParameter("date");				
 		String[] sDate = req.getParameterValues("sDate");	//검색할 키워드,속성,날짜유형,날짜 범위 받아옴
-		List<UserDto> user = userService.Select(keyWord,keyField,date,sDate);
+		List<AdminDto> user = userService.Select(keyWord,keyField,date,sDate);
 		//셀럭트서비스의 메소드 호출후 유저리스트에 담음 セレクトサービスのメソッド呼び出し後、ユーザーリストに入れる
 		int count = user.size();	//count변수에 검색된 인원 수를 담음 count変数に検索された人数を含める
 		req.setAttribute("count", count);

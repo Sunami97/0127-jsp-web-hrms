@@ -1,18 +1,17 @@
-package user.command;
+package admin.command;
 
 import java.util.Arrays;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import admin.service.AdminInsertService;
 import mvc.command.CommandHandler;
-import user.dto.UserDto;
-import user.service.UserInsertService;
 
-public class UserInsertHandler implements CommandHandler {
+public class AdminInsertHandler implements CommandHandler {
 
 	private static final String FORM_VIEW = "/WEB-INF/adminForm.jsp";
-	private UserInsertService userService = new UserInsertService();
+	private AdminInsertService userService = new AdminInsertService();
 
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
@@ -32,7 +31,7 @@ public class UserInsertHandler implements CommandHandler {
 
 	private String processSubmit(HttpServletRequest req, HttpServletResponse res)
 			throws NumberFormatException, Exception {
-		UserInsertService userRequest = new UserInsertService();
+		AdminInsertService userRequest = new AdminInsertService();
 
 		String[] reqVal = new String[13];	
 		String[] insertList = new String[13];	//넣을 항목과 값을 담을 배열 객체 入れる項目と数値を入れる配列オブジェクト
