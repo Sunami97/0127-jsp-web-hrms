@@ -30,7 +30,7 @@
         <i class="ri-contacts-book-fill"></i>
         <span>사원 연락망</span>
     </a>
-    <a href="leaveManage.do" class="menu-box">
+    <a href="paidleave.do" class="menu-box">
         <i class="ri-calendar-check-fill"></i>
         <span>연차 관리</span>
     </a>

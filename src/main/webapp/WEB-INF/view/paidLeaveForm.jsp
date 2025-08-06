@@ -13,10 +13,8 @@
     <title>연차 신청</title>
 </head>
 <body>
-<h2>연차 신청서</h2>
-<p><strong>사용자 ID:</strong> ${sessionScope.loginUser.user_id}</p>
-<!-- ✅ 일반 사용자용 연차 신청 폼 -->
-<c:if test="${userId != 'admin01' && userId != 'manager02'}">
+    <h2>연차 신청서</h2>
+    <p><strong>사용자 ID:</strong> ${sessionScope.loginUser.user_id}</p>
     <form action="write.do" method="post">
         <input type="hidden" name="userId" value="${userId}" />
         <input type="hidden" name="status" value="신청중" />
@@ -44,7 +42,5 @@
 
         <input type="submit" value="신청하기" />
     </form>
-</c:if>
-
 </body>
 </html>

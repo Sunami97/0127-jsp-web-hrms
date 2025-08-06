@@ -65,6 +65,57 @@ public class PaidLeaveDao {
         }
     }
 
+    public List<PaidLeave> select(Connection conn, int startRow, int size) throws SQLException {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        try {
+            pstmt = conn.prepareStatement("select * from (select inner_query.*, rownum as rnum from(select * from paid_leave_tbl order by leave_id desc) inner_query where rownum <= ?) where rnum > ?");
+
+            int endRow = startRow + size;
+            pstmt.setInt(1, endRow);
+            pstmt.setInt(2, startRow);
+            rs = pstmt.executeQuery();
+
+            List<PaidLeave> result = new ArrayList<>();
+            while (rs.next()) {
+                result.add(convertPaidLeave(rs));
+            }
+            return result;
+        } finally {
+            JdbcUtil.close(rs);
+            JdbcUtil.close(pstmt);
+        }
+    }
+
+    private PaidLeave convertPaidLeave(ResultSet rs) throws SQLException {
+        return new PaidLeave(rs.getInt("leave_id"),
+                rs.getString("user_id"),
+                rs.getDate("start_date"),
+                rs.getDate("end_date"),
+                rs.getDouble("days"),
+                rs.getString("status"),
+                rs.getString("reason"),
+                rs.getDate("applied_at"),
+                rs.getString("approved_by"),
+                rs.getDate("approved_at"));
+    }
+
+    public int selectCount(Connection conn) throws SQLException {
+        Statement stmt = null;
+        ResultSet rs = null;
+        try {
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery("SELECT COUNT(*) FROM paid_leave_tbl");
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+            return 0;
+        } finally {
+            JdbcUtil.close(rs);
+            JdbcUtil.close(stmt);
+        }
+    }
+
     private Timestamp toTimestamp (Date date) {
         if (date == null) {
             return null; // null 처리
