@@ -1,26 +1,30 @@
 package contacts.command;
 
 import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import contacts.dao.ContactsDAO;
 import contacts.model.ContactsDTO;
+import contacts.service.ContactsService;
 import mvc.command.CommandHandler;
 
 public class ContactsController implements CommandHandler {
 
-    private ContactsDAO contactsDAO = new ContactsDAO(); // 필요 시 생성자 주입 가능
+    private ContactsService contactsService = new ContactsService();
 
     @Override
     public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        // 연락처 목록 가져오기
-        List<ContactsDTO> contactsList = contactsDAO.findAll();
+        // 부서별 그룹핑된 연락처 맵 가져오기
+        // 部署ごとにグループ化された連絡先のマップを取得
+        Map<String, List<ContactsDTO>> groupedContacts = contactsService.getGroupedByDepartment();
 
         // JSP에 전달
-        request.setAttribute("contactsList", contactsList);
+        // JSPに渡す
+        request.setAttribute("groupedContacts", groupedContacts);
 
         // 뷰 반환
-        return "/WEB-INF/view/contacts.jsp"; // 실제 파일 경로에 맞게 조정
+        // ビューのパスを返す
+        return "/WEB-INF/view/contacts.jsp";
     }
 }
