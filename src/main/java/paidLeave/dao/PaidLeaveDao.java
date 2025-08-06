@@ -23,10 +23,13 @@ public class PaidLeaveDao {
             pstmt.setString(5, paidleave.getStatus());
             pstmt.setString(6, paidleave.getReason());
             pstmt.setTimestamp(7, toTimestamp(paidleave.getAppliedAt()));
-
-            // approved_by와 approved_at은 null 허용
             pstmt.setString(8, paidleave.getApprovedBy());
-            pstmt.setTimestamp(9, toTimestamp(paidleave.getApprovedAt()));
+
+            if (paidleave.getApprovedAt() != null) {
+                pstmt.setTimestamp(9, toTimestamp(paidleave.getApprovedAt()));
+            } else {
+                pstmt.setTimestamp(9, null);
+            }
 
             int insertedCount = pstmt.executeUpdate();
 
@@ -34,7 +37,7 @@ public class PaidLeaveDao {
             if (insertedCount > 0) {
                 // 마지막 insert된 leave_id를 조회
                 stmt = conn.createStatement();
-                rs = stmt.executeQuery("SELECT last_insert_id() FROM paid_leave_tbl");
+                rs = stmt.executeQuery("SELECT seq_leave_id.CURRVAL FROM dual");
 
                 if (rs.next()) {
                     Integer leaveId = rs.getInt(1);
@@ -63,6 +66,9 @@ public class PaidLeaveDao {
     }
 
     private Timestamp toTimestamp (Date date) {
+        if (date == null) {
+            return null; // null 처리
+        }
         return new Timestamp(date.getTime());
     }
 }

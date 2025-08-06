@@ -44,7 +44,7 @@ public class WritePaidLeaveHandler implements CommandHandler {
 
         try {
             // 유저 정보 세션에서 가져옴
-            UserDTO user = (UserDTO) req.getSession().getAttribute("authUser");
+            UserDTO user = (UserDTO) req.getSession().getAttribute("loginUser");
             if (user == null) {
                 res.sendRedirect(req.getContextPath() + "/login.do");
                 return null;
@@ -56,7 +56,7 @@ public class WritePaidLeaveHandler implements CommandHandler {
             int newPaidLeaveNo = writeService.write(writeReq);
             req.setAttribute("newPaidLeaveNo", newPaidLeaveNo);
 
-            return "/WEB-INF/view/PaidLeaveSuccess.jsp";
+            return "/WEB-INF/view/paidLeaveList.jsp";
         } catch (Exception e) {
             e.printStackTrace();
             errors.put("submitFailed", true);
@@ -95,7 +95,7 @@ public class WritePaidLeaveHandler implements CommandHandler {
 
     private String processForm(HttpServletRequest req, HttpServletResponse res) {
         // 유저 정보 세션에서 가져옴
-        UserDTO user = (UserDTO) req.getSession().getAttribute("authUser");
+        UserDTO user = (UserDTO) req.getSession().getAttribute("loginUser");
         if (user == null) {
             try {
                 res.sendRedirect(req.getContextPath() + "/login.do");

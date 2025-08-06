@@ -59,12 +59,12 @@ public class UserDAO {
 
 	// 관리자
 	public List<String> getAdminUsernames(Connection conn) throws SQLException {
-		String sql = "SELECT name FROM user WHERE is_admin='Y'" ;
+		String sql = "SELECT user_id FROM user_tbl WHERE is_admin='Y'" ;
 		try (PreparedStatement pstmt = conn.prepareStatement(sql);
 			 ResultSet rs = pstmt.executeQuery()) {
 			List<String> names = new ArrayList<>();
 			while (rs.next()) {
-				names.add(rs.getString("username"));
+				names.add(rs.getString("user_id"));
 			}
 			return names;
 		}

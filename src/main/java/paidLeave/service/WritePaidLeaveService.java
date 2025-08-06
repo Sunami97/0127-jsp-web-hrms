@@ -46,7 +46,7 @@ public class WritePaidLeaveService {
                 req.getStartDate(),
                 req.getEndDate(),
                 req.getDays(),
-                null,
+                "申請中",
                 req.getReason(),
                 now,
                 req.getApprovedBy(),
