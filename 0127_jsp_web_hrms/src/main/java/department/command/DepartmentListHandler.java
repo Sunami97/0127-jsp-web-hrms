@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import department.model.UserStatusDTO;
+import department.model.DepartmentUserDTO;
 import department.service.DepartmentService;
 import jdbc.connection.ConnectionProvider;
 import mvc.command.CommandHandler;
@@ -25,17 +25,17 @@ public class DepartmentListHandler implements CommandHandler {
         try (Connection conn = ConnectionProvider.getConnection()) {
             // DAO → Service → 결과 리스트 얻기
             // DAO → サービス → 結果リストの取得
-            List<UserStatusDTO> flatList = departmentService.getOrgChart(conn);
+            List<DepartmentUserDTO> flatList = departmentService.getOrgChart(conn);
             // 사용자 정보가 담긴 평면 리스트
             // ユーザー情報が含まれるフラットリスト
 
             // 계층 구조로 가공: 부서 → 직책 → 사용자 목록
             // 階層構造に変換：部署 → 職位 → ユーザー一覧
-            Map<String, Map<String, List<UserStatusDTO>>> orgChartMap = new LinkedHashMap<>();
+            Map<String, Map<String, List<DepartmentUserDTO>>> orgChartMap = new LinkedHashMap<>();
             // 순서를 유지하기 위해 LinkedHashMap 사용
             // 順序を維持するために LinkedHashMap を使用
 
-            for (UserStatusDTO dto : flatList) {
+            for (DepartmentUserDTO dto : flatList) {
                 // 각 DTO에서 부서, 직책을 기준으로 계층 구조 구성
                 // 各DTOから部署と職位を基に階層構造を作成
                 orgChartMap

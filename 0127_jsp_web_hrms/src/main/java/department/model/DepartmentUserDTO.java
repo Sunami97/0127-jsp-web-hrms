@@ -1,14 +1,21 @@
 package department.model;
 
-public class UserStatusDTO {
+public class DepartmentUserDTO {
 	private String departmentName; // 부서 이름 // 部署名
 	private String position;       // 직책 // 職位
 	private String name;           // 사용자 이름 // ユーザー名
-	private String statusType;     // 상태 종류 (예: 근무중) // 状態タイプ（例：勤務中）
-	private String isCurrent;      // 현재 상태 여부 (Y/N) // 現在の状態かどうか（Y/N）
+	private String workStatus;     // 근무중, 연차, 출장 등 // 勤務中、年休、出張など
 
-	// Getter / Setter
-	// ゲッター / セッター
+	public DepartmentUserDTO() {
+		
+	}
+
+	public DepartmentUserDTO(String departmentName, String position, String name, String workStatus) {
+		this.departmentName = departmentName;
+		this.position = position;
+		this.name = name;
+		this.workStatus = workStatus;
+	}
 
 	public String getDepartmentName() {
 		return departmentName;
@@ -34,19 +41,12 @@ public class UserStatusDTO {
 		this.name = name;
 	}
 
-	public String getStatusType() {
-		return statusType;
+	public String getWorkStatus() {
+		return workStatus;
 	}
 
-	public void setStatusType(String statusType) {
-		this.statusType = statusType;
+	public void setWorkStatus(String workStatus) {
+		this.workStatus = workStatus;
 	}
 
-	public String getIsCurrent() {
-		return isCurrent;
-	}
-
-	public void setIsCurrent(String isCurrent) {
-		this.isCurrent = isCurrent;
-	}
 }
