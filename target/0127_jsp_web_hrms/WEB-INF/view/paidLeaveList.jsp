@@ -21,25 +21,25 @@
             display: inline-block;
         }
 
-        .apply-link {
-            float: right;
-            margin-top: 10px;
-        }
-
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
+            box-shadow: 0 0 10px rgba(0,0,255,0.1);
         }
 
         th, td {
-            border: 1px solid #ccc;
-            padding: 10px;
+            border: 1px solid #b3c6ff;
+            padding: 12px;
             text-align: center;
         }
 
         th {
-            background-color: #f5f5f5;
+            background-color: #e6ecff;
+        }
+
+        td {
+            background-color: #f9faff;
         }
 
         tr:hover {
@@ -62,6 +62,26 @@
             font-weight: bold;
         }
 
+        .apply-link {
+            text-align: right;
+            margin: 20px 0 0;
+        }
+
+        .apply-link a {
+            display: inline-block;
+            padding: 8px 14px;
+            border: none;
+            background-color: #3366cc;
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .apply-link a:hover {
+            background-color: #003399;
+        }
+
         .pagination {
             text-align: center;
             padding: 20px 0;
@@ -70,6 +90,12 @@
         .pagination a {
             margin: 0 5px;
             text-decoration: none;
+            color: #3366cc;
+            font-weight: bold;
+        }
+
+        .pagination a:hover {
+            color: #003399;
         }
 
     </style>
@@ -85,9 +111,9 @@
     <table>
         <thead>
         <tr>
+            <th>신청번호</th>
             <th>신청자</th>
-            <th>시작일</th>
-            <th>종료일</th>
+            <th>신청일</th>
             <th>사용일수</th>
             <th>상태</th>
             <th>신청일</th>
@@ -103,10 +129,10 @@
         </c:if>
         <c:forEach var="leave" items="${paidLeavePage.content}">
             <tr onclick="goToDetail(${leave.leaveId}, ${paidLeavePage.currentPage})">
+                <td>${leave.leaveId}</td>
                 <td>${leave.userId}</td>
-                <td>${leave.startDate}</td>
-                <td>${leave.endDate}</td>
-                <td>${leave.days}</td>
+                <td>${leave.startDate} ~ ${leave.endDate}</td>
+                <td>${leave.days}일</td>
                 <td>
                     <c:choose>
                         <c:when test="${leave.status == '신청중'}">
@@ -131,7 +157,7 @@
         </tbody>
     </table>
     <div class="apply-link">
-        <a href="paidleave/write.do">[연차신청하기]</a>
+        <a href="paidleave/write.do">연차신청</a>
     </div>
     <c:if test="${paidLeavePage.hasPaidLeaves()}">
         <div class="pagination">

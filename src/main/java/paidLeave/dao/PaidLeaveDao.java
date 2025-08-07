@@ -116,6 +116,24 @@ public class PaidLeaveDao {
         }
     }
 
+    public PaidLeave selectById(Connection conn, int no) throws SQLException {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        try {
+            pstmt = conn.prepareStatement("SELECT * FROM paid_leave_tbl WHERE leave_id = ?");
+            pstmt.setInt(1, no);
+            rs = pstmt.executeQuery();
+            PaidLeave paidLeave = null;
+            if (rs.next()) {
+                paidLeave = convertPaidLeave(rs);
+            }
+            return paidLeave;
+        } finally {
+            JdbcUtil.close(rs);
+            JdbcUtil.close(pstmt);
+        }
+    }
+
     private Timestamp toTimestamp (Date date) {
         if (date == null) {
             return null; // null 처리
