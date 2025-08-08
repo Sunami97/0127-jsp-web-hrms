@@ -5,12 +5,15 @@
   Time: 오후 2:28
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ include file="common/header.jsp" %>
 <html>
 <head>
-    <title>연차 신청</title>
+    <title>有給休暇申請</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -82,34 +85,35 @@
     </style>
 </head>
 <body>
-    <h2>연차 신청서</h2>
-    <p><strong>사용자 ID:</strong> ${sessionScope.loginUser.user_id}</p>
+    <h2>有給休暇申請書</h2>
+    <p><strong>ユーザーID:</strong> ${sessionScope.loginUser.user_id}</p>
     <form action="write.do" method="post">
         <input type="hidden" name="userId" value="${userId}" />
-        <input type="hidden" name="status" value="신청중" />
+        <input type="hidden" name="status" value="申請中" />
         <input type="hidden" name="appliedAt" value="<%= new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date()) %>" />
 
-        <label>연차 시작일:</label>
+        <label>有給休暇開始日:</label>
         <input type="date" name="startDate" value="${param.startDate}" required /><br/><br/>
 
-        <label>연차 종료일:</label>
+        <label>有給休暇終了日:</label>
         <input type="date" name="endDate" value="${param.endDate}" required /><br/><br/>
 
-        <label>사용 일수 (예: 0.5, 1):</label>
+        <label>使用日数（例: 0.5、1）:</label>
         <input type="number" name="days" step="0.5" min="0.5" value="${param.days}" required /><br/><br/>
 
-        <label>신청 사유:</label><br/>
+        <label>申請理由:</label><br/>
         <textarea name="reason" rows="4" cols="50" required>${param.reason}</textarea><br/><br/>
 
-        <label for="approvedBy">승인자 선택</label>
+        <label for="approvedBy">承認者選択</label>
         <select name="approvedBy" id="approvedBy" required>
-            <option value="">-- 승인자 선택 --</option>
+            <option value="">-- 承認者を選択してください --</option>
             <c:forEach var="admin" items="${adminnames}">
                 <option value="${admin}">${admin}</option>
             </c:forEach>
         </select><br/><br/>
 
-        <input type="submit" value="신청하기" />
+        <input type="submit" value="申請" />
     </form>
+    <%@ include file="common/footer.jsp" %>
 </body>
 </html>
