@@ -4,7 +4,7 @@
     <title>조직도 / 組織図</title>
 
 <style>
-/* 🇰🇷 전체 페이지 기본 설정 / 🇯🇵 ページ全体の基本設定 */
+/* 🇰🇷 기본 바디 설정 / 🇯🇵 基本のボディ設定 */
 body {
     font-family: Arial, sans-serif;
     font-size: 14px;
@@ -12,7 +12,7 @@ body {
     background-color: #f4f8fc;
 }
 
-/* 🇰🇷 상단 파란색 헤더 바 / 🇯🇵 上部の青いヘッダーバー */
+/* 🇰🇷 상단 헤더 바 / 🇯🇵 上部のヘッダーバー */
 .header-bar {
     background-color: #1976d2;
     color: white;
@@ -21,7 +21,7 @@ body {
     font-weight: bold;
 }
 
-/* 🇰🇷 내용 박스 / 🇯🇵 コンテンツボックス */
+/* 🇰🇷 내용 컨테이너 / 🇯🇵 コンテンツコンテナ */
 .container {
     background-color: white;
     margin: 20px auto;
@@ -31,6 +31,7 @@ body {
     border-radius: 8px;
 }
 
+/* 🇰🇷 리스트 스타일 / 🇯🇵 リストスタイル */
 ul {
     list-style: none;
     margin-left: 20px;
@@ -39,47 +40,65 @@ ul {
 
 li {
     margin: 5px 0;
+    position: relative;
 }
 
-/* 🇰🇷 폴더 스타일 / 🇯🇵 フォルダスタイル */
-.folder {
+/* 🇰🇷 토글용 체크박스 숨김 / 🇯🇵 トグル用チェックボックスを非表示に */
+input[type="checkbox"] {
+    display: none;
+}
+
+/* 🇰🇷 폴더/직급 이름 라벨 / 🇯🇵 フォルダ/役職名のラベル */
+input[type="checkbox"] + label {
     cursor: pointer;
     font-weight: bold;
-    padding: 5px;
     display: inline-block;
+    padding: 5px;
     transition: background-color 0.2s;
 }
 
-.folder:hover {
+/* 🇰🇷 마우스 오버 시 하이라이트 / 🇯🇵 ホバー時にハイライト */
+input[type="checkbox"] + label:hover {
     background-color: #e3f2fd;
     border-radius: 4px;
 }
 
-/* 🇰🇷 직원 이름 스타일 / 🇯🇵 社員名スタイル */
-.employee-name {
-    font-weight: normal;
-    position: relative; /* 툴팁 기준 위치 설정 */
+/* 🇰🇷 기본적으로 하위 항목 숨김 / 🇯🇵 デフォルトでは子要素を非表示 */
+input[type="checkbox"] ~ ul {
+    display: none;
 }
 
-/* 🇰🇷 마우스 오버 시 배경 강조 / 🇯🇵 ホバー時の背景強調 */
+/* 🇰🇷 체크되면 하위 항목 표시 / 🇯🇵 チェックされると子要素を表示 */
+input[type="checkbox"]:checked ~ ul {
+    display: block;
+}
+
+/* 🇰🇷 직원 이름 스타일 / 🇯🇵 社員名のスタイル */
+.employee-name {
+    font-weight: normal;
+    position: relative;
+    display: inline-block;
+}
+
+/* 🇰🇷 직원 이름 마우스 오버 효과 / 🇯🇵 社員名ホバー時の効果 */
 .employee-name:hover {
     background-color: #e3f2fd;
     border-radius: 4px;
 }
 
-/* 🇰🇷 상태가 '근무중'인 경우 파란색 / 🇯🇵 勤務中の場合は青色 */
+/* 🇰🇷 근무 중인 경우 파란색 / 🇯🇵 勤務中の場合は青色 */
 .icon-blue {
     color: #1976d2;
 }
 
-/* 🇰🇷 상태가 '근무중 아님'일 경우 회색 / 🇯🇵 勤務中でない場合はグレー */
+/* 🇰🇷 근무 중이 아닌 경우 회색 / 🇯🇵 勤務中でない場合はグレー */
 .icon-gray {
     color: #757575;
 }
 
-/* 🇰🇷 툴팁 스타일 (기본 숨김) / 🇯🇵 ツールチップのスタイル（デフォルト非表示） */
-.tooltip {
-    display: none;
+/* 🇰🇷 툴팁 텍스트 / 🇯🇵 ツールチップのテキスト */
+.employee-name[data-status]:hover::after {
+    content: attr(data-status); /* 상태 텍스트 표시 / 状態テキストを表示 */
     position: absolute;
     top: -30px;
     left: 0;
@@ -93,74 +112,57 @@ li {
 }
 
 /* 🇰🇷 툴팁 화살표 / 🇯🇵 ツールチップの矢印 */
-.tooltip::after {
+.employee-name[data-status]:hover::before {
     content: '';
     position: absolute;
-    bottom: -6px;
+    top: -8px;
     left: 10px;
     border-width: 6px;
     border-style: solid;
-    border-color: #333 transparent transparent transparent;
+    border-color: transparent transparent #333 transparent;
 }
 </style>
 
-<!-- 🇰🇷 jQuery 포함 / 🇯🇵 jQuery 読み込み -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<script>
-    $(function () {
-        // 🇰🇷 폴더 클릭 시 하위 항목 표시/숨기기 / 🇯🇵 フォルダクリックで子要素を表示/非表示
-        $(".folder").click(function () {
-            $(this).next("ul").toggle();
-        });
-
-        // 🇰🇷 직원 이름에 마우스를 올리면 툴팁 표시 / 🇯🇵 社員名にマウスを乗せるとツールチップ表示
-        $(".employee-name").hover(function () {
-            $(this).find(".tooltip").fadeIn(200);
-        }, function () {
-            $(this).find(".tooltip").fadeOut(200);
-        });
-    });
-</script>
 </head>
-
 <body>
 
-    <!-- 🇰🇷 헤더바 / 🇯🇵 ヘッダーバー -->
-    <div class="header-bar">📁 조직도 보기 / 組織図の表示</div>
+<!-- 🇰🇷 헤더 바 / 🇯🇵 ヘッダーバー -->
+<div class="header-bar">📁 조직도 보기 / 組織図の表示</div>
 
-    <!-- 🇰🇷 조직도 표시 컨테이너 / 🇯🇵 組織図の表示コンテナ -->
-    <div class="container">
-        <ul>
-            <!-- 🇰🇷 부서 반복 출력 / 🇯🇵 部署の繰り返し表示 -->
-            <c:forEach var="deptEntry" items="${orgChartMap}">
-                <li>
-                    <span class="folder">📂 ${deptEntry.key}</span>
-                    <ul class="hidden">
-                        <!-- 🇰🇷 직급 반복 / 🇯🇵 職位の繰り返し -->
-                        <c:forEach var="posEntry" items="${deptEntry.value}">
-                            <li>
-                                <span class="folder">📌 ${posEntry.key}</span>
-                                <ul class="hidden">
-                                    <!-- 🇰🇷 직원 반복 / 🇯🇵 社員の繰り返し -->
-                                    <c:forEach var="user" items="${posEntry.value}">
-                                        <li>
-                                            <span class="employee-name ${user.workStatus == '勤務中' ? 'icon-blue' : 'icon-gray'}">
-                                                👤 ${user.name}
-                                                <!-- 🇰🇷 상태를 말풍선으로 표시 / 🇯🇵 状態を吹き出しで表示 -->
-                                                <c:if test="${not empty user.workStatus}">
-                                                    <span class="tooltip">${user.workStatus}</span>
-                                                </c:if>
-                                            </span>
-                                        </li>
-                                    </c:forEach>
-                                </ul>
-                            </li>
-                        </c:forEach>
-                    </ul>
-                </li>
-            </c:forEach>
-        </ul>
-    </div>
+<!-- 🇰🇷 조직도 전체 컨테이너 / 🇯🇵 組織図全体のコンテナ -->
+<div class="container">
+    <ul>
+        <!-- 🇰🇷 부서 반복 출력 / 🇯🇵 部署の繰り返し表示 -->
+        <c:forEach var="deptEntry" items="${orgChartMap}">
+            <li>
+                <!-- 🇰🇷 부서 토글 체크박스 / 🇯🇵 部署のトグル用チェックボックス -->
+                <input type="checkbox" id="dept-${deptEntry.key.hashCode()}" />
+                <label for="dept-${deptEntry.key.hashCode()}">📂 ${deptEntry.key}</label>
+                <ul>
+                    <!-- 🇰🇷 직급 반복 출력 / 🇯🇵 役職の繰り返し表示 -->
+                    <c:forEach var="posEntry" items="${deptEntry.value}">
+                        <li>
+                            <!-- 🇰🇷 직급 토글 체크박스 / 🇯🇵 役職のトグル用チェックボックス -->
+                            <input type="checkbox" id="pos-${posEntry.key.hashCode()}-${deptEntry.key.hashCode()}" />
+                            <label for="pos-${posEntry.key.hashCode()}-${deptEntry.key.hashCode()}">📌 ${posEntry.key}</label>
+                            <ul>
+                                <!-- 🇰🇷 직원 반복 출력 / 🇯🇵 社員の繰り返し表示 -->
+                                <c:forEach var="user" items="${posEntry.value}">
+                                    <li>
+                                        <!-- 🇰🇷 직원 이름 및 상태 표시 / 🇯🇵 社員名と状態表示 -->
+                                        <span class="employee-name ${user.workStatus == '勤務中' ? 'icon-blue' : 'icon-gray'}"
+                                              data-status="${user.workStatus}">
+                                            👤 ${user.name}
+                                        </span>
+                                    </li>
+                                </c:forEach>
+                            </ul>
+                        </li>
+                    </c:forEach>
+                </ul>
+            </li>
+        </c:forEach>
+    </ul>
+</div>
 
 </body>
