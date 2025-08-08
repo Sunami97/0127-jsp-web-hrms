@@ -1,9 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="common/header.jsp" %>
 <%@ page import="myPage.model.UserDepartmentDTO"%>
 <%
-    // 🌸 유저 정보 받아오기 (컨트롤러에서 setAttribute로 넘겨준 거야!)
-    UserDepartmentDTO user = (UserDepartmentDTO) request.getAttribute("user");
-    // 😢 유저 정보가 없으면(로그인 안 했거나 세션 만료!) 안내 메시지 뿅!
+    // [컨트롤러에서 전달받은 유저 정보] 
+    // (コントローラーから受け取ったユーザー情報)
+    UserDepartmentDTO userDepartment = (UserDepartmentDTO) request.getAttribute("user");
+
+    // [유저 정보가 없을 때 안내] 
+    // (ユーザー情報がない場合の案内)
     if (user == null) {
 %>
 <h2>개인정보 수정</h2>
@@ -12,35 +16,53 @@
     <a href="<%=request.getContextPath()%>/login.jsp" style="color: #007bff;">로그인 페이지로 이동</a>
 </p>
 <%
-    // 여기서 끝내버리기!
+    // 더 이상 실행하지 않고 종료
+    // (これ以上実行せずに終了)
     return;
-}
+    }
+    String position = userDepartment.getPosition() == null ? "" : userDepartment.getPosition();
+    String borderColor = "#16a34a"; // 기본 (초록)
+    String bgColor = "#bbf7d0"; // 얼굴 배경 (밝은 초록)
+    String hairColor = "#0f172a"; // 머리색
+    String bodyColor = "#fbbf24"; // 옷색
+
+    // 심즈 느낌: 직급별 컬러만 변경
+    if ("部長".equals(position)) {
+        borderColor = "#d4af37"; bgColor = "#fef3c7"; hairColor = "#78350f"; bodyColor = "#fde68a";
+    } else if ("課長".equals(position)) {
+        borderColor = "#2563eb"; bgColor = "#dbeafe"; hairColor = "#334155"; bodyColor = "#3b82f6";
+    } else if ("社長".equals(position)) {
+        borderColor = "#0f172a"; bgColor = "#f1f5f9"; hairColor = "#0f172a"; bodyColor = "#94a3b8";
+    }
+    String displayPosition = position.isEmpty() ? "직원" : position;
 %>
 <!DOCTYPE html>
 <html>
 <head>
     <title>개인정보 수정</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- 🎨 예쁜 아이콘 가져오는 링크 (카메라 등) -->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <!-- 아이콘 폰트 라이브러리 (FontAwesome 등) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
-        /* 🖼️ 전체 배경, 글씨 스타일 */
+        /* [페이지 전체 배경 및 폰트] */
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
             background: #f5f7fa;
         }
-        /* 🃏 카드형 프로필 박스 */
+        /* [프로필 카드 레이아웃] */
         .profile-card {
-            display: flex;                   /* 좌우 나눔! */
+            display: flex;
             max-width: 700px;
-            margin: 40px auto;               /* 가운데로~ */
+            margin: 40px auto;
             background: #fff;
             border-radius: 18px;
             box-shadow: 0 2px 16px rgba(0,0,0,0.11);
             overflow: hidden;
             min-height: 340px;
+            padding: 80px;
         }
-        /* 왼쪽(사진/버튼 영역) */
+        /* [왼쪽 영역: 사진/버튼] */
         .profile-left {
             background: #f0f4fa;
             padding: 36px 18px 24px 18px;
@@ -51,7 +73,7 @@
             width: 230px;
             position: relative;
         }
-        /* 프로필 사진 */
+        /* [프로필 사진] */
         .profile-img-wrapper {
             position: relative;
             width: 140px;
@@ -61,12 +83,12 @@
         .profile-img {
             width: 140px;
             height: 140px;
-            border-radius: 50%;    /* 동글동글 */
+            border-radius: 50%;
             object-fit: cover;
             background: #d6e0f7;
             box-shadow: 0 2px 10px #dde3ee;
         }
-        /* 카메라 버튼 (사진 변경용) */
+        /* [사진 변경 버튼] */
         .profile-img-edit {
             position: absolute;
             right: 6px;
@@ -89,7 +111,7 @@
             left: 0; top: 0; width: 100%; height: 100%;
             opacity: 0; cursor: pointer;
         }
-        /* 이름/직책/부서 */
+        /* [이름/부서/직책] */
         .profile-name {
             font-size: 1.3em;
             font-weight: bold;
@@ -102,7 +124,7 @@
             font-size: 16px;
             text-align: center;
         }
-        /* 버튼 그룹 (비번변경/저장) */
+        /* [버튼 그룹 영역] */
         .btn-group {
             width: 100%;
             margin-top: 38px;
@@ -125,7 +147,7 @@
         .my-btn:hover {
             background: #003bb8;
         }
-        /* 오른쪽(내정보 폼) */
+        /* [오른쪽: 내 정보 입력 영역] */
         .profile-right {
             flex: 1;
             padding: 38px 32px;
@@ -134,7 +156,7 @@
             flex-direction: column;
             justify-content: center;
         }
-        /* 테이블 */
+        /* [테이블 스타일] */
         .profile-table {
             width: 100%;
             border-collapse: collapse;
@@ -153,11 +175,10 @@
             color: #7682a0;
             font-weight: 600;
         }
-        /* 마지막 줄까지 줄 그어줌 */
         .profile-table tr:last-child td, .profile-table tr:last-child th {
             border-bottom: 1px solid #e0e3ea !important;
         }
-        /* --- 🧡비밀번호 변경 모달 스타일🧡 --- */
+        /* [비밀번호 변경 모달 영역 스타일] */
         .pw-modal {
             display: none; position: fixed; z-index: 9999;
             left: 0; top: 0; width: 100vw; height: 100vh;
@@ -212,7 +233,7 @@
             transition: background 0.14s;
         }
         .pw-modal-btn:hover { background: #003bb8; }
-        /* 📱 반응형(모바일 예쁘게) */
+        /* [모바일 반응형 레이아웃] */
         @media (max-width: 700px) {
             .profile-card {
                 flex-direction: column;
@@ -233,7 +254,7 @@
         }
     </style>
     <script>
-        // 📸 프로필 사진 미리보기 (백엔드 저장은 구현 필요!)
+        // [프로필 사진 미리보기] (프로필画像プレビュー)
         function previewProfileImg(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
@@ -243,15 +264,15 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
-        // 🛎️ 비밀번호 변경 모달 열기!
+        // [비밀번호 변경 모달 열기] (パスワード変更モーダルを開く)
         function openPwModal() {
             document.getElementById('pwModal').style.display = 'block';
         }
-        // ❌ 모달 닫기!
+        // [모달 닫기] (モーダルを閉じる)
         function closePwModal() {
             document.getElementById('pwModal').style.display = 'none';
         }
-        // 모달 바깥 클릭하면 닫히게!
+        // [모달 바깥 클릭 시 닫힘] (モーダル外クリックで閉じる)
         window.onclick = function(event) {
             var modal = document.getElementById('pwModal');
             if (event.target == modal) { modal.style.display = "none"; }
@@ -259,43 +280,58 @@
     </script>
 </head>
 <body>
-    <!-- 📝 정보수정 form (저장버튼 누르면 /mypageEditPro.do로 POST 요청) -->
+    <!-- [개인정보 수정 폼] (個人情報編集フォーム) -->
     <form action="<%=request.getContextPath()%>/mypageEditPro.do" method="post">
     <div class="profile-card">
-        <!-- 왼쪽: 프로필/이름/버튼 -->
+        <!-- [왼쪽 영역: 프로필/이름/버튼] -->
         <div class="profile-left">
-            <div class="profile-img-wrapper">
-                <img src="https://cdn-icons-png.flaticon.com/512/1946/1946429.png"
-                     alt="프로필" id="profilePreview"
-                     class="profile-img" />
-                <label class="profile-img-edit" title="사진 변경">
-                    <i class="fa-solid fa-camera"></i>
-                    <input type="file" name="profileImg" accept="image/*" onchange="previewProfileImg(this)">
-                </label>
-            </div>
+         <div class="profile-img-wrapper" style="position:relative;">
+    <svg width="140" height="140" viewBox="0 0 140 140" style="display:block;">
+        <!-- 외곽 원 -->
+        <circle cx="70" cy="70" r="68" fill="<%=bgColor%>" stroke="<%=borderColor%>" stroke-width="4"/>
+        <!-- 머리 (심즈 스타일) -->
+        <ellipse cx="70" cy="56" rx="34" ry="28" fill="<%=hairColor%>" />
+        <!-- 얼굴 (피부색) -->
+        <ellipse cx="70" cy="68" rx="31" ry="26" fill="#fee2b6"/>
+        <!-- 몸통(상의) -->
+        <rect x="43" y="90" width="54" height="28" rx="14" fill="<%=bodyColor%>"/>
+        <!-- 눈 -->
+        <ellipse cx="60" cy="68" rx="4" ry="3" fill="#111"/>
+        <ellipse cx="80" cy="68" rx="4" ry="3" fill="#111"/>
+        <!-- 미소 -->
+        <path d="M60 80 Q70 87 80 80" stroke="#b91c1c" stroke-width="2" fill="none"/>
+        <!-- 얼굴에 직급명 (굵은 폰트) -->
+        <text x="70" y="120" text-anchor="middle" font-size="17" font-weight="bold" fill="<%=borderColor%>"><%=displayPosition%></text>
+    </svg>
+    <img src="" alt="프로필" id="profilePreview" class="profile-img" style="display:none;position:absolute;left:0;top:0;" />
+    <label class="profile-img-edit" title="사진 변경">
+        <i class="fa-solid fa-camera"></i>
+        <input type="file" name="profileImg" accept="image/*" onchange="previewProfileImg(this)">
+    </label>
+</div>
             <div class="profile-name"><%=user.getName()%></div>
             <div class="profile-pos">
-                <%=user.getDepartmentName() == null ? "" : user.getDepartmentName()%>
+                <%=userDepartment.getDepartmentName() == null ? "" : userDepartment.getDepartmentName()%>
                 <% if(user.getPosition() != null && !user.getPosition().isEmpty()) { %>
                     / <%= user.getPosition() %>
                 <% } %>
             </div>
-            <!-- 🟣 비밀번호 변경 모달 띄우기 -->
+            <!-- [비밀번호 변경 버튼] -->
             <div class="btn-group">
                 <button type="button" class="my-btn" onclick="openPwModal()">비밀번호 변경</button>
             </div>
-            <!-- 💾 정보 저장(수정) 버튼 -->
+            <!-- [저장 버튼] -->
             <div class="btn-group" style="margin-top:12px;">
                 <button type="submit" class="my-btn">저장</button>
             </div>
         </div>
-        <!-- 오른쪽: 내 정보 입력폼 (일부는 readonly) -->
+        <!-- [오른쪽: 내 정보 입력폼 (일부 readonly)] -->
         <div class="profile-right">
             <table class="profile-table">
                 <tr>
                     <th>아이디</th>
                     <td>
-                        <input type="text" name="userId" value="<%=user.getUserId()%>" readonly
+                        <input type="text" name="userId" value="<%=userDepartment.getUserId()%>" readonly
                             style="background:#f2f3f8;border:none;color:#888;padding:5px 10px;font-size:15px;width:85%;">
                     </td>
                 </tr>
@@ -324,31 +360,15 @@
                     <th>생년월일</th>
                     <td>
                         <input type="date" name="birthDate"
-                               value="<%=user.getBirthDate()==null?"":user.getBirthDate().toString()%>"readonly
+                               value="<%=userDepartment.getBirthDate()==null?"":userDepartment.getBirthDate().toString()%>"readonly
                             style="background:#f2f3f8;border:none;color:#888;padding:5px 10px;font-size:15px;width:85%;">
                     </td>
                 </tr>
-                <tr>
-                    <th>입사일</th>
-                    <td>
-                        <input type="date" name="joinDate"
-                               value="<%=user.getJoinDate()==null?"":user.getJoinDate().toString()%>"readonly
-                            style="background:#f2f3f8;border:none;color:#888;padding:5px 10px;font-size:15px;width:85%;">
-                    </td>
-                </tr>
-                <tr>
-                    <th>퇴사일</th>
-                    <td>
-                        <input type="date" name="retireDate"
-                               value="<%=user.getRetireDate()==null?"":user.getRetireDate().toString()%>"readonly
-                            style="background:#f2f3f8;border:none;color:#888;padding:5px 10px;font-size:15px;width:85%;">
-                    </td>
-                </tr>
-                <tr>
+                 <tr>
                     <th>부서</th>
                     <td>
                         <input type="text" name="departmentName"
-                            value="<%=user.getDepartmentName()==null?"":user.getDepartmentName()%>"readonly
+                            value="<%=userDepartment.getDepartmentName()==null?"":userDepartment.getDepartmentName()%>"readonly
                             style="background:#f2f3f8;border:none;color:#888;padding:5px 10px;font-size:15px;width:85%;">
                     </td>
                 </tr>
@@ -360,21 +380,38 @@
                             style="background:#f2f3f8;border:none;color:#888;padding:5px 10px;font-size:15px;width:85%;">
                     </td>
                 </tr>
+                <tr>
+                    <th>입사일</th>
+                    <td>
+                        <input type="date" name="joinDate"
+                               value="<%=userDepartment.getJoinDate()==null?"":userDepartment.getJoinDate().toString()%>"readonly
+                            style="background:#f2f3f8;border:none;color:#888;padding:5px 10px;font-size:15px;width:85%;">
+                    </td>
+                </tr>
+                <tr>
+                    <th>퇴사일</th>
+                    <td>
+                        <input type="date" name="retireDate"
+                               value="<%=userDepartment.getRetireDate()==null?"":userDepartment.getRetireDate().toString()%>"readonly
+                            style="background:#f2f3f8;border:none;color:#888;padding:5px 10px;font-size:15px;width:85%;">
+                    </td>
+                </tr>
+               
             </table>
         </div>
     </div>
     </form>
 
-    <!-- ========== [비밀번호 변경 모달 영역] ========== -->
+    <!-- [비밀번호 변경 모달 영역] -->
     <div id="pwModal" class="pw-modal">
         <div class="pw-modal-content">
             <div class="pw-modal-header">
                 <span>비밀번호 변경</span>
                 <span class="pw-modal-close" onclick="closePwModal()">&times;</span>
             </div>
-            <!-- ✨ 비밀번호 변경 폼! (POST로 pwUpdatePro.do로 감) -->
+            <!-- [비밀번호 변경 폼] -->
             <form method="post" action="<%=request.getContextPath()%>/pwUpdatePro.do" style="margin-top:12px;">
-                <input type="hidden" name="userId" value="<%=user.getUserId()%>">
+                <input type="hidden" name="userId" value="<%=userDepartment.getUserId()%>">
                 <div class="pw-form-row">
                     <label>기존 비밀번호</label>
                     <input type="password" name="currentPw" required autocomplete="current-password">
@@ -393,5 +430,6 @@
             </form>
         </div>
     </div>
+    <%@ include file="common/footer.jsp" %>
 </body>
 </html>
