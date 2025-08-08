@@ -92,7 +92,7 @@
     </tr>
     <tr>
         <th>신청자</th>
-        <td>${paidLeaveData.paidLeave.userId}</td>
+        <td>${paidLeaveData.paidLeave.userId}, ${loginUser.position}</td>
     </tr>
     <tr>
         <th>신청일</th>
@@ -126,7 +126,7 @@
     <a href="${pageContext.request.contextPath}/paidleave.do?pageNo=${pageNo}">목록</a>
 </div>
 
-<c:if test="${login_user.user_id == paidLeaveData.paidLeave.userId}">
+<c:if test="${loginUser.user_id == paidLeaveData.paidLeave.userId}">
     <div class="button-area center">
         <a href="#">삭제</a>
     </div>
