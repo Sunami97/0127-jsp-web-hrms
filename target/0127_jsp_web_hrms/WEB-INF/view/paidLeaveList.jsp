@@ -5,8 +5,9 @@
   Time: 오후 12:20
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="common/header.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,28 +15,35 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #f5f8ff;
+            color: #333;
             padding: 20px;
         }
 
         h2 {
-            display: inline-block;
+            color: #2E83F2;
+            text-align: center;
+            margin-bottom: 20px;
         }
 
         table {
-            width: 100%;
+            width: 60%;
+            margin: 0 auto 30px;
             border-collapse: collapse;
-            margin-top: 20px;
-            box-shadow: 0 0 10px rgba(0,0,255,0.1);
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
         }
 
         th, td {
-            border: 1px solid #b3c6ff;
+            border: 1px solid #79BAF2;
             padding: 12px;
             text-align: center;
         }
 
         th {
             background-color: #e6ecff;
+            color: #2E83F2;
         }
 
         td {
@@ -43,7 +51,7 @@
         }
 
         tr:hover {
-            background-color: #f0f8ff;
+            background-color: #e4f0ff;
             cursor: pointer;
         }
 
@@ -63,39 +71,45 @@
         }
 
         .apply-link {
+            width: 60%;
+            margin: 0 auto 30px;
             text-align: right;
-            margin: 20px 0 0;
         }
 
         .apply-link a {
             display: inline-block;
             padding: 8px 14px;
-            border: none;
-            background-color: #3366cc;
+            background-color: #2E83F2;
             color: white;
+            border-radius: 5px;
             text-decoration: none;
             cursor: pointer;
-            border-radius: 5px;
+            transition: background-color 0.3s ease;
         }
 
         .apply-link a:hover {
-            background-color: #003399;
+            background-color: #3071F2;
         }
 
         .pagination {
+            width: 60%;
+            margin: 0 auto 40px;
             text-align: center;
-            padding: 20px 0;
         }
 
         .pagination a {
-            margin: 0 5px;
+            margin: 0 6px;
             text-decoration: none;
-            color: #3366cc;
             font-weight: bold;
+            color: #2E83F2;
+            padding: 6px 12px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
         }
 
         .pagination a:hover {
-            color: #003399;
+            background-color: #3071F2;
+            color: white;
         }
 
     </style>
@@ -141,8 +155,8 @@
                         <c:when test="${leave.status == '승인'}">
                             <span class="approved">승인</span>
                         </c:when>
-                        <c:when test="${leave.status == '반려'}">
-                            <span class="rejected">반려</span>
+                        <c:when test="${leave.status == '거절'}">
+                            <span class="rejected">거절</span>
                         </c:when>
                         <c:otherwise>
                             ${leave.status}
@@ -172,5 +186,6 @@
             </c:if>
         </div>
     </c:if>
+    <%@ include file="common/footer.jsp" %>
 </body>
 </html>

@@ -5,9 +5,14 @@
   Time: 오후 6:16
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="u" tagdir="/WEB-INF/tags" %>
+<%@ include file="common/header.jsp" %>
+<%
+    user.model.UserDTO User = (user.model.UserDTO) session.getAttribute("loginUser");
+    boolean isAdmin = User != null && "Y".equals(user.getIs_admin());
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,23 +20,29 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #f5f8ff;
+            color: #333;
+            padding: 20px;
         }
 
         table {
             border-collapse: collapse;
             width: 60%;
             margin: 30px auto;
-            box-shadow: 0 0 10px rgba(0,0,255,0.1);
+            background-color: #fff;
+            border: 1px solid #79BAF2;
+            border-radius: 8px;
         }
 
         th, td {
-            border: 1px solid #b3c6ff;
+            border: 1px solid #79BAF2;
             padding: 12px;
             text-align: left;
         }
 
         th {
             background-color: #e6ecff;
+            color: #2E83F2;
         }
 
         td {
@@ -39,9 +50,16 @@
         }
 
         .button-area {
-            text-align: right;
-            margin: 20px auto;
             width: 60%;
+            margin: 20px auto;
+        }
+
+        .button-area.center {
+            text-align: center;
+        }
+
+        .button-area.right {
+            text-align: right;
         }
 
         .button-area a, .button-area form button {
@@ -49,19 +67,20 @@
             padding: 8px 14px;
             margin-left: 8px;
             border: none;
-            background-color: #3366cc;
+            background-color: #2E83F2;
             color: white;
             text-decoration: none;
             cursor: pointer;
             border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .button-area a:hover, .button-area form button:hover {
+            background-color: #3071F2;
         }
 
         .button-area form {
             display: inline;
-        }
-
-        .button-area a:hover, .button-area form button:hover {
-            background-color: #003399;
         }
     </style>
 </head>
@@ -100,26 +119,34 @@
         <td>${paidLeaveData.paidLeave.approvedAt}</td>
     </tr>
 </table>
+
 <c:set var="pageNo" value="${empty param.pageNo ? '1' : param.pageNo}" />
-    <div class="button-area">
-        <a href="${pageContext.request.contextPath}/paidleave.do?pageNo=${pageNo}">목록</a>
+
+<div class="button-area center">
+    <a href="${pageContext.request.contextPath}/paidleave.do?pageNo=${pageNo}">목록</a>
+</div>
+
+<c:if test="${login_user.user_id == paidLeaveData.paidLeave.userId}">
+    <div class="button-area center">
+        <a href="#">삭제</a>
     </div>
-    <c:if test="${authUser.id == paidLeaveData.paidLeave.userId}">
-        <div class="button-area">
-            <a href="#">수정</a>
-        </div>
-    </c:if>
-<c:if test="${authUser.is_admin == 'Y'}">
-    <div class="button-area">
-        <form action="<c:url value='/paidLeave/approve'/>" method="post">
-            <input type="hidden" name="leaveId" value="${paidLeaveData.paidLeave.leaveId}" />
+</c:if>
+
+<c:if test="${loginUser.is_admin == 'Y'}">
+    <div class="button-area right">
+        <form action="<c:url value='/paidleave/status.do'/>" method="post">
+            <input type="hidden" name="leaveId" value="${paidLeaveData.paidLeave.leaveId}">
+            <input type="hidden" name="status" value="승인" />
             <button type="submit">승인</button>
         </form>
-        <form action="<c:url value='/paidLeave/reject'/>" method="post">
-            <input type="hidden" name="leaveId" value="${paidLeaveData.paidLeave.leaveId}" />
+        <form action="<c:url value='/paidleave/status.do'/>" method="post">
+            <input type="hidden" name="leaveId" value="${paidLeaveData.paidLeave.leaveId}">
+            <input type="hidden" name="status" value="거절" />
             <button type="submit">거절</button>
         </form>
     </div>
 </c:if>
+
+<%@ include file="common/footer.jsp" %>
 </body>
 </html>

@@ -11,6 +11,75 @@
 <html>
 <head>
     <title>연차 신청</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f8ff;
+            color: #333;
+        }
+
+        h2 {
+            text-align: center;
+            color: #2E83F2;
+            margin-top: 30px;
+        }
+
+        form {
+            width: 60%;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 1px solid #79BAF2;
+            border-radius: 8px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+            color: #2E83F2;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        input[type="number"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            border: 1px solid #79BAF2;
+            border-radius: 5px;
+            box-sizing: border-box;
+            background-color: #f9faff;
+        }
+
+        textarea {
+            resize: none;
+        }
+
+        input[type="submit"] {
+            display: block;
+            margin: 25px auto 0;
+            padding: 10px 20px;
+            background-color: #2E83F2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #3071F2;
+        }
+
+        p {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
 </head>
 <body>
     <h2>연차 신청서</h2>
