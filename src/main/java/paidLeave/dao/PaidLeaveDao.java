@@ -1,7 +1,9 @@
 package paidLeave.dao;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import jdbc.JdbcUtil;
 import paidLeave.model.PaidLeave;
@@ -20,21 +22,13 @@ public class PaidLeaveDao {
             pstmt.setDouble(4, paidleave.getDays());
             pstmt.setString(5, paidleave.getStatus());
             pstmt.setString(6, paidleave.getReason());
-
-            // appliedAt이 null이면 현재 시간으로 대체 가능 (DB에서 DEFAULT SYSDATE도 처리되지만 명시 가능)
-            if (paidleave.getAppliedAt() != null) {
-                pstmt.setTimestamp(7, toTimestamp(paidleave.getAppliedAt()));
-            } else {
-                pstmt.setTimestamp(7, new Timestamp(System.currentTimeMillis()));
-            }
-
-            // approved_by와 approved_at은 null 허용
+            pstmt.setTimestamp(7, toTimestamp(paidleave.getAppliedAt()));
             pstmt.setString(8, paidleave.getApprovedBy());
 
             if (paidleave.getApprovedAt() != null) {
                 pstmt.setTimestamp(9, toTimestamp(paidleave.getApprovedAt()));
             } else {
-                pstmt.setNull(9, Types.TIMESTAMP);
+                pstmt.setTimestamp(9, null);
             }
 
             int insertedCount = pstmt.executeUpdate();
@@ -43,7 +37,7 @@ public class PaidLeaveDao {
             if (insertedCount > 0) {
                 // 마지막 insert된 leave_id를 조회
                 stmt = conn.createStatement();
-                rs = stmt.executeQuery("SELECT last_insert_id() FROM paid_leave_tbl");
+                rs = stmt.executeQuery("SELECT seq_leave_id.CURRVAL FROM dual");
 
                 if (rs.next()) {
                     Integer leaveId = rs.getInt(1);
@@ -71,7 +65,102 @@ public class PaidLeaveDao {
         }
     }
 
+    public List<PaidLeave> select(Connection conn, int startRow, int size) throws SQLException {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        try {
+            pstmt = conn.prepareStatement("select * from (select inner_query.*, rownum as rnum from(select * from paid_leave_tbl order by leave_id desc) inner_query where rownum <= ?) where rnum > ?");
+
+            int endRow = startRow + size;
+            pstmt.setInt(1, endRow);
+            pstmt.setInt(2, startRow);
+            rs = pstmt.executeQuery();
+
+            List<PaidLeave> result = new ArrayList<>();
+            while (rs.next()) {
+                result.add(convertPaidLeave(rs));
+            }
+            return result;
+        } finally {
+            JdbcUtil.close(rs);
+            JdbcUtil.close(pstmt);
+        }
+    }
+
+    private PaidLeave convertPaidLeave(ResultSet rs) throws SQLException {
+        return new PaidLeave(rs.getInt("leave_id"),
+                rs.getString("user_id"),
+                rs.getDate("start_date"),
+                rs.getDate("end_date"),
+                rs.getDouble("days"),
+                rs.getString("status"),
+                rs.getString("reason"),
+                rs.getDate("applied_at"),
+                rs.getString("approved_by"),
+                rs.getDate("approved_at"));
+    }
+
+    public int selectCount(Connection conn) throws SQLException {
+        Statement stmt = null;
+        ResultSet rs = null;
+        try {
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery("SELECT COUNT(*) FROM paid_leave_tbl");
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+            return 0;
+        } finally {
+            JdbcUtil.close(rs);
+            JdbcUtil.close(stmt);
+        }
+    }
+
+    public PaidLeave selectById(Connection conn, int no) throws SQLException {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        try {
+            pstmt = conn.prepareStatement("SELECT * FROM paid_leave_tbl WHERE leave_id = ?");
+            pstmt.setInt(1, no);
+            rs = pstmt.executeQuery();
+            PaidLeave paidLeave = null;
+            if (rs.next()) {
+                paidLeave = convertPaidLeave(rs);
+            }
+            return paidLeave;
+        } finally {
+            JdbcUtil.close(rs);
+            JdbcUtil.close(pstmt);
+        }
+    }
+
+    public void updateStatus(Connection conn, int leaveId, String status) throws SQLException {
+        PreparedStatement pstmt = null;
+        try {
+            if ("承認".equals(status)) {
+                pstmt = conn.prepareStatement(
+                        "UPDATE paid_leave_tbl SET status = ?, approved_at = ? WHERE leave_id = ?"
+                );
+                pstmt.setString(1, status);
+                pstmt.setTimestamp(2, new java.sql.Timestamp(System.currentTimeMillis()));
+                pstmt.setInt(3, leaveId);
+            } else {
+                pstmt = conn.prepareStatement(
+                        "UPDATE paid_leave_tbl SET status = ?, approved_at = null WHERE leave_id = ?"
+                );
+                pstmt.setString(1, status);
+                pstmt.setInt(2, leaveId);
+            }
+            pstmt.executeUpdate();
+        } finally {
+            JdbcUtil.close(pstmt);
+        }
+    }
+
     private Timestamp toTimestamp (Date date) {
+        if (date == null) {
+            return null; // null 처리
+        }
         return new Timestamp(date.getTime());
     }
 }
