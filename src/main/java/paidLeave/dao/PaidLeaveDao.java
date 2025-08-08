@@ -134,19 +134,19 @@ public class PaidLeaveDao {
         }
     }
 
-    public void updateStatus(Connection conn, int leaveId, String status, Date approvedAt) throws SQLException {
+    public void updateStatus(Connection conn, int leaveId, String status) throws SQLException {
         PreparedStatement pstmt = null;
         try {
-            if ("승인".equals(status)) {
+            if ("承認".equals(status)) {
                 pstmt = conn.prepareStatement(
                         "UPDATE paid_leave_tbl SET status = ?, approved_at = ? WHERE leave_id = ?"
                 );
                 pstmt.setString(1, status);
-                pstmt.setDate(2, new java.sql.Date(approvedAt.getTime()));
+                pstmt.setTimestamp(2, new java.sql.Timestamp(System.currentTimeMillis()));
                 pstmt.setInt(3, leaveId);
             } else {
                 pstmt = conn.prepareStatement(
-                        "UPDATE paid_leave_tbl SET status = ?, approved_at = NULL WHERE leave_id = ?"
+                        "UPDATE paid_leave_tbl SET status = ?, approved_at = null WHERE leave_id = ?"
                 );
                 pstmt.setString(1, status);
                 pstmt.setInt(2, leaveId);

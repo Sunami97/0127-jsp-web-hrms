@@ -25,11 +25,10 @@ public class ReadPaidLeave {
 
     public void updatePaidLeave(int leaveId, String status) {
         try (Connection conn = ConnectionProvider.getConnection()) {
-            if ("승인".equals(status)) {
-                Date approvedAt = new Date();
-                paidLeaveDao.updateStatus(conn, leaveId, status, approvedAt);
+            if ("承認".equals(status)) {
+                paidLeaveDao.updateStatus(conn, leaveId, status);
             } else {
-                paidLeaveDao.updateStatus(conn, leaveId, status, null);
+                paidLeaveDao.updateStatus(conn, leaveId, status);
             }
         } catch (Exception e) {
             throw new RuntimeException("상태 업데이트 실패", e);

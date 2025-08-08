@@ -27,7 +27,7 @@
         }
 
         table {
-            width: 60%;
+            width: 90%;
             margin: 0 auto 30px;
             border-collapse: collapse;
             background-color: #fff;
@@ -71,7 +71,7 @@
         }
 
         .apply-link {
-            width: 60%;
+            width: 90%;
             margin: 0 auto 30px;
             text-align: right;
         }
@@ -146,14 +146,14 @@
                 <td>${leave.leaveId}</td>
                 <td>${leave.userId}</td>
                 <td>${leave.startDate} ~ ${leave.endDate}</td>
-                <td>${leave.days}일</td>
+                <td>${leave.days}日</td>
                 <td>
                     <c:choose>
                         <c:when test="${leave.status == '신청중'}">
                             <span class="pending">신청중</span>
                         </c:when>
-                        <c:when test="${leave.status == '승인'}">
-                            <span class="approved">승인</span>
+                        <c:when test="${leave.status == '承認'}">
+                            <span class="approved">承認</span>
                         </c:when>
                         <c:when test="${leave.status == '거절'}">
                             <span class="rejected">거절</span>

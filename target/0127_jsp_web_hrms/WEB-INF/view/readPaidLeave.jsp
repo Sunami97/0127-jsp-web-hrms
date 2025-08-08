@@ -100,7 +100,7 @@
     </tr>
     <tr>
         <th>사용일수</th>
-        <td>${paidLeaveData.paidLeave.days}일</td>
+        <td>${paidLeaveData.paidLeave.days}日</td>
     </tr>
     <tr>
         <th>사유</th>
@@ -124,20 +124,19 @@
 
 <div class="button-area center">
     <a href="${pageContext.request.contextPath}/paidleave.do?pageNo=${pageNo}">목록</a>
+    <c:if test="${loginUser.user_id == paidLeaveData.paidLeave.userId
+                  && paidLeaveData.paidLeave.status != '承認'}">
+        <a href="delete.do?leaveId=${paidLeaveData.paidLeave.leaveId}"
+           onclick="return confirm('정말 삭제하시겠습니까?');">삭제</a>
+    </c:if>
 </div>
-
-<c:if test="${loginUser.user_id == paidLeaveData.paidLeave.userId}">
-    <div class="button-area center">
-        <a href="#">삭제</a>
-    </div>
-</c:if>
 
 <c:if test="${loginUser.is_admin == 'Y'}">
     <div class="button-area right">
         <form action="<c:url value='/paidleave/status.do'/>" method="post">
             <input type="hidden" name="leaveId" value="${paidLeaveData.paidLeave.leaveId}">
-            <input type="hidden" name="status" value="승인" />
-            <button type="submit">승인</button>
+            <input type="hidden" name="status" value="承認" />
+            <button type="submit">承認</button>
         </form>
         <form action="<c:url value='/paidleave/status.do'/>" method="post">
             <input type="hidden" name="leaveId" value="${paidLeaveData.paidLeave.leaveId}">
