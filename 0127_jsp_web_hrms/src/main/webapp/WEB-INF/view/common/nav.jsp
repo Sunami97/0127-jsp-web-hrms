@@ -20,33 +20,33 @@
             <li>
                 <a href="${pageContext.request.contextPath}/myInfo.do">
                     <i class="ri-user-3-fill"></i>
-                    <span>내 정보</span>
+                    <span>マイページ</span>
                 </a>
             </li>
         
         <li>
             <a href="${pageContext.request.contextPath}/orgChart.do">
                 <i class="ri-organization-chart"></i>
-                <span>조직도 조회</span>
+                <span>組織図</span>
             </a>
         </li>
         <li>
             <a href="${pageContext.request.contextPath}/contactList.do">
                 <i class="ri-contacts-book-fill"></i>
-                <span>사원 연락망</span>
+                <span>連絡網</span>
             </a>
         </li>
         <li>
             <a href="${pageContext.request.contextPath}/leaveManage.do">
                 <i class="ri-calendar-check-fill"></i>
-                <span>연차 관리</span>
+                <span>年次管理</span>
             </a>
         </li>
         <% if (navIsAdmin) { %>
             <li>
                 <a href="${pageContext.request.contextPath}/empManage.do">
                     <i class="ri-team-fill"></i>
-                    <span>사원 관리</span>
+                    <span>社員管理</span>
                 </a>
             </li>
         <% } %>

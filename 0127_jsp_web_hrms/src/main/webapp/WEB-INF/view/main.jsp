@@ -21,25 +21,25 @@
 <div class="menu-container">
         <a href="myInfo.do" class="menu-box">
             <i class="ri-user-3-fill"></i>
-            <span>내 정보</span>
+            <span>マイページ</span>
         </a>
     
     <a href="orgChart.do" class="menu-box">
         <i class="ri-organization-chart"></i>
-        <span>조직도 조회</span>
+        <span>組織図</span>
     </a>
     <a href="contactList.do" class="menu-box">
         <i class="ri-contacts-book-fill"></i>
-        <span>사원 연락망</span>
+        <span>連絡網</span>
     </a>
     <a href="leaveManage.do" class="menu-box">
         <i class="ri-calendar-check-fill"></i>
-        <span>연차 관리</span>
+        <span>年次管理</span>
     </a>
     <% if (isAdmin) { %>
         <a href="empManage.do" class="menu-box">
             <i class="ri-team-fill"></i>
-            <span>사원 관리</span>
+            <span>社員管理</span>
         </a>
     <% } %>
 </div>

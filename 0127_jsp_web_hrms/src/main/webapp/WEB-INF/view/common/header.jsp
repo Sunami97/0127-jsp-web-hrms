@@ -19,12 +19,12 @@
 <body>
 	<div class="header">
     <div class="header-left">
-        <a href="main.do" class="logo">인사관리시스템</a>
+        <a href="main.do" class="logo">人事管理システム</a>
     </div>
     <div class="header-right">
-        <span><%= user.getName() %>님 환영합니다.</span>
+        <span><%= user.getName() %> 様、歓迎します.</span>
         <form action="logout.do" method="post" style="display:inline;">
-            <button type="submit" class="logout-btn">로그아웃</button>
+            <button type="submit" class="logout-btn">ログアウト</button>
         </form>
     </div>
 </div>
