@@ -16,7 +16,7 @@ public class AdminInsertService {
 			conn = ConnectionProvider.getConnection();
 			conn.setAutoCommit(false);
 			
-			userDao.insert(conn,insertList,reqVal);
+			userDao.insert(conn,insertList,reqVal); //dao 추가 메소드 호출, 매개변수 전달 daoメソッド呼び出し、パラメータ伝達
 			
 			conn.commit();
 		}catch(SQLException e) {

@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <%
   request.setCharacterEncoding("UTF-8");
-  String userI = request.getParameter("userId");
+  String userI = request.getParameter("updateId");
 %>
 <html>
 <head>
@@ -12,30 +12,47 @@
 </head>
 <body>
 	<form action="update.do" method="post">
-		이메일	<input type="text" name="email"><br>
-		연락처	<input type="text" name="phone"><br>
-		직급		<select name="position">
+		メール	<input type="text" name="email"><br>
+		連絡先	<input type="text" name="phone"><br>
+		職位		<select name="position">
 					<option value="社員">社員</option>
 					<option value="主任">主任</option>
+					<option value="係長">係長</option>
 					<option value="課長">課長</option>
+					<option value="次長">次長</option>
 					<option value="部長">部長</option>
+					<option value="常務">常務</option>
+					<option value="専務">専務</option>
+					<option value="取締役">取締役</option>
+					<option value="代表取締役">代表取締役</option>
+					<option value="会長">会長</option>
 					<option value="社長">社長</option>
 				</select><br>			
-		부서	<select name="departmentId">
-					<option value="1">생산</option>
-					<option value="2">회계</option>
-					<option value="3">인사</option>
-					<option value="4">전산</option>
-				</select><br>	
-		관리자 권한  N<input type="radio" name="isAdmin" checked="checked" value="N">
+		部署	<select name="departmentId">
+					<option value="1">総務部</option>
+					<option value="2">人事課</option>
+					<option value="3">経理部</option>
+					<option value="4">財務部</option>
+					<option value="5">営業部</option>
+					<option value="6">販売部</option>
+					<option value="7">マーケティング部</option>
+					<option value="8">開発部</option>
+					<option value="9">技術部</option>
+					<option value="10">情報システム部</option>
+					<option value="11">生産部</option>
+					<option value="12">品質管理部</option>
+					<option value="13">法務部</option>
+					<option value="14">企画部</option>
+				</select><br>			
+		管理者 権限  N<input type="radio" name="isAdmin" checked="checked" value="N">
 				  Y<input type="radio" name="isAdmin" value="Y"><br>
-		상태		<select name="empStatus">
+		状態		<select name="empStatus">
 					<option value="在職">在職</option>
 					<option value="休職">休職</option>
 					<option value="退職">退職</option>
 				</select><br>	
-				<input type="hidden" name="userId" value="<%=userI %>">
-		<button type="submit">수정</button>
+				<input type="hidden" name="updateId" value="<%=userI %>">
+		<button type="submit">修整</button>
 	</form>
 </body>
 </html>

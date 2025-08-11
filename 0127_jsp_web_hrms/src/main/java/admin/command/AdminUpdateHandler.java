@@ -30,7 +30,7 @@ public class AdminUpdateHandler implements CommandHandler {
 	}
 
 	private String processSubmit(HttpServletRequest req, HttpServletResponse res) {
-		String userId = req.getParameter("userId");
+		String userId = req.getParameter("updateId");
 		String[] reqVal = new String[6];
 		String[] updateList = new String[6];	//넣을 항목과 값을 담을 배열 객체 入れる項目と数値を入れる配列オブジェクト
 		int i;// 반복문에 사용할 변수 反復文に使用する変数

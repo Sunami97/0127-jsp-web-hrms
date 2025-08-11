@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import admin.service.AdminInsertService;
 import mvc.command.CommandHandler;
+import util.BCryptUtil;
 
 public class AdminInsertHandler implements CommandHandler {
 
@@ -46,7 +47,9 @@ public class AdminInsertHandler implements CommandHandler {
 				continue;
 			} else if (req.getParameter("password") != "" && req.getParameter("password") != null
 					&& !Arrays.toString(insertList).contains("password")) {
-				reqVal[i] = req.getParameter("password");
+				String psw = req.getParameter("password");
+				String hashed = BCryptUtil.hash(psw);
+				reqVal[i] = hashed;
 				insertList[i] = "password";
 				continue;
 			} else if (req.getParameter("name") != "" && req.getParameter("name") != null

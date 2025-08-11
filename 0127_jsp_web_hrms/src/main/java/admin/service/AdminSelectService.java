@@ -18,10 +18,10 @@ public class AdminSelectService {
 			conn = ConnectionProvider.getConnection();
 			conn.setAutoCommit(false);
 			
-			List<AdminDto> user = userDao.selectList(conn, keyWord, keyField,date,sDate);
+			List<AdminDto> user = userDao.selectList(conn, keyWord, keyField,date,sDate); //dao 조회 메소드 호출, 매개변수 전달 daoメソッド呼び出し、パラメータ伝達
 			
 			conn.commit();
-			return user;
+			return user; //객체 리턴 オブジェクト·リターン
 		}catch(SQLException e) {
 			JdbcUtil.rollback(conn);
 			System.out.print(e.getMessage());

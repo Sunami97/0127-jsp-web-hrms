@@ -1,66 +1,63 @@
- <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
- <style>
- .search-box {
-  position: relative;
-  width: 300px;
+<style>
+.search-box {
+	position: relative;
+	width: 300px;
 }
 
 input {
-  width: 100%;
-  border: 1px solid #bbb;
-  border-radius: 8px;
-  padding: 10px 12px;
-  font-size: 14px;
+	width: 100%;
+	border: 1px solid #bbb;
+	border-radius: 8px;
+	padding: 10px 12px;
+	font-size: 14px;
 }
 
 img {
-  position : absolute;
-  width: 17px;
-  top: 10px;
-  right: 12px;
-  margin: 0;
+	position: absolute;
+	width: 17px;
+	top: 10px;
+	right: 12px;
+	margin: 0;
 }
 </style>
 </head>
 <body>
+	<!-- 조회할 사원의 정보를 입력하여 검색 照会する社員の情報を入力して検索 -->
 	<form class="search-box" action="select.do" method="post">
-		<table >
-				<tr> 
-					<td><select name="keyField">
-						<option>전체</option>
-						<option value="name">이름</option>
-						<option value="user_id">아이디</option>
-						<option value="position">직급</option>
-						<option value="phone">연락처</option>
-						</select>
-						<select name="date">
-						<option	value="null" selected>기간</option>
-						<option value="join_date">입사일</option>
-						<option value="retire_date">퇴사일</option>
-						</select>
-						<input type="date" name="sDate">~ 
-						<input type="date" name="sDate"> 
-					 <input class="search-txt" type="text" name="keyWord" placeholder="검색어를 입력하세요.">
-					<button type="submit">조회</button>
-					</td>
-					
-				</tr>
-			
+		<table>
+			<tr>	<!-- 검색할 카테고리 検索するカテゴリ--> 
+				<td><select name="keyField">
+						<option>全体</option>
+						<option value="name">名前</option>
+						<option value="user_id">ID</option>
+						<option value="position">職位</option>
+						<option value="phone">連絡先</option>
+				</select> 
+					<!-- 입사일 혹은 퇴사일 기간을 정해서 조회 入社日または退社日の期間を決めて照会 -->
+				<select name="date">
+						<option value="null" selected>期間</option>
+						<option value="join_date">入社日</option>
+						<option value="retire_date">退社日</option>
+				</select> 
+				<input type="date" name="sDate">~ 
+				<input type="date" name="sDate"> 
+				
+				<input class="search-txt" type="text" name="keyWord" placeholder="検索ワードを入力してください.">
+					<button type="submit">照会</button></td>
+			</tr>
 		</table>
-	
 	</form>
-	<jsp:include page="/WEB-INF/view/userListForm.jsp" flush="false">
-		<jsp:param name="cmd" value="ListForm" />	
-	</jsp:include>	
-	<form>
-	<button type="submit" onclick="javascript: form.action='registerForm.do'">추가</button>
-	</form>
-	
+	<!-- 결과을 출력한 jsp페이지를 불러옴 結果を出力したjspページを読み込む -->
+	<jsp:include page="/WEB-INF/view/userListForm.jsp" flush="false"/>
+	<!-- 사원 추가 command 호출 社員追加command呼び出し -->
+	<button type="button" onclick="location.href='registerForm.do'">追加</button>
 </body>
 </html>

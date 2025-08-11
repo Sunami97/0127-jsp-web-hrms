@@ -15,7 +15,7 @@ AdminDao userDao = new AdminDao();
 		try {
 		conn = ConnectionProvider.getConnection();
 		conn.setAutoCommit(false);
-		userDao.fire(conn, userId, date);
+		userDao.fire(conn, userId, date); //dao 해고 메소드 호출, 매개변수 전달 daoメソッド呼び出し、パラメータ伝達
 		conn.commit();
 		
 	}catch(SQLException e) {

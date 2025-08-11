@@ -16,7 +16,7 @@ public class AdminUpdateService {
 		try {
 		conn = ConnectionProvider.getConnection();
 		conn.setAutoCommit(false);
-		userDao.Update(conn, userId, UpdateList, reqVal);
+		userDao.Update(conn, userId, UpdateList, reqVal); //dao 수정 메소드 호출, 매개변수 전달 daoメソッド呼び出し、パラメータ伝達
 		conn.commit();
 		
 	}catch(SQLException e) {

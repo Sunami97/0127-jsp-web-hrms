@@ -9,73 +9,84 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-body {
+.body {
 	background-color: #f8f9fa;
+	margin: 0;
 }
 
 .board-table {
-	width: 100%;
-	table-layout: fixed;
-	max-width: 900px;
-	margin: auto;
-	border-collapse: collapse;
-	background-color: white;
-	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  table-layout: auto;         /* 셀 내용에 맞게 너비 자동 조절 */
+  border-collapse: collapse;
 }
 
-.board-table th, .board-table td {
-	padding: 12px 16px;
-	border: 1px solid #dee2e6;
-	text-align: center;
-	height: 10px;
-	line-height: 20px;
+.board-table th{
+
+  white-space: nowrap;
+  padding: 10px 20px;
+  border: 1px solid #dee2e6;
+  text-align: center;
+  height: auto;
+  line-height: 30px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
+
+ .board-table td {
+  padding: 10px 20px;
+  border: 1px solid #dee2e6;
+  text-align: center;
+  white-space: normal;        /* 줄바꿈 허용 */
+  word-break: break-word;     /* 단어 길면 강제로 자르기 */
+  line-height: 30px;
+}
 .board-table thead {
 	background-color: #f1f3f5;
 }
 </style>
 </head>
 <body>
-	<h2 style="text-align: center;">📋 사원 관리 화면</h2>
-	<form method="post" name="form">${count}명있습니다.
+	<h2 style="text-align: center;">📋社員管理画面</h2>
+	<!-- 조회한 총 수 照会した総数 -->
+	<form method="post" name="form">照会${count}件
 		<table class="board-table" id="user-table">
 			<thead>
-				<tr>
-					<th width="70" class="text-center">아이디</th>
-					<th width="140" class="text-center">패스워드</th>
-					<th width="70" class="text-center">이름</th>
-					<th width="200" class="text-center">이메일</th>
-					<th width="140" class="text-center">연락처</th>
-					<th width="140" class="text-center">생년월일</th>
-					<th width="120" class="text-center">입사일</th>
-					<th width="120" class="text-center">퇴사일</th>
-					<th width="20" class="text-center">직급</th>
-					<th width="20" class="text-center">부서</th>
-					<th width="20" class="text-center">관리자 여부</th>
-					<th width="20" class="text-center">상태</th>
-					<th width="20" class="text-center">근무상태</th>
-					<th width="20" class="text-center">로그인상태</th>
-					<th width="20" class="text-center">삭제</th>
-					<th width="20" class="text-center">수정</th>
+				<tr> <!-- 사원 정보 속성 社員情報属性 -->
+					<th class="text-center">ID</th>
+					<th class="text-center">名前</th>
+					<th class="text-center">メール</th>
+					<th class="text-center">連絡先</th>
+					<th class="text-center">生年月日</th>
+					<th class="text-center">入社日</th>
+					<th class="text-center">退社日</th>
+					<th class="text-center">職位</th>
+					<th class="text-center">部署</th>
+					<th class="text-center">管理者 権限</th>
+					<th class="text-center">状態</th>
+					<th class="text-center">勤務状態</th>
+					<th class="text-center">ログイン状態</th>
+					<th class="text-center">削除</th>
+					<th class="text-center">修整</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody> <!-- 조회한 사원 별 정보 출력 照会した社員別情報の出力 -->
 				<c:forEach var="user" items="${user}">
 					<tr>
 						<td>${user.userId}</td>
-						<td>${user.password}</td>
 						<td>${user.name}</td>
 						<td>${user.email}</td>
 						<td>${user.phone}</td>
 						<td>${user.birthDate}</td>
 						<td>${user.joinDate}</td>
 						<td>
-							<c:choose>
+										<!-- 만약 퇴사일이 없다면 버튼을 클릭했을때 지정한 날짜로 퇴사일을 업데이트
+										もし退社日がない場合、ボタンをクリックした時に指定した日に退社日をアップデート -->
+							<c:choose>  
 									<c:when test="${empty user.retireDate}">
 								 		<input type="hidden" name="userId" value="${user.userId}">
 								 		<input type="date" name="date">
-   										 <button type="submit" onclick="javascript: form.action='fire.do'">퇴사</button>
+   										 <button type="submit" onclick="javascript: form.action='fire.do'">退社</button>
    									 </c:when>
    									 <c:otherwise>
    										${user.retireDate}
@@ -88,17 +99,21 @@ body {
 						<td>${user.empStatus}</td>
 						<td>${user.workStatus}</td>
 						<td>${user.loginStatus}</td>
-						<td><input type="checkbox" name="userId" value="${user.userId}"></td>
-						<td><input type="radio" name="userId" value="${user.userId}"></td>
+						<!-- 삭제할 사원 (복수선택가능) 削除する社員(複数選択可能) -->
+						<td><input type="checkbox" name="deleteId" value="${user.userId}"></td>
+						<!-- 수정할 사원 (복수선택불가) 修正する社員(複数選択不可) -->
+						<td><input type="radio" name="updateId" value="${user.userId}"></td>
 					</tr>
 				</c:forEach>
 
 
 			</tbody>
 		</table>
-		<button type="submit" onclick="javascript: form.action='delete.do'">삭제</button>
-		<button type="submit"
-			onclick="javascript: form.action='updateForm.do'">수정</button>
+		
+		<!-- 위에서 체크박스에 선택한 사원 삭제 上でチェックボックスに選択した社員を削除  -->
+		<button type="submit" onclick="javascript: form.action='delete.do'">削除</button>
+		<!-- 위에서 라디오에 선택한 사원의 정보를 수정하는 페이지로 이동 ラジオで選択した社員の情報を修正するページに移動 -->
+		<button type="submit" onclick="javascript: form.action='updateForm.do'">修整</button>
 
 	</form>
 

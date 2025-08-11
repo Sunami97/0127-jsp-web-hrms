@@ -64,6 +64,7 @@ public class AdminDto {
 		return loginStatus;
 	}
 
+	//조회용 DTO 照会用DTO
 	public AdminDto(String userId, String password, String name, String email, String phone, String birthDate,
 			String joinDate, String retireDate, String position, int departmentId, String isAdmin, String empStatus,
 			String workStatus, String loginStatus, String departmentName) {
@@ -84,6 +85,8 @@ public class AdminDto {
 		this.loginStatus = loginStatus;
 		this.departmentName = departmentName;
 	}
+	
+	//추가용 DTO 追加用DTO
 	public AdminDto(String userId, String password, String name, String email, String phone, String birthDate,
 			String joinDate, String position, int departmentId, String isAdmin, String empStatus, String workStatus,
 			String loginStatus, String departmentName) {
