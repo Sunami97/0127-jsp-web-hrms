@@ -67,14 +67,14 @@
     <div class="popup-box">
         <!-- 팝업 타이틀 (Popup title) -->
         <!-- ポップアップタイトル -->
-        <div class="popup-title">알림</div>
+        <div class="popup-title">お知らせ</div>
         <!-- 비밀번호 변경 결과 메시지 (Result message from server) -->
         <!-- サーバーからの結果メッセージ -->
         <div class="popup-msg"><%= request.getAttribute("msg") %></div>
         <!-- 내 정보로 이동 버튼 (Move to mypage) -->
         <!-- マイページへ戻るボタン -->
         <button class="popup-btn" onclick="window.location.href='<%=request.getContextPath()%>/mypage.do'">
-            내 정보로 돌아가기
+            マイページへ戻る
         </button>
     </div>
 </body>

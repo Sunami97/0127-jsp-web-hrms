@@ -34,10 +34,11 @@ public class MypageEditProHandler implements CommandHandler {
 
         // 6. 수정 결과에 따라, 결과 메시지를 request에 담는다 (JSP에서 사용 가능)
         if (result) {
-            request.setAttribute("msg", "정보가 성공적으로 수정되었습니다.");
+            request.setAttribute("msg", "情報が正常に更新されました。");
         } else {
-            request.setAttribute("msg", "수정에 실패했습니다. 다시 시도해주세요.");
+            request.setAttribute("msg", "更新に失敗しました。もう一度お試しください。");
         }
+
 
         // 7. 마지막으로 결과 메시지를 보여줄 JSP 화면으로 이동한다
         return "/WEB-INF/view/mypageEditResult.jsp";

@@ -318,84 +318,86 @@
             </div>
             <!-- [비밀번호 변경 버튼] -->
             <div class="btn-group">
-                <button type="button" class="my-btn" onclick="openPwModal()">비밀번호 변경</button>
-            </div>
-            <!-- [저장 버튼] -->
-            <div class="btn-group" style="margin-top:12px;">
-                <button type="submit" class="my-btn">저장</button>
+          <button type="button" class="my-btn" onclick="openPwModal()">パスワード変更</button>
+</div>
+<!-- [저장 버튼] -->
+<div class="btn-group" style="margin-top:12px;">
+    <button type="submit" class="my-btn">保存</button>
             </div>
         </div>
         <!-- [오른쪽: 내 정보 입력폼 (일부 readonly)] -->
         <div class="profile-right">
             <table class="profile-table">
-                <tr>
-                    <th>아이디</th>
-                    <td>
-                        <input type="text" name="userId" value="<%=userDepartment.getUserId()%>" readonly
-                            style="background:#f2f3f8;border:none;color:#888;padding:5px 10px;font-size:15px;width:85%;">
-                    </td>
-                </tr>
-                <tr>
-                    <th>이름</th>
-                    <td>
-                        <input type="text" name="name" value="<%=user.getName()%>"readonly
-                            style="background:#f2f3f8;border:none;color:#888;padding:5px 10px;font-size:15px;width:85%;">
-                    </td>
-                </tr>
-                <tr>
-                    <th>이메일</th>
-                    <td>
-                        <input type="email" name="email" value="<%=user.getEmail()==null?"":user.getEmail()%>"
-                            style="padding:5px 10px;font-size:15px;width:85%;">
-                    </td>
-                </tr>
-                <tr>
-                    <th>전화번호</th>
-                    <td>
-                        <input type="text" name="phone" value="<%=user.getPhone()==null?"":user.getPhone()%>"
-                            style="padding:5px 10px;font-size:15px;width:85%;">
-                    </td>
-                </tr>
-                <tr>
-                    <th>생년월일</th>
-                    <td>
-                        <input type="date" name="birthDate"
-                               value="<%=userDepartment.getBirthDate()==null?"":userDepartment.getBirthDate().toString()%>"readonly
-                            style="background:#f2f3f8;border:none;color:#888;padding:5px 10px;font-size:15px;width:85%;">
-                    </td>
-                </tr>
-                 <tr>
-                    <th>부서</th>
-                    <td>
-                        <input type="text" name="departmentName"
-                            value="<%=userDepartment.getDepartmentName()==null?"":userDepartment.getDepartmentName()%>"readonly
-                            style="background:#f2f3f8;border:none;color:#888;padding:5px 10px;font-size:15px;width:85%;">
-                    </td>
-                </tr>
-                <tr>
-                    <th>직책</th>
-                    <td>
-                        <input type="text" name="position"
-                            value="<%=user.getPosition()==null?"":user.getPosition()%>" readonly
-                            style="background:#f2f3f8;border:none;color:#888;padding:5px 10px;font-size:15px;width:85%;">
-                    </td>
-                </tr>
-                <tr>
-                    <th>입사일</th>
-                    <td>
-                        <input type="date" name="joinDate"
-                               value="<%=userDepartment.getJoinDate()==null?"":userDepartment.getJoinDate().toString()%>"readonly
-                            style="background:#f2f3f8;border:none;color:#888;padding:5px 10px;font-size:15px;width:85%;">
-                    </td>
-                </tr>
-                <tr>
-                    <th>퇴사일</th>
-                    <td>
-                        <input type="date" name="retireDate"
-                               value="<%=userDepartment.getRetireDate()==null?"":userDepartment.getRetireDate().toString()%>"readonly
-                            style="background:#f2f3f8;border:none;color:#888;padding:5px 10px;font-size:15px;width:85%;">
-                    </td>
-                </tr>
+             <tr>
+    <th>ユーザーID <%-- ユーザーアイディー (yuuzaa aideii) --%></th>
+    <td>
+        <input type="text" name="userId" value="<%=userDepartment.getUserId()%>" readonly
+            style="background:#f2f3f8;border:none;color:#888;padding:5px 10px;font-size:15px;width:85%;">
+    </td>
+</tr>
+<tr>
+    <th>氏名 <%-- しめい (shimei) --%></th>
+    <td>
+        <input type="text" name="name" value="<%=user.getName()%>" readonly
+            style="background:#f2f3f8;border:none;color:#888;padding:5px 10px;font-size:15px;width:85%;">
+    </td>
+</tr>
+<tr>
+<th style="white-space:nowrap;">メールアドレス <%-- 메에루 아도레스 --%></th>
+    
+    <td>
+        <input type="email" name="email" value="<%=user.getEmail()==null?"":user.getEmail()%>"
+            style="padding:5px 10px;font-size:15px;width:85%;">
+    </td>
+</tr>
+<tr>
+    <th>電話番号 <%-- でんわばんごう (denwa bangou) --%></th>
+    <td>
+        <input type="text" name="phone" value="<%=user.getPhone()==null?"":user.getPhone()%>"
+            style="padding:5px 10px;font-size:15px;width:85%;">
+    </td>
+</tr>
+<tr>
+    <th>生年月日 <%-- せいねんがっぴ (seinengappi) --%></th>
+    <td>
+        <input type="date" name="birthDate"
+               value="<%=userDepartment.getBirthDate()==null?"":userDepartment.getBirthDate().toString()%>" readonly
+            style="background:#f2f3f8;border:none;color:#888;padding:5px 10px;font-size:15px;width:85%;">
+    </td>
+</tr>
+<tr>
+    <th>部署 <%-- ぶしょ (busho) --%></th>
+    <td>
+        <input type="text" name="departmentName"
+            value="<%=userDepartment.getDepartmentName()==null?"":userDepartment.getDepartmentName()%>" readonly
+            style="background:#f2f3f8;border:none;color:#888;padding:5px 10px;font-size:15px;width:85%;">
+    </td>
+</tr>
+<tr>
+    <th>役職 <%-- やくしょく (yakushoku) --%></th>
+    <td>
+        <input type="text" name="position"
+            value="<%=user.getPosition()==null?"":user.getPosition()%>" readonly
+            style="background:#f2f3f8;border:none;color:#888;padding:5px 10px;font-size:15px;width:85%;">
+    </td>
+</tr>
+<tr>
+    <th>入社日 <%-- にゅうしゃび (nyuushabi) --%></th>
+    <td>
+        <input type="date" name="joinDate"
+               value="<%=userDepartment.getJoinDate()==null?"":userDepartment.getJoinDate().toString()%>" readonly
+            style="background:#f2f3f8;border:none;color:#888;padding:5px 10px;font-size:15px;width:85%;">
+    </td>
+</tr>
+<tr>
+    <th>退社日 <%-- たいしゃび (taishabi) --%></th>
+    <td>
+        <input type="date" name="retireDate"
+               value="<%=userDepartment.getRetireDate()==null?"":userDepartment.getRetireDate().toString()%>" readonly
+            style="background:#f2f3f8;border:none;color:#888;padding:5px 10px;font-size:15px;width:85%;">
+    </td>
+</tr>
+
                
             </table>
         </div>
@@ -406,26 +408,29 @@
     <div id="pwModal" class="pw-modal">
         <div class="pw-modal-content">
             <div class="pw-modal-header">
-                <span>비밀번호 변경</span>
+                <span>パスワード変更</span>
                 <span class="pw-modal-close" onclick="closePwModal()">&times;</span>
             </div>
             <!-- [비밀번호 변경 폼] -->
-            <form method="post" action="<%=request.getContextPath()%>/pwUpdatePro.do" style="margin-top:12px;">
-                <input type="hidden" name="userId" value="<%=userDepartment.getUserId()%>">
-                <div class="pw-form-row">
-                    <label>기존 비밀번호</label>
-                    <input type="password" name="currentPw" required autocomplete="current-password">
-                </div>
-                <div class="pw-form-row">
-                    <label>새 비밀번호</label>
-                    <input type="password" name="newPw" required autocomplete="new-password">
-                </div>
-                <div class="pw-form-row">
-                    <label>새 비밀번호 확인</label>
-                    <input type="password" name="newPw2" required autocomplete="new-password">
-                </div>
-                <div style="text-align:center; margin-top:24px;">
-                    <button type="submit" class="pw-modal-btn">변경</button>
+           <form method="post" action="<%=request.getContextPath()%>/pwUpdatePro.do" style="margin-top:12px;">
+    <input type="hidden" name="userId" value="<%=userDepartment.getUserId()%>">
+    <div class="pw-form-row">
+        <label>現在のパスワード <%-- げんざい の ぱすわーど --%></label>
+        <input type="password" name="currentPw" required autocomplete="current-password">
+    </div>
+    <div class="pw-form-row">
+        <label>新しいパスワード <%-- あたらしい ぱすわーど --%></label>
+        <input type="password" name="newPw" required autocomplete="new-password">
+    </div>
+    <div class="pw-form-row">
+        <label>新しいパスワード（確認） <%-- あたらしい ぱすわーど（かくにん） --%></label>
+        <input type="password" name="newPw2" required autocomplete="new-password">
+    </div>
+    <div style="text-align:center; margin-top:24px;">
+        <button type="submit" class="pw-modal-btn">変更 <%-- へんこう --%></button>
+    </div>
+</form>
+
                 </div>
             </form>
         </div>

@@ -82,10 +82,10 @@
         <div class="popup-box">
             <!-- 성공 메시지 (Success message) -->
             <!-- 成功メッセージ -->
-            <div class="popup-title">정보가 성공적으로<br>수정되었습니다.</div>
-            <!-- 확인 버튼 (OK button, triggers goMyPage function) -->
-            <!-- 確認ボタン（goMyPage関数実行） -->
-            <button class="popup-btn" onclick="goMyPage()">확인</button>
+           <div class="popup-title">情報が正常に<br>更新されました。</div>
+<!-- 確認ボタン（goMyPage関数実行） -->
+<button class="popup-btn" onclick="goMyPage()">確認</button>
+
         </div>
     </div>
 </body>

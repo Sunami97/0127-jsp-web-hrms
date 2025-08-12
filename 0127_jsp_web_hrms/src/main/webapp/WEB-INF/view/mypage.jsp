@@ -118,27 +118,29 @@
             </div>
             <div class="btn-group">
                 <a href="<%=request.getContextPath()%>/mypageEditForm.do" style="width:100%;">
-                    <button type="button" class="my-btn">수정</button>
+                    <button type="button" class="my-btn">修正</button>
                 </a>
             </div>
         </div>
         <div class="profile-right">
             <table class="profile-table">
-                <tr><th>아이디</th><td><%=userDepartment.getUserId()%></td></tr>
-                <tr><th>이름</th><td><%=userDepartment.getName()%></td></tr>
-                <tr><th>이메일</th><td><%=userDepartment.getEmail() == null ? "" : userDepartment.getEmail()%></td></tr>
-                <tr><th>전화번호</th><td><%=userDepartment.getPhone() == null ? "" : userDepartment.getPhone()%></td></tr>
-                <tr><th>생년월일</th><td><%=userDepartment.getBirthDate() == null ? "" : userDepartment.getBirthDate().toString()%></td></tr>
-                <tr><th>부서</th><td><%=userDepartment.getDepartmentName() == null ? "" : userDepartment.getDepartmentName()%></td></tr>
-                <tr><th>직책</th><td><%=userDepartment.getPosition() == null ? "" : userDepartment.getPosition()%></td></tr>
-                <tr><th>입사일</th><td><%=userDepartment.getJoinDate() == null ? "" : userDepartment.getJoinDate().toString()%></td></tr>
-                <tr><th>퇴사일</th><td><%=userDepartment.getRetireDate() == null ? "" : userDepartment.getRetireDate().toString()%></td></tr>
-                <% if ("Y".equals(userDepartment.getIsAdmin())) { %>
-                    <tr><th>관리자여부</th><td>예</td></tr>
-                <% } %>
-                <tr><th>근로상태</th><td><%=userDepartment.getEmpStatus() == null ? "" : userDepartment.getEmpStatus()%></td></tr>
-                <tr><th>근무상태</th><td><%=userDepartment.getWorkStatus() == null ? "" : userDepartment.getWorkStatus()%></td></tr>
-                <tr><th>로그인상태</th><td><%="Y".equals(userDepartment.getLoginStatus()) ? "예" : "아니오"%></td></tr>
+               <tr><th>ユーザーID</th><td><%=userDepartment.getUserId()%></td></tr>
+<tr><th>氏名</th><td><%=userDepartment.getName()%></td></tr>
+<tr>
+    <th style="white-space:nowrap; min-width:120px;">メールアドレス <%-- メエルアドレス --%></th>
+    <td><%=userDepartment.getEmail() == null ? "" : userDepartment.getEmail()%></td>
+</tr><tr><th>電話番号</th><td><%=userDepartment.getPhone() == null ? "" : userDepartment.getPhone()%></td></tr>
+<tr><th>生年月日</th><td><%=userDepartment.getBirthDate() == null ? "" : userDepartment.getBirthDate().toString()%></td></tr>
+<tr><th>部署</th><td><%=userDepartment.getDepartmentName() == null ? "" : userDepartment.getDepartmentName()%></td></tr>
+<tr><th>役職</th><td><%=userDepartment.getPosition() == null ? "" : userDepartment.getPosition()%></td></tr>
+<tr><th>入社日</th><td><%=userDepartment.getJoinDate() == null ? "" : userDepartment.getJoinDate().toString()%></td></tr>
+<tr><th>退職日</th><td><%=userDepartment.getRetireDate() == null ? "" : userDepartment.getRetireDate().toString()%></td></tr>
+<% if ("Y".equals(userDepartment.getIsAdmin())) { %>
+    <tr><th>管理者権限</th><td>はい</td></tr>
+<% } %>
+<tr><th>雇用状態</th><td><%=userDepartment.getEmpStatus() == null ? "" : userDepartment.getEmpStatus()%></td></tr>
+<tr><th>勤務状態</th><td><%=userDepartment.getWorkStatus() == null ? "" : userDepartment.getWorkStatus()%></td></tr>
+<tr><th>ログイン状態</th><td><%="Y".equals(userDepartment.getLoginStatus()) ? "はい" : "いいえ"%></td></tr>
             </table>
         </div>
     </div>

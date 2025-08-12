@@ -22,7 +22,7 @@ public class PwUpdateProHandler implements CommandHandler {
         //    새 비밀번호(newPw)와 새 비밀번호 확인(newPw2)이 다르면
         //    msg에 "입력값을 확인하세요."라는 메시지를 담는다
         if (userId == null || currentPw == null || newPw == null || newPw2 == null || !newPw.equals(newPw2)) {
-            msg = "입력값을 확인하세요.";
+            msg = "入力内容を確認してください。"; // にゅうりょくないよう を かくにん してください
         } else {
             // 4. UserService라는 서비스 객체를 새로 만들어서 userService 변수에 담는다
             UserService userService = new UserService();
@@ -34,10 +34,11 @@ public class PwUpdateProHandler implements CommandHandler {
             //    msg에 "비밀번호가 성공적으로 변경되었습니다."라는 메시지를 담고,
             //    아니면 "현재 비밀번호가 변경에 실패했습니다."라는 메시지를 담는다
             if (result) {
-                msg = "비밀번호가 성공적으로 변경되었습니다.";
+                msg = "パスワードが正常に変更されました。";
             } else {
-                msg = "현재 비밀번호가 변경에 실패했습니다.";
+                msg = "現在のパスワードの変更に失敗しました。";
             }
+
         }
 
         // 7. msg에 담긴 메시지를 request에 "msg"라는 이름으로 저장한다 (JSP에서 사용 가능)

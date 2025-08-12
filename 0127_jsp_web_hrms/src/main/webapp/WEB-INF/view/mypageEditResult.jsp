@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>정보 수정 결과</title>
+    <title>情報修正結果</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         /* 배경: 투명도 적용 (Background with transparency) */
@@ -63,18 +63,18 @@
 <body>
     <!-- 팝업 메인 컨테이너 (Popup Main Container) -->
     <!-- ポップアップメインコンテナ -->
-    <div class="popup-box">
-        <!-- 타이틀 영역 (Title Area) -->
-        <!-- タイトルエリア -->
-        <div class="popup-title">알림</div>
-        <!-- 컨트롤러에서 전달된 결과 메시지 표시 (Display result message from Controller) -->
-        <!-- コントローラーから渡されたメッセージを表示 -->
-        <div class="popup-msg"><%= request.getAttribute("msg") %></div>
-        <!-- 확인 버튼: 클릭 시 마이페이지로 이동 (OK button: Go to MyPage) -->
-        <!-- 確認ボタン：クリックでマイページへ遷移 -->
-        <button class="popup-btn" onclick="window.location.href='<%=request.getContextPath()%>/mypage.do'">
-            내 정보로 돌아가기
-        </button>
-    </div>
+ <div class="popup-box">
+    <!-- タイトルエリア -->
+    <div class="popup-title">お知らせ</div>
+    
+    <!-- コントローラーから渡されたメッセージを表示 -->
+    <div class="popup-msg"><%= request.getAttribute("msg") %></div>
+    
+    <!-- 確認ボタン：クリックでマイページへ遷移 -->
+    <button class="popup-btn" onclick="window.location.href='<%=request.getContextPath()%>/mypage.do'">
+        マイページへ戻る
+    </button>
+</div>
+
 </body>
 </html>
