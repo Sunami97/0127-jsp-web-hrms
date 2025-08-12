@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div class="footer">
-    <span>&copy; 헥사곤 인사관리 프로젝트</span>
+    <span>&copy; 株式会社ヘキサゴン</span>
 </div>
 	
 </body>

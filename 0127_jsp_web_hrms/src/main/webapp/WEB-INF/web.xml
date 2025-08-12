@@ -54,6 +54,11 @@
 		<servlet-name>ControllerUsingURI</servlet-name>
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
+	
+	<listener>
+    <listener-class>session.SessionListener</listener-class>
+	</listener>
+	
 
 	<filter>
 		<filter-name>LoginCheckFilter</filter-name>

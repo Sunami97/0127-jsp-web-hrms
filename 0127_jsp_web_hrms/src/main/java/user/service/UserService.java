@@ -1,6 +1,7 @@
 package user.service;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 import user.dao.UserDAO;
 import user.model.UserDTO;
@@ -16,4 +17,8 @@ public class UserService {
         return userDAO.isUserExist(conn, user_id);
     }
 
+    
+    public void updateLoginStatus(Connection conn, String userId, String status) throws SQLException {
+        userDAO.updateLoginStatus(conn, userId, status);
+    }
 } 
