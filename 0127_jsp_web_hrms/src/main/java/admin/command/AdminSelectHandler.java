@@ -32,11 +32,19 @@ public class AdminSelectHandler implements CommandHandler{
 		String keyField = req.getParameter("keyField");
 		String date = req.getParameter("date");				
 		String[] sDate = req.getParameterValues("sDate");	//검색할 키워드,속성,날짜유형,날짜 범위 받아옴
+		
+		//조회가 되었는지 확인하고 없다면 그대로 리턴 照会ができているか確認していない場合は、そのままリターン
+		if(userService.Select(keyWord,keyField,date,sDate) != null) {
 		List<AdminDto> user = userService.Select(keyWord,keyField,date,sDate);
-		//셀럭트서비스의 메소드 호출후 유저리스트에 담음 セレクトサービスのメソッド呼び出し後、ユーザーリストに入れる
 		int count = user.size();	//count변수에 검색된 인원 수를 담음 count変数に検索された人数を含める
 		req.setAttribute("count", count);
 		req.setAttribute("user", user);	//리퀘스트 객체에 count,user 저장 リクエストオブジェクトにcount、userを保存
+		} else {
+			return "WEB-INF/view/adminForm.jsp"; //관리자 페이지로 리턴 管理者ページにリターン
+		}
+		//셀럭트서비스의 메소드 호출후 유저리스트에 담음 セレクトサービスのメソッド呼び出し後、ユーザーリストに入れる
+	
+		
 		return "WEB-INF/view/adminForm.jsp"; //관리자 페이지로 리턴 管理者ページにリターン
 	}
 
