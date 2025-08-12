@@ -9,17 +9,24 @@ import java.util.List;
 
 public class ContactsDAO {
 
+    // 데이터베이스 연결을 생성하는 메서드
+    // データベース接続を生成するメソッド
     private Connection getConnection() throws SQLException {
-        // DB 연결 정보 (필요에 따라 수정)
-        String url = "jdbc:oracle:thin:@localhost:1521:xe";
-        String user = "system";
-        String password = "1234";
-        return DriverManager.getConnection(url, user, password);
+        // DB 연결 정보 설정
+        // DB接続情報の設定
+        String url = "jdbc:oracle:thin:@localhost:1521:xe"; // 오라클 JDBC 접속 URL / Oracle JDBC接続URL
+        String user = "system"; // DB 사용자 이름 / DBユーザー名
+        String password = "1234"; // DB 비밀번호 / DBパスワード
+        return DriverManager.getConnection(url, user, password); // 연결 반환 / 接続を返す
     }
 
+    // 모든 연락처 정보를 조회하는 메서드
+    // 全ての連絡先情報を取得するメソッド
     public List<ContactsDTO> findAll() {
-        List<ContactsDTO> list = new ArrayList<>();
+        List<ContactsDTO> list = new ArrayList<>(); // 결과를 담을 리스트 / 結果を格納するリスト
 
+        // SQL 쿼리 작성: 부서명, 이름, 이메일, 전화번호, 입사일, 직급, 로그인 상태, 근무 상태를 조회
+        // SQLクエリ作成: 部署名、名前、メール、電話番号、入社日、役職、ログイン状態、勤務状態を取得
         String sql = "SELECT " +
                      "d.department_name, " +
                      "u.name, " +
@@ -35,27 +42,31 @@ public class ContactsDAO {
                      "WHERE u.retire_date IS NULL " +
                      "ORDER BY d.department_name, u.name";
 
+        // try-with-resources를 사용하여 DB 연결, SQL 실행, 결과셋 자동 닫기
+        // try-with-resourcesを使用して、DB接続、SQL実行、結果セットを自動的に閉じる
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql);
              ResultSet rs = pstmt.executeQuery()) {
 
+            // 결과셋(ResultSet)에서 한 행씩 읽기
+            // 結果セット(ResultSet)から1行ずつ読み込む
             while (rs.next()) {
                 ContactsDTO dto = new ContactsDTO(
-                    rs.getString("department_name"),                     // departmentName
-                    rs.getString("name"),                                // name
-                    rs.getString("email"),                               // email
-                    rs.getString("phone"),                               // phone
-                    rs.getDate("join_date"),                             // joinDate (java.util.Date로 자동 변환)
-                    rs.getString("position"),                            // position
-                    "Y".equals(rs.getString("login_status")) ? "login" : "logout", // loginStatus
-                    rs.getString("status_type") != null ? rs.getString("status_type") : "정상근무" // statusType
+                    rs.getString("department_name"),                     // 부서명 / 部署名
+                    rs.getString("name"),                                // 이름 / 名前
+                    rs.getString("email"),                               // 이메일 / メール
+                    rs.getString("phone"),                               // 전화번호 / 電話番号
+                    rs.getDate("join_date"),                             // 입사일 (java.util.Date로 변환) / 入社日 (java.util.Dateに変換)
+                    rs.getString("position"),                            // 직급 / 役職
+                    "Y".equals(rs.getString("login_status")) ? "login" : "logout", // 로그인 여부 / ログイン有無
+                    rs.getString("status_type") != null ? rs.getString("status_type") : "정상근무" // 근무 상태 / 勤務状態
                 );
-                list.add(dto);
+                list.add(dto); // 리스트에 추가 / リストに追加
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            e.printStackTrace(); // 예외 발생 시 스택 트레이스 출력 / 例外発生時にスタックトレースを出力
         }
 
-        return list;
+        return list; // 전체 목록 반환 / 全リストを返す
     }
 }
