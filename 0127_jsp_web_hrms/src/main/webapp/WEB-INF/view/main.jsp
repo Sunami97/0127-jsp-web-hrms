@@ -23,7 +23,7 @@
             <span>マイページ</span>
         </a>
     
-    <a href="orgChart.do" class="menu-box">
+    <a href="department.do" class="menu-box">
         <i class="ri-organization-chart"></i>
         <span>組織図</span>
     </a>
