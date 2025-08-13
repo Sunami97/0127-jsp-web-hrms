@@ -321,7 +321,7 @@
     <button type="submit" class="my-btn">保存</button>
             </div>
         </div>
-        <!-- [오른쪽: 내 정보 입력폼 (일부 readonly)] -->
+        <!-- [오른쪽: 내 정보 입력폼 (일부 readonly)]. -->
         <div class="profile-right">
             <table class="profile-table">
              <tr>

@@ -3,7 +3,7 @@
 <%@ include file="common/header.jsp"%>
 <%@ page import="myPage.model.UserDepartmentDTO"%>
 <%
-// [서버에서 user 객체 받기!]
+// [서버에서 user 객체 받기.!]
 UserDepartmentDTO userDepartment = (UserDepartmentDTO) request.getAttribute("user");
 // [로그인 or 세션 없으면 안내]
 if (userDepartment == null) {
