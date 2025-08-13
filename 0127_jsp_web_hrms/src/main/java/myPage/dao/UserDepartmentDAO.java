@@ -105,25 +105,43 @@ public class UserDepartmentDAO {
 		}
 	}
 
-	// 저장된 비밀번호(해시/레거시) 조회 — TRIM으로 CHAR 패딩 방지
+	// 저장된 비밀번호(해시 또는 레거시 평문)를 조회하는 메서드
+	// TRIM을 사용해서 CHAR 타입 컬럼일 경우 발생할 수 있는 공백 패딩 문제를 방지
 	public String selectPasswordHashById(Connection conn, String userId) throws SQLException {
-		final String sql = "SELECT TRIM(password) FROM user_tbl WHERE user_id = ?";
-		try (PreparedStatement ps = conn.prepareStatement(sql)) {
-			ps.setString(1, userId);
-			try (ResultSet rs = ps.executeQuery()) {
-				return rs.next() ? rs.getString(1) : null;
-			}
-		}
+	    // 실행할 SQL: user_tbl에서 해당 user_id의 비밀번호 컬럼 값을 가져옴
+	    // TRIM()을 사용하여 앞뒤 공백 제거
+	    final String sql = "SELECT TRIM(password) FROM user_tbl WHERE user_id = ?";
+
+	    // PreparedStatement를 try-with-resources로 생성 → 자동 자원 해제
+	    try (PreparedStatement ps = conn.prepareStatement(sql)) {
+	        // 첫 번째 파라미터(?)에 userId 값 바인딩
+	        ps.setString(1, userId);
+
+	        // SQL 실행 후 ResultSet으로 결과 받기 (역시 try-with-resources로 자동 close)
+	        try (ResultSet rs = ps.executeQuery()) {
+	            // 결과가 있으면 첫 번째 컬럼(password) 값을 반환, 없으면 null 반환
+	            return rs.next() ? rs.getString(1) : null;
+	        }
+	    }
 	}
 
-	// 새 비번 해시 저장 (updated_at 있으면 SYSDATE 추가)
+	// 새 비밀번호 해시 값을 DB에 업데이트하는 메서드
+	// updated_at 같은 수정 시간 컬럼이 있다면 SYSDATE 등을 같이 업데이트 가능
 	public int updatePasswordHash(Connection conn, String userId, String newHash) throws SQLException {
-		final String sql = "UPDATE user_tbl SET password = ? WHERE user_id = ?";
-		try (PreparedStatement ps = conn.prepareStatement(sql)) {
-			ps.setString(1, newHash);
-			ps.setString(2, userId);
-			return ps.executeUpdate();
-		}
+	    // 실행할 SQL: 해당 user_id의 password 컬럼 값을 새 해시 값으로 변경
+	    final String sql = "UPDATE user_tbl SET password = ? WHERE user_id = ?";
+
+	    // PreparedStatement를 try-with-resources로 생성 → 자동 자원 해제
+	    try (PreparedStatement ps = conn.prepareStatement(sql)) {
+	        // 첫 번째 파라미터(?)에 새 비밀번호 해시 값 바인딩
+	        ps.setString(1, newHash);
+
+	        // 두 번째 파라미터(?)에 userId 값 바인딩
+	        ps.setString(2, userId);
+
+	        // SQL 실행 후 영향받은 행(row) 수 반환 (1이면 정상 변경)
+	        return ps.executeUpdate();
+	    }
 	}
 
 }

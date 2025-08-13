@@ -41,42 +41,70 @@ public class UserService {
 		}
 	}
 
-	// 로그인 시 검증 + (레거시면) 해시 업그레이드
+	// 로그인 시 비밀번호 검증 + (레거시 비밀번호라면) 해시 업그레이드 수행
 	public boolean loginAndMaybeUpgrade(String userId, String inputPw) throws SQLException {
-		try (Connection conn = ConnectionProvider.getConnection()) {
-			UserDepartmentDAO dao = new UserDepartmentDAO();
-			String stored = dao.selectPasswordHashById(conn, userId);
-			if (stored == null)
-				return false;
+	    // 1. DB 연결 (try-with-resources로 자동 close)
+	    try (Connection conn = ConnectionProvider.getConnection()) {
+	        
+	        // 2. DAO 생성 → DB에서 사용자 정보 가져오기 위한 객체
+	        UserDepartmentDAO dao = new UserDepartmentDAO();
+	        
+	        // 3. 해당 userId의 저장된 비밀번호(해시 또는 평문)를 조회
+	        String stored = dao.selectPasswordHashById(conn, userId);
+	        
+	        // 4. 비밀번호 정보가 없으면 로그인 실패
+	        if (stored == null)
+	            return false;
 
-			// BCryptUtil.check는 레거시(평문)도 안전 비교
-			boolean ok = BCryptUtil.check(inputPw, stored);
-			if (!ok)
-				return false;
+	        // 5. BCryptUtil.check() → 입력 비밀번호와 저장된 값 비교
+	        //    저장된 값이 평문이어도 안전하게 비교 가능
+	        boolean ok = BCryptUtil.check(inputPw, stored);
+	        
+	        // 6. 비밀번호가 일치하지 않으면 로그인 실패
+	        if (!ok)
+	            return false;
 
-			// 평문이었다면 성공 시 해시로 업그레이드
-			boolean isBcrypt = stored.startsWith("$2a$") || stored.startsWith("$2b$") || stored.startsWith("$2y$");
-			if (!isBcrypt) {
-				String newHash = BCryptUtil.hash(inputPw);
-				dao.updatePasswordHash(conn, userId, newHash);
-			}
-			return true;
-		}
+	        // 7. 저장된 비밀번호가 BCrypt 해시인지 확인
+	        boolean isBcrypt = stored.startsWith("$2a$") || stored.startsWith("$2b$") || stored.startsWith("$2y$");
+	        
+	        // 8. 만약 BCrypt 해시가 아니면(=레거시 평문) 해시로 업그레이드
+	        if (!isBcrypt) {
+	            // 새 비밀번호 해시 생성
+	            String newHash = BCryptUtil.hash(inputPw);
+	            // DB에 해시값 업데이트
+	            dao.updatePasswordHash(conn, userId, newHash);
+	        }
+
+	        // 9. 모든 검증이 통과하면 true 반환 → 로그인 성공
+	        return true;
+	    }
 	}
 
-	// 마이페이지에서 비밀번호 변경 (현재 비번 검증 → 새 비번은 항상 해시 저장)
+	// 마이페이지에서 비밀번호 변경
+	// 1) 현재 비밀번호 검증 → 2) 새 비밀번호를 항상 BCrypt 해시로 저장
 	public boolean updatePassword(String userId, String currentPw, String newPw) throws SQLException {
-		try (Connection conn = ConnectionProvider.getConnection()) {
-			UserDepartmentDAO dao = new UserDepartmentDAO();
-			String stored = dao.selectPasswordHashById(conn, userId);
-			if (stored == null)
-				return false;
+	    // 1. DB 연결
+	    try (Connection conn = ConnectionProvider.getConnection()) {
+	        
+	        // 2. DAO 생성
+	        UserDepartmentDAO dao = new UserDepartmentDAO();
+	        
+	        // 3. 현재 저장된 비밀번호(해시 또는 평문) 조회
+	        String stored = dao.selectPasswordHashById(conn, userId);
+	        
+	        // 4. 비밀번호 정보가 없으면 실패
+	        if (stored == null)
+	            return false;
 
-			if (!BCryptUtil.check(currentPw, stored))
-				return false;
+	        // 5. 현재 비밀번호 검증
+	        if (!BCryptUtil.check(currentPw, stored))
+	            return false;
 
-			String newHash = BCryptUtil.hash(newPw);
-			return dao.updatePasswordHash(conn, userId, newHash) > 0;
-		}
+	        // 6. 새 비밀번호를 BCrypt 해시로 변환
+	        String newHash = BCryptUtil.hash(newPw);
+	        
+	        // 7. 해시된 새 비밀번호를 DB에 저장 → 저장된 행이 1개 이상이면 성공
+	        return dao.updatePasswordHash(conn, userId, newHash) > 0;
+	    }
 	}
 }
