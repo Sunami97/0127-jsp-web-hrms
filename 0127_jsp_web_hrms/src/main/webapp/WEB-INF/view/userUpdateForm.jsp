@@ -5,16 +5,20 @@
   request.setCharacterEncoding("UTF-8");
   String userI = request.getParameter("updateId");
 %>
+
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/adminRegister.css">
 <title>Insert title here</title>
 </head>
 <body>
 	<form action="update.do" method="post">
-		メール	<input type="text" name="email"><br>
-		連絡先	<input type="text" name="phone"><br>
-		職位		<select name="position">
+		<div>
+	 		<div class="container">
+		メール<br><input type="text" name="email"><br><br>
+		連絡先<br><input type="text" name="phone"><br><br>
+		職位	<br><select name="position">
 					<option value="社員">社員</option>
 					<option value="主任">主任</option>
 					<option value="係長">係長</option>
@@ -27,8 +31,8 @@
 					<option value="代表取締役">代表取締役</option>
 					<option value="会長">会長</option>
 					<option value="社長">社長</option>
-				</select><br>			
-		部署	<select name="departmentId">
+				</select><br><br>			
+		部署	<br><select name="departmentId">
 					<option value="1">総務部</option>
 					<option value="2">人事課</option>
 					<option value="3">経理部</option>
@@ -43,16 +47,18 @@
 					<option value="12">品質管理部</option>
 					<option value="13">法務部</option>
 					<option value="14">企画部</option>
-				</select><br>			
-		管理者 権限  N<input type="radio" name="isAdmin" checked="checked" value="N">
-				  Y<input type="radio" name="isAdmin" value="Y"><br>
-		状態		<select name="empStatus">
+				</select><br><br>			
+		管理者 権限  <br>N<input type="radio" name="isAdmin" checked="checked" value="N">
+				  Y<input type="radio" name="isAdmin" value="Y"><br><br>
+		状態		<br><select name="empStatus">
 					<option value="在職">在職</option>
 					<option value="休職">休職</option>
 					<option value="退職">退職</option>
-				</select><br>	
+				</select><br><br>	
 				<input type="hidden" name="updateId" value="<%=userI %>">
 		<button type="submit">修整</button>
+		</div>
+		</div>
 	</form>
 </body>
 </html>

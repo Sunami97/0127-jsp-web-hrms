@@ -62,8 +62,30 @@ input[type="date"]:focus {
 .board-table thead {
 	background-color: #f1f3f5;
 }
+   .button {
+      padding: 4px 10px;
+      font-size: 13px;
+      color: #333;
+      background-color: transparent;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+    }
 
+    .button:hover {
+      background-color: #f0f0f0;
+      border-color: #aaa;
+    }
 
+    .button:active {
+      background-color: #e0e0e0;
+    }
+
+    .button:focus {
+      outline: none;
+      border-color: #555;
+    }
 </style>
 <script>
 function toggleDate(btn) {
@@ -130,7 +152,7 @@ function submitFire() {
 										もし退社日がない場合、ボタンをクリックした時に指定した日に退社日をアップデート --> <c:choose>
 								<c:when test="${empty user.retireDate}">
 									<input type="hidden" name="userId" value="${user.userId}">
-									<button type="button" onclick='toggleDate(this)'>退社</button>
+									<button type="button" onclick='toggleDate(this)' class="button">退社</button>
 									<span class="toggle-container" style="display: none;"> <input
 										type="date" name="date">
 										<button type="button" onclick="submitFire()">確認</button>
