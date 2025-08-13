@@ -346,14 +346,14 @@
 <th style="white-space:nowrap;">メールアドレス <%-- 메에루 아도레스 --%></th>
     
     <td>
-        <input type="email" name="email" value="<%=user.getEmail()==null?"":user.getEmail()%>"
+        <input type="email" name="email" value="<%=userDepartment.getEmail()==null?"":userDepartment.getEmail()%>"
             style="padding:5px 10px;font-size:15px;width:85%;">
     </td>
 </tr>
 <tr>
     <th>電話番号 <%-- でんわばんごう (denwa bangou) --%></th>
     <td>
-        <input type="text" name="phone" value="<%=user.getPhone()==null?"":user.getPhone()%>"
+        <input type="text" name="phone" value="<%=userDepartment.getPhone()==null?"":userDepartment.getPhone()%>"
             style="padding:5px 10px;font-size:15px;width:85%;">
     </td>
 </tr>
