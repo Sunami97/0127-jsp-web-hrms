@@ -277,13 +277,7 @@ body {
         <text x="70" y="120" text-anchor="middle" font-size="17"
 						font-weight="bold" fill="<%=borderColor%>"><%=displayPosition%></text>
     </svg>
-				<img src="" alt="프로필" id="profilePreview" class="profile-img"
-					style="display: none; position: absolute; left: 0; top: 0;" /> <label
-					class="profile-img-edit" title="사진 변경"> <i
-					class="fa-solid fa-camera"></i> <input type="file"
-					name="profileImg" accept="image/*"
-					onchange="previewProfileImg(this)">
-				</label>
+				
 			</div>
 			<div class="profile-name"><%=userDepartment.getName()%></div>
 			<div class="profile-pos">
