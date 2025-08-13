@@ -1,30 +1,52 @@
 package department.model;
 
 public class DepartmentDTO {
-
-	private int departmentId;      // 부서 ID // 部署ID
 	private String departmentName; // 부서 이름 // 部署名
-	private int parentId;          // 상위 부서 ID // 親部署ID（上位部署）
+	private String position;       // 직책 // 職位
+	private String name;           // 사용자 이름 // ユーザー名
+	private String workStatus;     // 근무중, 연차, 출장 등 // 勤務中、年休、出張など
 
-	// 생성자 // コンストラクタ
-	public DepartmentDTO(int departmentId, String departmentName, int parentId) {
-		this.departmentId = departmentId;
+	public DepartmentDTO() {
+		
+	}
+
+	public DepartmentDTO(String departmentName, String position, String name, String workStatus) {
 		this.departmentName = departmentName;
-		this.parentId = parentId;
+		this.position = position;
+		this.name = name;
+		this.workStatus = workStatus;
 	}
 
-	// 부서 ID 반환 // 部署ID を返す
-	public int getDepartmentId() {
-		return departmentId;
-	}
-
-	// 부서 이름 반환 // 部署名 を返す
 	public String getDepartmentName() {
 		return departmentName;
 	}
 
-	// 상위 부서 ID 반환 // 親部署ID を返す
-	public int getParentId() {
-		return parentId;
+	public void setDepartmentName(String departmentName) {
+		this.departmentName = departmentName;
 	}
+
+	public String getPosition() {
+		return position;
+	}
+
+	public void setPosition(String position) {
+		this.position = position;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getWorkStatus() {
+		return workStatus;
+	}
+
+	public void setWorkStatus(String workStatus) {
+		this.workStatus = workStatus;
+	}
+
 }
