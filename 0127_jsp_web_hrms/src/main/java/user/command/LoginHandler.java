@@ -39,7 +39,7 @@ public class LoginHandler implements CommandHandler {
                 boolean userExist = userService.isUserExist(conn, user_id);
 
                 if (!userExist) { // 아이디가 존재하지 않으면 에러 메시지 설정 후 로그인 페이지로 이동 // IDが存在しない場合はエラーメッセージ設定後ログインページへ遷移
-                    request.setAttribute("msg", "존재하지 않는 아이디입니다.");
+                    request.setAttribute("msg", "存在しないIDです.");
                     return "/index.jsp";
                 } else {
                 	// (2) 아이디가 존재하면 비밀번호 일치 여부 확인 // (2) IDが存在する場合はパスワード一致を確認
@@ -56,7 +56,7 @@ public class LoginHandler implements CommandHandler {
                     } else {
                     	 // 비밀번호가 틀린 경우 // パスワードが間違っている場合
 
-                        request.setAttribute("msg", "비밀번호가 틀렸습니다.");
+                        request.setAttribute("msg", "暗証番号が間違っています.");
                         return "/index.jsp";
                     }
                 }
