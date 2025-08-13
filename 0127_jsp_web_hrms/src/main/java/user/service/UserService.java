@@ -30,6 +30,7 @@ public class UserService {
         return userDAO.isUserExist(conn, user_id);
     }
 
+
     // 로그인 상태 변경 메소드  // ログイン状態変更メソッド
     // - 로그인 시 status 값을 "Y", 로그아웃 시 "N"으로 설정  // - ログイン時は status を「Y」、ログアウト時は「N」に設定
     // - DAO의 updateLoginStatus 메소드를 호출하여 DB에 반영  // - DAO の updateLoginStatus メソッドを呼び出してDBに反映
@@ -38,3 +39,4 @@ public class UserService {
         userDAO.updateLoginStatus(conn, userId, status);
     }
 }
+

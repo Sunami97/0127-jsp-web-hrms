@@ -59,6 +59,22 @@
     <listener-class>session.SessionListener</listener-class>
 	</listener>
 	
+<<<<<<< HEAD
+=======
+
+	<filter>
+		<filter-name>LoginCheckFilter</filter-name>
+		<filter-class>filter.LoginCheckFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>LoginCheckFilter</filter-name>
+		<url-pattern>/orgChart.do</url-pattern>
+		<url-pattern>/myInfo.do</url-pattern>
+		<url-pattern>/contactList.do</url-pattern>
+		<url-pattern>/leaveManage.do</url-pattern>
+		<url-pattern>/empManage.do</url-pattern>
+	</filter-mapping>
+>>>>>>> develop
 
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>

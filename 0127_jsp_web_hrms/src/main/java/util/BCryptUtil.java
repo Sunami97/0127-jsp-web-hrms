@@ -2,6 +2,7 @@ package util;
 
 import org.mindrot.jbcrypt.BCrypt;
 
+
 // - 비밀번호를 안전하게 저장하고 검증하기 위한 유틸리티 클래스 // - パスワードを安全に保存し、検証するためのユーティリティクラス
 // - BCrypt 라이브러리를 사용하여 비밀번호를 암호화(해싱)하고, 비교하는 기능 제공 // - BCryptライブラリを使用してパスワードを暗号化（ハッシュ化）し、比較する機能を提供
 
@@ -29,6 +30,7 @@ public class BCryptUtil {
     // 설명: // 説明:
     // - BCrypt.checkpw() : 평문 비밀번호를 해시 알고리즘으로 비교 // - BCrypt.checkpw() : 平文パスワードをハッシュアルゴリズムで比較
     // - plainPassword나 hashedPassword가 null이면 false 반환 // - plainPassword または hashedPassword が null の場合は false を返す
+
     public static boolean check(String plainPassword, String hashedPassword) {
         if (plainPassword == null || hashedPassword == null) return false;
         return BCrypt.checkpw(plainPassword, hashedPassword);

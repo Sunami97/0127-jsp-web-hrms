@@ -1,9 +1,10 @@
 package session;
 
+import java.sql.Connection;
+
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
-import javax.servlet.http.HttpSession;
-import java.sql.Connection;
 
 import jdbc.connection.ConnectionProvider;
 import user.model.UserDTO;
@@ -12,6 +13,7 @@ import user.service.UserService;
 
 /**
  * SessionListener
+<<<<<<< HEAD
  * - 사용자의 세션이 종료될 때(브라우저 닫힘, 시간 초과 등) 자동으로 동작하는 리스너 클래스 // ユーザーのセッションが終了したとき（ブラウザ閉鎖、タイムアウトなど）自動的に動作するリスナークラス
  * - 로그인 상태였던 사용자의 login_status 값을 'N'(로그아웃 상태)로 변경 // ログイン状態だったユーザーの login_status を「N」（ログアウト状態）に変更
  *
@@ -19,11 +21,14 @@ import user.service.UserService;
  *  1. 톰캣/Tomcat 서버에서 세션이 종료되면 sessionDestroyed()가 자동 호출됨 // 1. Tomcat サーバでセッションが終了すると sessionDestroyed() が自動的に呼び出される
  *  2. 세션에 저장된 로그인 사용자 정보(loginUser)를 가져옴 // 2. セッションに保存されているログインユーザー情報（loginUser）を取得
  *  3. DB 연결 후 login_status를 'N'으로 업데이트하여 로그아웃 처리 // 3. DB 接続後、login_status を「N」に更新してログアウト処理
+
+
  */
 public class SessionListener implements HttpSessionListener {
 
 	
 	/**
+
      * 세션이 종료될 때 호출되는 메서드 // セッション終了時に呼び出されるメソッド
      * @param se 세션 이벤트 객체(HttpSessionEvent) // セッションイベントオブジェクト（HttpSessionEvent）
      */
@@ -43,6 +48,7 @@ public class SessionListener implements HttpSessionListener {
                 userService.updateLoginStatus(conn, userId, "N"); // 세션 만료 -> 로그아웃 // セッション満了 → ログアウト
             } catch (Exception e) {
             	// 예외 발생 시 콘솔에 에러 출력 // 例外発生時にコンソールへエラー出力
+
                 e.printStackTrace(); 
             }
         }

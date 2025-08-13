@@ -13,6 +13,7 @@ import user.service.UserService;
 
 
 
+
 // 로그아웃 기능을 처리하는 핸들러 클래스 // ログアウト機能を処理するハンドラクラス
 //- 로그인 상태에서 로그아웃 버튼을 클릭하면 // - ログイン状態でログアウトボタンをクリックすると
 //  세션을 삭제하고 DB의 로그인 상태를 "N"(로그아웃 상태)로 변경 //  セッションを削除し、DB のログイン状態を「N」（ログアウト状態）に更新
@@ -36,6 +37,7 @@ public class LogoutHandler implements CommandHandler {
                 }
             }
             session.invalidate(); // 세션 무효화 (로그아웃) // セッションを無効化（ログアウト）
+
         }
         // 로그인 페이지로 리다이렉트 // ログインページへリダイレクト
         response.sendRedirect(request.getContextPath() + "/index.jsp");

@@ -2,6 +2,7 @@ package user.model;
 
 import java.sql.Date; 
 
+
 public class UserDTO {
 	
 	// 사용자 기본 정보 // ユーザー基本情報
@@ -27,11 +28,14 @@ public class UserDTO {
     private String login_status;  // 로그인 상태 // ログイン状態
 
     // 기본 생성자 // デフォルトコンストラクタ
+
     public UserDTO() {
 		super();
 	}
 
+
     // 모든 필드를 초기화하는 생성자 // 全てのフィールドを初期化するコンストラクタ
+
 	public UserDTO(String user_id, String password, String name, String email, String phone, Date birth_date,
 			Date join_date, Date retire_date, String position, int department_id, String is_admin, String emp_status,
 			String work_status, String login_status) {
@@ -52,7 +56,9 @@ public class UserDTO {
 		this.login_status = login_status;
 	}
 
+
     // Getter & Setter // ゲッター＆セッター
+
 	public String getUser_id() {
 		return user_id;
 	}
