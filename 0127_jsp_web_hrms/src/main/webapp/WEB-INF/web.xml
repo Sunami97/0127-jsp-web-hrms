@@ -59,8 +59,7 @@
     <listener-class>session.SessionListener</listener-class>
 	</listener>
 	
-<<<<<<< HEAD
-=======
+
 
 	<filter>
 		<filter-name>LoginCheckFilter</filter-name>
@@ -74,7 +73,7 @@
 		<url-pattern>/leaveManage.do</url-pattern>
 		<url-pattern>/empManage.do</url-pattern>
 	</filter-mapping>
->>>>>>> develop
+
 
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
