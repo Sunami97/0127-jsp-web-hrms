@@ -2,37 +2,36 @@ package user.model;
 
 import java.sql.Date; 
 
-
 public class UserDTO {
 	
-	// 사용자 기본 정보
-	private String user_id;       // 사용자 ID (Primary Key)
-    private String password;      // 비밀번호 (암호화 저장)
-    private String name;          // 이름
-    private String email;         // 이메일
-    private String phone;         // 전화번호
+	// 사용자 기본 정보 // ユーザー基本情報
+	private String user_id;       // 사용자 ID (Primary Key) // ユーザーID（主キー）
+    private String password;      // 비밀번호 (암호화 저장) // パスワード（暗号化保存）
+    private String name;          // 이름 // 名前
+    private String email;         // 이메일 // メールアドレス
+    private String phone;         // 전화번호 // 電話番号
     
-    // 날짜 정보
-    private Date birth_date;      // 생년월일
-    private Date join_date;       // 입사일
-    private Date retire_date;     // 퇴사일 
+    // 날짜 정보 // 日付情報
+    private Date birth_date;      // 생년월일 // 生年月日
+    private Date join_date;       // 입사일 // 入社日
+    private Date retire_date;     // 퇴사일 // 退職日 
     
-    // 직무 및 부서 정보
-    private String position;      // 직급
-    private int department_id;    // 부서 ID 
+    // 직무 및 부서 정보 // 職務および部署情報
+    private String position;      // 직급 // 職位
+    private int department_id;    // 부서 ID // 部署ID
     
-    // 권한 및 상태 정보
-    private String is_admin;      // 관리자 여부 
-    private String emp_status;    // 재직 상태
-    private String work_status;   // 근무 상태
-    private String login_status;  // 로그인 상태 
+    // 권한 및 상태 정보 // 権限および状態情報
+    private String is_admin;      // 관리자 여부 // 管理者かどうか
+    private String emp_status;    // 재직 상태 // 在職状態
+    private String work_status;   // 근무 상태 // 勤務状態
+    private String login_status;  // 로그인 상태 // ログイン状態
 
-    // 기본 생성자
+    // 기본 생성자 // デフォルトコンストラクタ
     public UserDTO() {
 		super();
 	}
 
-    // 모든 필드를 초기화하는 생성자
+    // 모든 필드를 초기화하는 생성자 // 全てのフィールドを初期化するコンストラクタ
 	public UserDTO(String user_id, String password, String name, String email, String phone, Date birth_date,
 			Date join_date, Date retire_date, String position, int department_id, String is_admin, String emp_status,
 			String work_status, String login_status) {
@@ -53,7 +52,7 @@ public class UserDTO {
 		this.login_status = login_status;
 	}
 
-    // Getter & Setter 
+    // Getter & Setter // ゲッター＆セッター
 	public String getUser_id() {
 		return user_id;
 	}
