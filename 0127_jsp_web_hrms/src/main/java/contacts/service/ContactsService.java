@@ -1,47 +1,80 @@
 package contacts.service;
 
-import contacts.model.ContactsDTO;
-import contacts.dao.ContactsDAO;
-
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.LinkedHashMap;
-import java.util.ArrayList;
 
+import contacts.dao.ContactsDAO;
+import contacts.model.ContactsDTO;
+
+/**
+ * 연락망 비즈니스 로직을 처리하는 서비스 클래스
+ * 連絡網のビジネスロジックを処理するサービスクラス
+ */
 public class ContactsService {
 
     private ContactsDAO contactsDAO;
 
     public ContactsService() {
-        contactsDAO = new ContactsDAO(); // DAO 초기화
-        // DAOを初期化
+        contactsDAO = new ContactsDAO();
+        // DAO 객체 초기화
+        // DAOオブジェクトを初期化
     }
 
-    // 전체 연락처 목록 그대로 반환 (기존 방식 유지)
-    // 全ての連絡先リストをそのまま返す（既存の方法を維持）
-    public List<ContactsDTO> getAllContacts() {
-        return contactsDAO.findAll();
-    }
-
-    // 부서별로 연락처 그룹핑된 맵 반환
-    // 部署ごとに連絡先をグループ化したマップを返す
+    /**
+     * 부서별로 연락처를 그룹핑하여 반환
+     * 部署ごとに連絡先をグループ化して返す
+     *
+     * @return Map<String, List<ContactsDTO>> - 부서명 / 연락처 리스트
+     *                                          部署名 / 連絡先リスト
+     */
     public Map<String, List<ContactsDTO>> getGroupedByDepartment() {
-        List<ContactsDTO> allContacts = contactsDAO.findAll(); // 전체 목록 불러오기
-        // 全ての連絡先リストを取得
+        // 1. 전체 연락처 목록 조회
+        // 1. 全ての連絡先一覧を取得
+        List<ContactsDTO> allContacts = contactsDAO.findAll();
 
-        Map<String, List<ContactsDTO>> grouped = new LinkedHashMap<>(); // 순서 유지 맵
-        // 順序を保持するLinkedHashMapを作成
+        // 2. 날짜 포맷터 준비 (yyyy-MM-dd)
+        // 2. 日付フォーマッターを準備 (yyyy-MM-dd)
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
+        // 3. 순서를 유지하는 LinkedHashMap 생성
+        // 3. 順序を保持するLinkedHashMapを作成
+        Map<String, List<ContactsDTO>> grouped = new LinkedHashMap<>();
+
+        // 4. 각 연락처 처리
+        // 4. 各連絡先を処理
         for (ContactsDTO contact : allContacts) {
-            String deptName = contact.getDepartmentName();
 
-            // 부서별 그룹 생성 및 추가
-            // 部署ごとのグループを作成し、追加
+            // (A) 로그인 상태를 CSS 클래스명으로 변환
+            // (A) ログイン状態をCSSクラス名に変換
+            if ("login".equalsIgnoreCase(contact.getLoginStatus())) {
+                contact.setLoginStatus("online"); // 로그인 → 초록색 표시
+                                                 // ログイン → 緑色表示
+            } else {
+                contact.setLoginStatus("offline"); // 로그아웃 → 빨간색 표시
+                                                   // ログアウト → 赤色表示
+            }
+
+            // (B) 입사일(Date → yyyy-MM-dd 문자열 변환)
+            // (B) 入社日(Date → yyyy-MM-dd文字列に変換)
+            if (contact.getJoinDate() != null) {
+                String formattedDate = sdf.format(contact.getJoinDate());
+                contact.setJoinDateStr(formattedDate);
+            } else {
+                contact.setJoinDateStr("");
+            }
+
+            // (C) 부서별 그룹에 추가
+            // (C) 部署ごとのグループに追加
             grouped
-                .computeIfAbsent(deptName, k -> new ArrayList<>())
+                .computeIfAbsent(contact.getDepartmentName(), k -> new ArrayList<>())
                 .add(contact);
         }
 
+        // 5. 그룹핑된 결과 반환
+        // 5. グループ化された結果を返す
         return grouped;
     }
 }

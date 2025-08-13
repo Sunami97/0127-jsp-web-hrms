@@ -48,25 +48,26 @@ public class ContactsDAO {
              PreparedStatement pstmt = conn.prepareStatement(sql);
              ResultSet rs = pstmt.executeQuery()) {
 
-            // 결과셋(ResultSet)에서 한 행씩 읽기
-            // 結果セット(ResultSet)から1行ずつ読み込む
-            while (rs.next()) {
-                ContactsDTO dto = new ContactsDTO(
-                    rs.getString("department_name"),                     // 부서명 / 部署名
-                    rs.getString("name"),                                // 이름 / 名前
-                    rs.getString("email"),                               // 이메일 / メール
-                    rs.getString("phone"),                               // 전화번호 / 電話番号
-                    rs.getDate("join_date"),                             // 입사일 (java.util.Date로 변환) / 入社日 (java.util.Dateに変換)
-                    rs.getString("position"),                            // 직급 / 役職
-                    "Y".equals(rs.getString("login_status")) ? "login" : "logout", // 로그인 여부 / ログイン有無
-                    rs.getString("status_type") != null ? rs.getString("status_type") : "정상근무" // 근무 상태 / 勤務状態
-                );
-                list.add(dto); // 리스트에 추가 / リストに追加
+
+        	while (rs.next()) {
+                String loginStatus = "Y".equals(rs.getString("login_status")) ? "login" : "logout";
+                String statusType = rs.getString("status_type") != null
+                        ? rs.getString("status_type") : "정상근무";
+
+                list.add(new ContactsDTO(
+                        rs.getString("department_name"),
+                        rs.getString("name"),
+                        rs.getString("email"),
+                        rs.getString("phone"),
+                        rs.getDate("join_date"),
+                        rs.getString("position"),
+                        loginStatus,
+                        statusType
+                ));
             }
         } catch (Exception e) {
-            e.printStackTrace(); // 예외 발생 시 스택 트레이스 출력 / 例外発生時にスタックトレースを出力
+            e.printStackTrace();
         }
-
-        return list; // 전체 목록 반환 / 全リストを返す
+        return list;
     }
 }

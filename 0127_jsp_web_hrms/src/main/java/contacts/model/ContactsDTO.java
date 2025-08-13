@@ -4,15 +4,18 @@ import java.util.Date;
 
 public class ContactsDTO {
 
-    String departmentName; // 부서명 / 部署名
-    String name;           // 이름 / 名前
-    String email;          // 이메일 / メール
-    String phone;          // 연락처 / 連絡先
-    Date joinDate;         // 입사일 / 入社日
-    String position;       // 직급 / 職位
-    String loginStatus;    // 로그인 상태 / ログイン状態
-    String statusType;     // 상태 유형(연차, 출장 등) / 状態タイプ（休暇、出張など）
-
+    private String departmentName; // 부서명 / 部署名
+    private String name;           // 이름 / 名前
+    private String email;          // 이메일 / メール
+    private String phone;          // 연락처 / 連絡先
+    private Date joinDate;         // 입사일 / 入社日
+    private String position;       // 직급 / 職位
+    private String loginStatus;    // 로그인 상태 / ログイン状態
+    private String statusType;     // 상태 유형(연차, 출장 등) / 状態タイプ（休暇、出張など）
+    
+    // 추가 필드 / 追加フィールド
+    private String joinDateStr;     // 가공된 입사일(yyyy-MM-dd 문자열) / 加工された入社日(yyyy-MM-dd文字列)
+    
     public ContactsDTO() {
         // 기본 생성자 / デフォルトコンストラクタ
     }
@@ -91,6 +94,16 @@ public class ContactsDTO {
 
     public void setStatusType(String statusType) {
         this.statusType = statusType;
+    }
+    
+    // 가공된 입사일 문자열 Getter/Setter
+    // 加工された入社日文字列のGetter/Setter
+    public String getJoinDateStr() {
+        return joinDateStr;
+    }
+    
+    public void setJoinDateStr(String joinDateStr) {
+        this.joinDateStr = joinDateStr;
     }
 
 }
