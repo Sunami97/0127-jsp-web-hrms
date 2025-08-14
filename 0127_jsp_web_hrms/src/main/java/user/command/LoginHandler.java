@@ -25,7 +25,7 @@ public class LoginHandler implements CommandHandler {
         	// 로그인 폼에서 전송된 파라미터(아이디, 비밀번호) 가져오기
             String user_id = request.getParameter("user_id"); 
             String password = request.getParameter("password");
-
+            
             try (Connection conn = ConnectionProvider.getConnection()) {
             	// 비즈니스 로직을 담당하는 UserService 객체 생성
                 UserService userService = new UserService();
