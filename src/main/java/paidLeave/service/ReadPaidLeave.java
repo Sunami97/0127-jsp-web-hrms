@@ -11,6 +11,7 @@ import java.util.Date;
 public class ReadPaidLeave {
     private PaidLeaveDao paidLeaveDao = new PaidLeaveDao();
 
+    // 指定された休暇申請IDに基づいて、有給休暇データを取得する
     public PaidLeaveData getPaidLeave(int leaveNum) {
         try(Connection conn = ConnectionProvider.getConnection()) {
             PaidLeave paidLeave = paidLeaveDao.selectById(conn, leaveNum);
@@ -23,6 +24,7 @@ public class ReadPaidLeave {
         }
     }
 
+    // 有給休暇申請のステータスを更新する（承認・却下など）
     public void updatePaidLeave(int leaveId, String status) {
         try (Connection conn = ConnectionProvider.getConnection()) {
             if ("承認".equals(status)) {

@@ -11,7 +11,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>연차 신청</title>
+    <title>有給休暇申請</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -26,7 +28,7 @@
             margin-bottom: 20px;
         }
 
-        table {
+        .paid-leave-table table {
             width: 90%;
             margin: 0 auto 30px;
             border-collapse: collapse;
@@ -35,22 +37,23 @@
             overflow: hidden;
         }
 
-        th, td {
+        .paid-leave-table th,
+        .paid-leave-table td {
             border: 1px solid #79BAF2;
             padding: 12px;
             text-align: center;
         }
 
-        th {
+        .paid-leave-table th {
             background-color: #e6ecff;
             color: #2E83F2;
         }
 
-        td {
+        .paid-leave-table td {
             background-color: #f9faff;
         }
 
-        tr:hover {
+        .paid-leave-table tr:hover {
             background-color: #e4f0ff;
             cursor: pointer;
         }
@@ -121,71 +124,81 @@
 </head>
 
 <body>
-    <h2>연차 신청 리스트</h2>
-    <table>
-        <thead>
-        <tr>
-            <th>신청번호</th>
-            <th>신청자</th>
-            <th>신청일</th>
-            <th>사용일수</th>
-            <th>상태</th>
-            <th>신청일</th>
-            <th>승인자</th>
-            <th>승인일</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:if test="${paidLeavePage.hasNoPaidLeaves()}">
+    <h2>有給休暇申請リスト</h2>
+    <div class="paid-leave-table">
+        <table>
+            <thead>
             <tr>
-                <td colspan="8">신청 내역이 없습니다.</td>
+                <th>申請番号</th>
+                <th>申請者</th>
+                <th>休暇期間</th>
+                <th>使用日数</th>
+                <th>状態</th>
+                <th>申請日</th>
+                <th>承認者</th>
+                <th>承認日</th>
             </tr>
-        </c:if>
-        <c:forEach var="leave" items="${paidLeavePage.content}">
-            <tr onclick="goToDetail(${leave.leaveId}, ${paidLeavePage.currentPage})">
-                <td>${leave.leaveId}</td>
-                <td>${leave.userId}</td>
-                <td>${leave.startDate} ~ ${leave.endDate}</td>
-                <td>${leave.days}日</td>
-                <td>
-                    <c:choose>
-                        <c:when test="${leave.status == '신청중'}">
-                            <span class="pending">신청중</span>
-                        </c:when>
-                        <c:when test="${leave.status == '承認'}">
-                            <span class="approved">承認</span>
-                        </c:when>
-                        <c:when test="${leave.status == '거절'}">
-                            <span class="rejected">거절</span>
-                        </c:when>
-                        <c:otherwise>
-                            ${leave.status}
-                        </c:otherwise>
-                    </c:choose>
-                </td>
-                <td>${leave.appliedAt}</td>
-                <td>${leave.approvedBy}</td>
-                <td>${leave.approvedAt}</td>
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
-    <div class="apply-link">
-        <a href="paidleave/write.do">연차신청</a>
+            </thead>
+            <tbody>
+            <!-- データがない場合の表示 -->
+            <c:if test="${paidLeavePage.hasNoPaidLeaves()}">
+                <tr>
+                    <td colspan="8">申請履歴がありません。</td>
+                </tr>
+            </c:if>
+
+            <!-- 有給休暇データのループ表示 -->
+            <c:forEach var="leave" items="${paidLeavePage.content}">
+                <tr onclick="goToDetail(${leave.leaveId}, ${paidLeavePage.currentPage})">
+                    <td>${leave.leaveId}</td>
+                    <td>${leave.userId}</td>
+                    <td>${leave.startDate} ~ ${leave.endDate}</td>
+                    <td>${leave.days}日</td>
+                    <td>
+                        <c:choose>
+                            <c:when test="${leave.status == '申請中'}">
+                                <span class="pending">申請中</span>
+                            </c:when>
+                            <c:when test="${leave.status == '承認'}">
+                                <span class="approved">承認</span>
+                            </c:when>
+                            <c:when test="${leave.status == '却下'}">
+                                <span class="rejected">却下</span>
+                            </c:when>
+                            <c:otherwise>
+                                ${leave.status}
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
+                    <td>${leave.appliedAt}</td>
+                    <td>${leave.approvedBy}</td>
+                    <td>${leave.approvedAt}</td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
     </div>
+
+    <!-- 新規申請リンク -->
+    <div class="apply-link">
+        <a href="paidleave/write.do">有給休暇申請</a>
+    </div>
+
+    <!-- ページネーション -->
     <c:if test="${paidLeavePage.hasPaidLeaves()}">
         <div class="pagination">
             <c:if test="${paidLeavePage.startPage > 5}">
-                <a href="paidleave.do?pageNo=${paidLeavePage.startPage - 5}">[이전]</a>
+                <a href="paidleave.do?pageNo=${paidLeavePage.startPage - 5}">[前へ]</a>
             </c:if>
             <c:forEach var="pNo" begin="${paidLeavePage.startPage}" end="${paidLeavePage.endPage}">
                 <a href="paidleave.do?pageNo=${pNo}">[${pNo}]</a>
             </c:forEach>
             <c:if test="${paidLeavePage.endPage < paidLeavePage.totalPages}">
-                <a href="paidleave.do?pageNo=${paidLeavePage.startPage + 5}">[다음]</a>
+                <a href="paidleave.do?pageNo=${paidLeavePage.startPage + 5}">[次へ]</a>
             </c:if>
         </div>
     </c:if>
+    
     <%@ include file="common/footer.jsp" %>
 </body>
 </html>

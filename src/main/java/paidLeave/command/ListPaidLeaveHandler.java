@@ -12,12 +12,15 @@ public class ListPaidLeaveHandler implements CommandHandler {
 
     @Override
     public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
+        // ページ番号の取得（デフォルトは1ページ目）
         String pageNoVal = req.getParameter("pageNo");
         int pageNo = 1;
         if (pageNoVal != null) {
             pageNo = Integer.parseInt(pageNoVal);
         }
+        // 指定ページの有給休暇申請データを取得
         PaidLeavePage paidLeavePage = listPaidLeave.getPaidLeavePage(pageNo);
+        // 取得したデータをリクエスト属性に保存
         req.setAttribute("paidLeavePage", paidLeavePage);
         return "/WEB-INF/view/paidLeaveList.jsp";
     }

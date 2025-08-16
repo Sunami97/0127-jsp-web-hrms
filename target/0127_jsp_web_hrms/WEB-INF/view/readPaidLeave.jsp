@@ -16,7 +16,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>연차 신청 내역</title>
+    <title>有給休暇申請詳細</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -87,61 +89,65 @@
 <body>
 <table>
     <tr>
-        <th>신청번호</th>
+        <th>申請番号</th>
         <td>${paidLeaveData.paidLeave.leaveId}</td>
     </tr>
     <tr>
-        <th>신청자</th>
+        <th>申請者</th>
         <td>${paidLeaveData.paidLeave.userId}, ${loginUser.position}</td>
     </tr>
     <tr>
-        <th>신청일</th>
+        <th>申請日</th>
         <td>${paidLeaveData.paidLeave.startDate} ~ ${paidLeaveData.paidLeave.endDate}</td>
     </tr>
     <tr>
-        <th>사용일수</th>
+        <th>使用日数</th>
         <td>${paidLeaveData.paidLeave.days}日</td>
     </tr>
     <tr>
-        <th>사유</th>
+        <th>理由</th>
         <td>${paidLeaveData.paidLeave.reason}</td>
     </tr>
     <tr>
-        <th>상태</th>
+        <th>状態</th>
         <td>${paidLeaveData.paidLeave.status}</td>
     </tr>
     <tr>
-        <th>승인자</th>
+        <th>承認者</th>
         <td>${paidLeaveData.paidLeave.approvedBy}</td>
     </tr>
     <tr>
-        <th>승인일</th>
+        <th>承認日</th>
         <td>${paidLeaveData.paidLeave.approvedAt}</td>
     </tr>
 </table>
 
+<!-- ページ番号設定（パラメータが空なら1に設定） -->
 <c:set var="pageNo" value="${empty param.pageNo ? '1' : param.pageNo}" />
 
 <div class="button-area center">
-    <a href="${pageContext.request.contextPath}/paidleave.do?pageNo=${pageNo}">목록</a>
+    <a href="${pageContext.request.contextPath}/paidleave.do?pageNo=${pageNo}">一覧</a>
     <c:if test="${loginUser.user_id == paidLeaveData.paidLeave.userId
                   && paidLeaveData.paidLeave.status != '承認'}">
         <a href="delete.do?leaveId=${paidLeaveData.paidLeave.leaveId}"
-           onclick="return confirm('정말 삭제하시겠습니까?');">삭제</a>
+           onclick="return confirm('本当に削除しますか？');">削除</a>
     </c:if>
 </div>
 
+<!-- 管理者向け承認・却下ボタン -->
 <c:if test="${loginUser.is_admin == 'Y'}">
     <div class="button-area right">
+        <!-- 承認ボタン -->
         <form action="<c:url value='/paidleave/status.do'/>" method="post">
             <input type="hidden" name="leaveId" value="${paidLeaveData.paidLeave.leaveId}">
             <input type="hidden" name="status" value="承認" />
             <button type="submit">承認</button>
         </form>
+        <!-- 却下ボタン -->
         <form action="<c:url value='/paidleave/status.do'/>" method="post">
             <input type="hidden" name="leaveId" value="${paidLeaveData.paidLeave.leaveId}">
-            <input type="hidden" name="status" value="거절" />
-            <button type="submit">거절</button>
+            <input type="hidden" name="status" value="却下" />
+            <button type="submit">却下</button>
         </form>
     </div>
 </c:if>

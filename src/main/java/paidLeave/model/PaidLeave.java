@@ -3,16 +3,16 @@ package paidLeave.model;
 import java.util.Date;
 
 public class PaidLeave {
-    private Integer leaveId;        // 연차 내역 고유 ID
-    private String userId;          // 신청자 ID
-    private Date startDate;         // 연차 시작일
-    private Date endDate;           // 연차 종료일
-    private double days;            // 사용 일수 (0.5일 단위)
-    private String status;          // 상태 (신청중, 승인, 반려 등)
-    private String reason;          // 신청 사유
-    private Date appliedAt;         // 신청 일자
-    private String approvedBy;      // 승인자 ID (nullable)
-    private Date approvedAt;        // 승인 일자 (nullable)
+    private Integer leaveId;        // 有給休暇申請の固有ID
+    private String userId;          // 申請者ID
+    private Date startDate;         // 有給開始日
+    private Date endDate;           // 有給終了日
+    private double days;            // 使用日数（0.5日単位）
+    private String status;          // ステータス（申請中、承認、却下など）
+    private String reason;          // 申請理由
+    private Date appliedAt;         // 申請日
+    private String approvedBy;      // 承認者ID（null可）
+    private Date approvedAt;        // 承認日（null可）
 
     public PaidLeave(Integer leaveId, String userId, Date startDate, Date endDate, double days, String status, String reason, Date appliedAt, String approvedBy, Date approvedAt) {
         this.leaveId = leaveId;
