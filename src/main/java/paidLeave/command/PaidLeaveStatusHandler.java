@@ -12,7 +12,6 @@ public class PaidLeaveStatusHandler implements CommandHandler {
 
     @Override
     public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
-        // 요청 파라미터 받기
         String leaveIdParam = req.getParameter("leaveId");
         String status = req.getParameter("status");
 
@@ -23,7 +22,6 @@ public class PaidLeaveStatusHandler implements CommandHandler {
 
         int leaveId = Integer.parseInt(leaveIdParam);
 
-        // 서비스 객체를 통해 상태 업데이트
         readPaidLeave.updatePaidLeave(leaveId, status);
         res.sendRedirect(req.getContextPath() + "/paidleave.do");
         return null;

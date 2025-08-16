@@ -4,10 +4,10 @@ import java.util.Date;
 
 public class PaidLeaveRequest {
     private String userId;
-    private Date startDate;       // 연차 시작일
-    private Date endDate;         // 연차 종료일
-    private double days;          // 사용 일수
-    private String reason;        // 신청 사유
+    private Date startDate;
+    private Date endDate;
+    private double days;
+    private String reason;
     private String approvedBy;
 
     public PaidLeaveRequest(String userId, Date startDate, Date endDate, double days, String reason, String approvedBy) {

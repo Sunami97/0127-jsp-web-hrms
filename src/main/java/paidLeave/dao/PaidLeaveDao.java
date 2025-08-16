@@ -9,13 +9,17 @@ import jdbc.JdbcUtil;
 import paidLeave.model.PaidLeave;
 
 public class PaidLeaveDao {
+    // 有給休暇申請をデータベースに挿入する
     public PaidLeave insert(Connection conn, PaidLeave paidleave) throws SQLException {
         PreparedStatement pstmt = null;
         Statement stmt = null;
         ResultSet rs = null;
         try {
+            // INSERT文の準備（leave_idはシーケンスで自動採番される）
             pstmt = conn.prepareStatement("INSERT INTO paid_leave_tbl (user_id, start_date, end_date, days, status, reason, applied_at, approved_by, approved_at) "
                     + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+            // 各カラムに値をセット
             pstmt.setString(1, paidleave.getUserId());
             pstmt.setTimestamp(2, toTimestamp(paidleave.getStartDate()));
             pstmt.setTimestamp(3, toTimestamp(paidleave.getEndDate()));
@@ -25,6 +29,7 @@ public class PaidLeaveDao {
             pstmt.setTimestamp(7, toTimestamp(paidleave.getAppliedAt()));
             pstmt.setString(8, paidleave.getApprovedBy());
 
+            // 承認日がある場合は設定、ない場合はnull
             if (paidleave.getApprovedAt() != null) {
                 pstmt.setTimestamp(9, toTimestamp(paidleave.getApprovedAt()));
             } else {
@@ -33,15 +38,16 @@ public class PaidLeaveDao {
 
             int insertedCount = pstmt.executeUpdate();
 
-            // 트리거로 leave_id가 자동 생성되었으므로 다시 조회 필요
+            // INSERT成功後、自動採番されたleave_idを取得
             if (insertedCount > 0) {
-                // 마지막 insert된 leave_id를 조회
                 stmt = conn.createStatement();
+                // Oracleのシーケンスから直近の値を取得
                 rs = stmt.executeQuery("SELECT seq_leave_id.CURRVAL FROM dual");
 
                 if (rs.next()) {
                     Integer leaveId = rs.getInt(1);
                     return new PaidLeave(
+                            // DBに保存された情報を元にPaidLeaveオブジェクトを返す
                             leaveId,
                             paidleave.getUserId(),
                             paidleave.getStartDate(),
@@ -65,10 +71,12 @@ public class PaidLeaveDao {
         }
     }
 
+    // ページネーション用：指定範囲の有給休暇申請を取得
     public List<PaidLeave> select(Connection conn, int startRow, int size) throws SQLException {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         try {
+            // ROWNUMを利用したページネーションSQL
             pstmt = conn.prepareStatement("select * from (select inner_query.*, rownum as rnum from(select * from paid_leave_tbl order by leave_id desc) inner_query where rownum <= ?) where rnum > ?");
 
             int endRow = startRow + size;
@@ -77,9 +85,11 @@ public class PaidLeaveDao {
             rs = pstmt.executeQuery();
 
             List<PaidLeave> result = new ArrayList<>();
+            // ResultSetから1件ずつレコードを取り出し、PaidLeaveオブジェクトに変換してリストへ追加
             while (rs.next()) {
                 result.add(convertPaidLeave(rs));
             }
+            // 指定されたページに対応する有給休暇申請のリストを返却
             return result;
         } finally {
             JdbcUtil.close(rs);
@@ -100,6 +110,7 @@ public class PaidLeaveDao {
                 rs.getDate("approved_at"));
     }
 
+    // 全件数を取得（一覧のページングに使用）
     public int selectCount(Connection conn) throws SQLException {
         Statement stmt = null;
         ResultSet rs = null;
@@ -116,6 +127,7 @@ public class PaidLeaveDao {
         }
     }
 
+    // 主キー（leave_id）で有給休暇申請を検索
     public PaidLeave selectById(Connection conn, int no) throws SQLException {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -134,10 +146,12 @@ public class PaidLeaveDao {
         }
     }
 
+    // ステータスを更新する（承認・却下など）
     public void updateStatus(Connection conn, int leaveId, String status) throws SQLException {
         PreparedStatement pstmt = null;
         try {
             if ("承認".equals(status)) {
+                // 承認の場合、approved_at に現在時刻を設定
                 pstmt = conn.prepareStatement(
                         "UPDATE paid_leave_tbl SET status = ?, approved_at = ? WHERE leave_id = ?"
                 );
@@ -157,9 +171,10 @@ public class PaidLeaveDao {
         }
     }
 
+    // java.util.Date を java.sql.Timestamp に変換
     private Timestamp toTimestamp (Date date) {
         if (date == null) {
-            return null; // null 처리
+            return null;
         }
         return new Timestamp(date.getTime());
     }
