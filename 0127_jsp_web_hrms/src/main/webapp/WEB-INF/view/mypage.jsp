@@ -354,10 +354,6 @@ body {
 					<th>勤務状態</th>
 					<td><%=userDepartment.getWorkStatus() == null ? "" : userDepartment.getWorkStatus()%></td>
 				</tr>
-				<tr>
-					<th>ログイン状態</th>
-					<td><%="Y".equals(userDepartment.getLoginStatus()) ? "はい" : "いいえ"%></td>
-				</tr>
 			</table>
 		</div>
 	</div>
