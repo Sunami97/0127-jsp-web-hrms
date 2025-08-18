@@ -42,4 +42,36 @@ public class PaidLeavePage {
                 endPage = totalPages;
         }
     }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public boolean hasNoPaidLeaves() {
+        return total == 0;
+    }
+
+    public boolean hasPaidLeaves() {
+        return total > 0;
+    }
+
+    public int getCurrentPage() {
+        return currentPage;
+    }
+
+    public int getTotalPages() {
+        return totalPages;
+    }
+
+    public List<PaidLeave> getContent() {
+        return content;
+    }
+
+    public int getStartPage() {
+        return startPage;
+    }
+
+    public int getEndPage() {
+        return endPage;
+    }
 }
