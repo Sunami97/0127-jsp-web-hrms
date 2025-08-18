@@ -3,7 +3,7 @@
 <%@ include file="common/header.jsp"%>
 <%@ page import="myPage.model.UserDepartmentDTO"%>
 <%
-// [서버에서 user 객체 받기!]
+// [서버에서 user 객체 받기.!]
 UserDepartmentDTO userDepartment = (UserDepartmentDTO) request.getAttribute("user");
 // [로그인 or 세션 없으면 안내]
 if (userDepartment == null) {
@@ -277,13 +277,7 @@ body {
         <text x="70" y="120" text-anchor="middle" font-size="17"
 						font-weight="bold" fill="<%=borderColor%>"><%=displayPosition%></text>
     </svg>
-				<img src="" alt="프로필" id="profilePreview" class="profile-img"
-					style="display: none; position: absolute; left: 0; top: 0;" /> <label
-					class="profile-img-edit" title="사진 변경"> <i
-					class="fa-solid fa-camera"></i> <input type="file"
-					name="profileImg" accept="image/*"
-					onchange="previewProfileImg(this)">
-				</label>
+				
 			</div>
 			<div class="profile-name"><%=userDepartment.getName()%></div>
 			<div class="profile-pos">
@@ -359,10 +353,6 @@ body {
 				<tr>
 					<th>勤務状態</th>
 					<td><%=userDepartment.getWorkStatus() == null ? "" : userDepartment.getWorkStatus()%></td>
-				</tr>
-				<tr>
-					<th>ログイン状態</th>
-					<td><%="Y".equals(userDepartment.getLoginStatus()) ? "はい" : "いいえ"%></td>
 				</tr>
 			</table>
 		</div>

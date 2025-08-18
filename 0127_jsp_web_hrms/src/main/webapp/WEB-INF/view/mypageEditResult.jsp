@@ -23,7 +23,7 @@
             animation: popupIn 0.2s;
         }
         /* 팝업 등장 애니메이션 (Popup animation) */
-        /* ポップアップ登場アニメーション */
+        /* ポップアップ登場アニメーション *//
         @keyframes popupIn {
             from { transform: translateY(30px) scale(0.95); opacity: 0;}
             to { transform: none; opacity: 1;}

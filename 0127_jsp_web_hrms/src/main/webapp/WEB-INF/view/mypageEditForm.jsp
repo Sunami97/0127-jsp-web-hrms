@@ -303,11 +303,7 @@
         <!-- 얼굴에 직급명 (굵은 폰트) -->
         <text x="70" y="120" text-anchor="middle" font-size="17" font-weight="bold" fill="<%=borderColor%>"><%=displayPosition%></text>
     </svg>
-    <img src="" alt="프로필" id="profilePreview" class="profile-img" style="display:none;position:absolute;left:0;top:0;" />
-    <label class="profile-img-edit" title="사진 변경">
-        <i class="fa-solid fa-camera"></i>
-        <input type="file" name="profileImg" accept="image/*" onchange="previewProfileImg(this)">
-    </label>
+ 
 </div>
             <div class="profile-name"><%=user.getName()%></div>
             <div class="profile-pos">
@@ -325,7 +321,7 @@
     <button type="submit" class="my-btn">保存</button>
             </div>
         </div>
-        <!-- [오른쪽: 내 정보 입력폼 (일부 readonly)] -->
+        <!-- [오른쪽: 내 정보 입력폼 (일부 readonly)]. -->
         <div class="profile-right">
             <table class="profile-table">
              <tr>
@@ -346,14 +342,14 @@
 <th style="white-space:nowrap;">メールアドレス <%-- 메에루 아도레스 --%></th>
     
     <td>
-        <input type="email" name="email" value="<%=user.getEmail()==null?"":user.getEmail()%>"
+        <input type="email" name="email" value="<%=userDepartment.getEmail()==null?"":userDepartment.getEmail()%>"
             style="padding:5px 10px;font-size:15px;width:85%;">
     </td>
 </tr>
 <tr>
     <th>電話番号 <%-- でんわばんごう (denwa bangou) --%></th>
     <td>
-        <input type="text" name="phone" value="<%=user.getPhone()==null?"":user.getPhone()%>"
+        <input type="text" name="phone" value="<%=userDepartment.getPhone()==null?"":userDepartment.getPhone()%>"
             style="padding:5px 10px;font-size:15px;width:85%;">
     </td>
 </tr>
