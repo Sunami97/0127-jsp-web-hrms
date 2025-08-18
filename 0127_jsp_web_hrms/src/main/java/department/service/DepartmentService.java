@@ -22,12 +22,6 @@ public class DepartmentService {
         return departmentDAO.getOrgChart(conn);
     }
 
-    // 특정 부서의 사용자만 조회
-    // 特定部署に所属するユーザーのみ取得
-    public List<DepartmentDTO> getUsersByDepartment(Connection conn, String departmentId) throws SQLException {
-        return departmentDAO.getUsersByDepartment(conn, departmentId);
-    }
-
     // 전체 조직도 계층 구조로 변환 (부서 → 직책 → 사용자)
     // 組織図全体を階層構造に変換（部署 → 職位 → ユーザー）
     public Map<String, Map<String, List<DepartmentDTO>>> getOrgChartHierarchy(Connection conn) throws SQLException {

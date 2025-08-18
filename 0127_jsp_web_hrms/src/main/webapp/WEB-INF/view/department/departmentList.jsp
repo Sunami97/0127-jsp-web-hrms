@@ -8,14 +8,32 @@
 <title>조직도 / 組織図</title>
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <style>
-/* 조직도 컨테이너 */
+/* 조직도 컨테이너 / 組織図コンテナ */
 .org-container {
 	background-color: #fff;
-	margin: 100px auto 60px 220px; /* nav, header 고려 여백 */
+	margin: 100px auto 60px 220px; /* nav, header 고려 여백 / nav, header の余白考慮 */
 	padding: 20px;
 	max-width: 900px;
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 	border-radius: 8px;
+	position: relative; /* 버튼 위치를 컨테이너 기준으로 */
+}
+
+/* 전체 열기/닫기 버튼 / 全体開閉ボタン */
+.toggle-btn {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	padding: 6px 12px;
+	background-color: #1976d2;
+	color: #fff;
+	border: none;
+	border-radius: 6px;
+	cursor: pointer;
+	font-size: 14px;
+}
+.toggle-btn:hover {
+	background-color: #1565c0;
 }
 
 ul {
@@ -54,6 +72,7 @@ input[type="checkbox"]:checked ~ ul {
 	display: block;
 }
 
+/* 직원 이름 스타일 / 社員名スタイル */
 .employee-name {
 	font-weight: normal;
 	position: relative;
@@ -65,14 +84,17 @@ input[type="checkbox"]:checked ~ ul {
 	border-radius: 4px;
 }
 
+/* 로그인 중 / ログイン中 */
 .icon-blue {
 	color: #1976d2;
 }
 
+/* 로그아웃 상태 / ログアウト状態 */
 .icon-gray {
 	color: #757575;
 }
 
+/* 툴팁 (work_status 표시) / ツールチップ (work_status 表示) */
 .employee-name[data-status]:hover::after {
 	content: attr(data-status);
 	position: absolute;
@@ -102,30 +124,55 @@ input[type="checkbox"]:checked ~ ul {
 
 	<div class="org-container">
 		<h2>📁 조직도 보기 / 組織図の表示</h2>
+		<!-- 전체 열기/닫기 버튼 / 全体開閉ボタン -->
+		<button type="button" class="toggle-btn" onclick="toggleAll()">전체 닫기</button>
+
 		<ul>
 			<c:forEach var="deptEntry" items="${orgChartMap}">
-				<li><input type="checkbox"
-					id="dept-${deptEntry.key.hashCode()}" /> <label
-					for="dept-${deptEntry.key.hashCode()}">📂 ${deptEntry.key}</label>
+				<li>
+					<!-- 모든 트리가 처음부터 열려있도록 checked 추가 / すべてのツリーを最初から開いた状態にするため checked を追加 -->
+					<input type="checkbox" id="dept-${deptEntry.key.hashCode()}" checked />
+					<label for="dept-${deptEntry.key.hashCode()}">📂 ${deptEntry.key}</label>
 					<ul>
 						<c:forEach var="posEntry" items="${deptEntry.value}">
-							<li><input type="checkbox"
-								id="pos-${posEntry.key.hashCode()}-${deptEntry.key.hashCode()}" />
-								<label
-								for="pos-${posEntry.key.hashCode()}-${deptEntry.key.hashCode()}">📌
-									${posEntry.key}</label>
+							<li>
+								<input type="checkbox" id="pos-${posEntry.key.hashCode()}-${deptEntry.key.hashCode()}" checked />
+								<label for="pos-${posEntry.key.hashCode()}-${deptEntry.key.hashCode()}">📌 ${posEntry.key}</label>
 								<ul>
 									<c:forEach var="user" items="${posEntry.value}">
-										<li><span
-											class="employee-name ${user.workStatus == '勤務中' ? 'icon-blue' : 'icon-gray'}"
-											data-status="${user.workStatus}"> 👤 ${user.name} </span></li>
+										<li>
+											<span
+												class="employee-name ${user.isCurrent == 'Y' ? 'icon-blue' : 'icon-gray'}"
+												data-status="${user.workStatus}">
+												👤 ${user.name}
+											</span>
+										</li>
 									</c:forEach>
-								</ul></li>
+								</ul>
+							</li>
 						</c:forEach>
-					</ul></li>
+					</ul>
+				</li>
 			</c:forEach>
 		</ul>
 	</div>
+
+<script>
+/* 전체 열기/닫기 제어 함수 / 全体開閉制御関数 */
+let allOpen = true; // 현재 상태를 기억 / 現在の状態を記憶
+
+function toggleAll() {
+	const checkboxes = document.querySelectorAll('.org-container input[type="checkbox"]');
+	checkboxes.forEach(cb => cb.checked = !allOpen);
+	
+	// 버튼 텍스트 변경 / ボタンテキスト変更
+	const btn = document.querySelector('.toggle-btn');
+	btn.textContent = allOpen ? "전체 열기" : "전체 닫기"; // 한국어
+	// btn.textContent = allOpen ? "全体を開く" : "全体を閉じる"; // 日本語バージョン에 맞추고 싶으면 이 줄 사용
+
+	allOpen = !allOpen; // 상태 토글 / 状態を反転
+}
+</script>
 
 </body>
 </html>
