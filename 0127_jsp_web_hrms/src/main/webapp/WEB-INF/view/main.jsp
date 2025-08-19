@@ -32,7 +32,7 @@
         <i class="ri-contacts-book-fill"></i>
         <span>連絡網</span>
     </a>
-    <a href="leaveManage.do" class="menu-box">
+    <a href="paidleave.do" class="menu-box">
         <i class="ri-calendar-check-fill"></i>
         <span>年次管理</span>
     </a>

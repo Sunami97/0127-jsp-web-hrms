@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import user.model.UserDTO;
 import util.BCryptUtil; // 비밀번호 암호화/검증 유틸리티 클래스
@@ -90,4 +92,17 @@ public class UserDAO {
             pstmt.executeUpdate(); // UPDATE 실행 (DB 값 변경)
         }
     }
+    
+	// 관리자
+	public List<String> getAdminUsernames(Connection conn) throws SQLException {
+		String sql = "SELECT user_id FROM user_tbl WHERE is_admin='Y'" ;
+		try (PreparedStatement pstmt = conn.prepareStatement(sql);
+			 ResultSet rs = pstmt.executeQuery()) {
+			List<String> names = new ArrayList<>();
+			while (rs.next()) {
+				names.add(rs.getString("user_id"));
+			}
+			return names;
+		}
+	}
 }
