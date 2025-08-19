@@ -53,7 +53,7 @@ public class AdminDao {
 			try {
 			pstmt = conn.prepareStatement(
 					"Select u.*,d.department_name from user_tbl u, department_tbl d where u.department_id = d.department_id(+) and "
-							+keyField+" = ? and "+date+" between ? and ?");
+							+keyField+" = ? and "+date+" between ? and ? order by u.department_id");
 			pstmt.setString(1, keyWord);
 			pstmt.setString(2, sDate[0]);
 			pstmt.setString(3, sDate[1]);
@@ -73,7 +73,7 @@ public class AdminDao {
 		} else if(date.equals("null")  && keyWord != null && keyWord != ""){
 			//검색할 내용이 있지만 기간을 설정하지 않았을 때 실행 検索する内容がありますが、期間を設定していない場合に実行
 				try {pstmt = conn.prepareStatement("Select u.*,d.department_name from user_tbl u, department_tbl d where u.department_id = d.department_id(+) and "
-														+keyField+" = ?");
+														+keyField+" = ? order by u.department_id");
 				pstmt.setString(1, keyWord);
 				rs = pstmt.executeQuery();
 				List<AdminDto> result = new ArrayList<>();
@@ -91,7 +91,7 @@ public class AdminDao {
 			//검색할 내용은 없지만 기간은 설정했을 때 실행 検索する内容はありませんが、期間は設定した時に実行
 			try {
 				pstmt = conn.prepareStatement(
-						"Select u.*,d.department_name from user_tbl u, department_tbl d where u.department_id = d.department_id(+) and "+date+" between ? and ?");
+						"Select u.*,d.department_name from user_tbl u, department_tbl d where u.department_id = d.department_id(+) and "+date+" between ? and ? order by u.department_id");
 				pstmt.setString(1, sDate[0]);
 				pstmt.setString(2, sDate[1]);
 				rs = pstmt.executeQuery();
@@ -109,7 +109,7 @@ public class AdminDao {
 		} else {	
 			try {
 			//모든 조건에 부합하지 않았을 경우 모두 조회 すべての条件を満たしていない場合、すべて照会
-			pstmt = conn.prepareStatement("Select u.*,d.department_name from user_tbl u, department_tbl d where u.department_id = d.department_id(+)");
+			pstmt = conn.prepareStatement("Select u.*,d.department_name from user_tbl u, department_tbl d where u.department_id = d.department_id(+) order by u.department_id");
 			rs = pstmt.executeQuery();
 			List<AdminDto> result = new ArrayList<>();
 			while (rs.next()) {
@@ -122,6 +122,45 @@ public class AdminDao {
 			JdbcUtil.close(pstmt);
 		}
 		
+		}
+	}
+	
+	public List<AdminDto> AllSelect(Connection conn) throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			//모든 조건에 부합하지 않았을 경우 모두 조회 すべての条件を満たしていない場合、すべて照会
+			pstmt = conn.prepareStatement("Select u.*,d.department_name from user_tbl u, department_tbl d where u.department_id = d.department_id(+) order by u.department_id");
+			rs = pstmt.executeQuery();
+			List<AdminDto> result = new ArrayList<>();
+			while (rs.next()) {
+				result.add(convertUser(rs));
+
+			}
+			return result;
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+		
+	}
+	
+	public AdminDto userInfo(Connection conn, String userId) throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			//모든 조건에 부합하지 않았을 경우 모두 조회 すべての条件を満たしていない場合、すべて照会
+			pstmt = conn.prepareStatement("Select u.*,d.department_name from user_tbl u, department_tbl d where u.department_id = d.department_id(+) and user_id = ?");
+			pstmt.setString(1, userId);
+			rs = pstmt.executeQuery();
+			AdminDto user = null;
+			if(rs.next()) {
+			user = convertUser(rs);
+			}
+			return user;
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
 		}
 	}
 

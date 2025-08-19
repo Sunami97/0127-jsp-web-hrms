@@ -87,34 +87,11 @@ input[type="date"]:focus {
       border-color: #555;
     }
 </style>
-<script>
-function toggleDate(btn) {
-	const container = btn.nextElementSibling;
-	if (container.style.display === 'none') {
-		container.style.display = 'inline';
-	} else {
-		container.style.display = 'none';
-	}
-}
-
-function submitFire() {
-	const as = confirm("退社処理しますか?")
-	if(as == true){
-	const form = document.getElementById('form');
-	form.action = 'fire.do';
-	form.submit();
-	alert("完了しました.")
-	} else {
-		alert("キャンセルしました.")
-	}
-	
-}
-</script>
 </head>
 <body>
 	<h2 style="text-align: center;">📋社員管理画面</h2>
 	<!-- 조회한 총 수 照会した総数 -->
-	<form method="post" name="form" id="form">
+	<form method="post" name="form" id="form" action="infoForm.do">
 		照会${count}件
 		<table class="board-table" id="user-table">
 			<thead>
@@ -133,30 +110,24 @@ function submitFire() {
 					<th class="text-center">状態</th>
 					<th class="text-center">勤務状態</th>
 					<th class="text-center">ログイン状態</th>
-					<th class="text-center">削除</th>
-					<th class="text-center">修整</th>
 				</tr>
 			</thead>
 			<tbody>
 				<!-- 조회한 사원 별 정보 출력 照会した社員別情報の出力 -->
 				<c:forEach var="user" items="${user}">
 					<tr>
-						<td>${user.userId}</td>
+						<td>
+						<a href="infoForm.do?userId=${user.userId}">${user.userId}</a></td>
 						<td>${user.name}</td>
 						<td>${user.email}</td>
 						<td>${user.phone}</td>
 						<td>${user.birthDate}</td>
 						<td>${user.joinDate}</td>
 						<td>
-							<!-- 만약 퇴사일이 없다면 버튼을 클릭했을때 지정한 날짜로 퇴사일을 업데이트
-										もし退社日がない場合、ボタンをクリックした時に指定した日に退社日をアップデート --> <c:choose>
+							 <c:choose>
 								<c:when test="${empty user.retireDate}">
-									<input type="hidden" name="userId" value="${user.userId}">
-									<button type="button" onclick='toggleDate(this)' class="button">退社</button>
-									<span class="toggle-container" style="display: none;"> <input
-										type="date" name="date">
-										<button type="button" onclick="submitFire()">確認</button>
-									</span>
+								
+										
 								</c:when>
 								<c:otherwise>
    										${user.retireDate}
@@ -169,12 +140,6 @@ function submitFire() {
 						<td>${user.empStatus}</td>
 						<td>${user.workStatus}</td>
 						<td>${user.loginStatus}</td>
-						<!-- 삭제할 사원 (복수선택가능) 削除する社員(複数選択可能) -->
-						<td><input type="checkbox" name="deleteId"
-							value="${user.userId}"></td>
-						<!-- 수정할 사원 (복수선택불가) 修正する社員(複数選択不可) -->
-						<td><input type="radio" name="updateId"
-							value="${user.userId}"></td>
 					</tr>
 				</c:forEach>
 
@@ -182,11 +147,7 @@ function submitFire() {
 			</tbody>
 		</table>
 
-		<!-- 위에서 체크박스에 선택한 사원 삭제 上でチェックボックスに選択した社員を削除  -->
-		<button type="submit" onclick="javascript: form.action='delete.do'">削除</button>
-		<!-- 위에서 라디오에 선택한 사원의 정보를 수정하는 페이지로 이동 ラジオで選択した社員の情報を修正するページに移動 -->
-		<button type="submit"
-			onclick="javascript: form.action='updateForm.do'">修整</button>
+		
 
 	</form>
 

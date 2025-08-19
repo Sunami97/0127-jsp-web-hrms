@@ -34,12 +34,12 @@ public class AdminInsertHandler implements CommandHandler {
 			throws NumberFormatException, Exception {
 		AdminInsertService userRequest = new AdminInsertService();
 
-		String[] reqVal = new String[13];	
-		String[] insertList = new String[13];	//넣을 항목과 값을 담을 배열 객체 入れる項目と数値を入れる配列オブジェクト
+		String[] reqVal = new String[12];	
+		String[] insertList = new String[12];	//넣을 항목과 값을 담을 배열 객체 入れる項目と数値を入れる配列オブジェクト
 		int i; // 반복문에 사용할 변수 反復文に使用する変数
 
 	//  입력한 값이 있다면 그 항목과 값을 배열에 넣음 그걸 반복문으로 반복 入力した数値があれば、その項目と数値を配列に入れて、それを繰り返します
-		for (i = 0; i < 13; i++) {	
+		for (i = 0; i < 12; i++) {	
 			if (req.getParameter("userId") != "" && req.getParameter("userId") != null
 					&& !Arrays.toString(insertList).contains("user_id")) {
 				reqVal[i] = req.getParameter("userId");
@@ -102,12 +102,7 @@ public class AdminInsertHandler implements CommandHandler {
 				reqVal[i] = req.getParameter("workStatus");
 				insertList[i] = "work_status";
 				continue;
-			} else if (req.getParameter("loginStatus") != "" && req.getParameter("loginStatus") != null
-					&& !Arrays.toString(insertList).contains("login_status")) {
-				reqVal[i] = req.getParameter("loginStatus");
-				insertList[i] = "login_status";
-				continue;
-			} else {
+			}  else {
 				break;
 			}
 		}
