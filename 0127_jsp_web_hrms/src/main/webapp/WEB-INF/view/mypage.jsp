@@ -8,12 +8,7 @@ UserDepartmentDTO userDepartment = (UserDepartmentDTO) request.getAttribute("use
 // [로그인 or 세션 없으면 안내]
 if (userDepartment == null) {
 %>
-<h2>개인정보</h2>
-<p style="color: red;">
-	회원 정보가 없습니다.<br> 세션이 만료되었거나, 로그인 정보가 올바르지 않습니다.<br> <a
-		href="<%=request.getContextPath()%>/login.jsp" style="color: #007bff;">로그인
-		페이지로 이동</a>
-</p>
+
 <%
 return;
 }
