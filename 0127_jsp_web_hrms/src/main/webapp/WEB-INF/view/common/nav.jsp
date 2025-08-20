@@ -37,7 +37,7 @@
             </a>
         </li>
         <li>
-            <a href="${pageContext.request.contextPath}/leaveManage.do">
+            <a href="${pageContext.request.contextPath}/paidleave.do">
                 <i class="ri-calendar-check-fill"></i>
                 <span>年次管理</span>
             </a>
