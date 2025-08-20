@@ -70,8 +70,9 @@
 		<url-pattern>/orgChart.do</url-pattern>
 		<url-pattern>/myInfo.do</url-pattern>
 		<url-pattern>/contactList.do</url-pattern>
-		<url-pattern>/leaveManage.do</url-pattern>
+		<url-pattern>/paidLeave.do</url-pattern>
 		<url-pattern>/empManage.do</url-pattern>
+		<url-pattern>/attendance.do</url-pattern>	
 	</filter-mapping>
 
 
