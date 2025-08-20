@@ -94,7 +94,7 @@ input[type="checkbox"]:checked ~ ul {
 	color: #757575;
 }
 
-/* 툴팁 (work_status 표시) / ツールチップ (work_status 表示) */
+/* 툴팁 (status_type 표시) / ツールチップ (status_type 表示) */
 .employee-name[data-status]:hover::after {
 	content: attr(data-status);
 	position: absolute;
@@ -142,8 +142,8 @@ input[type="checkbox"]:checked ~ ul {
 									<c:forEach var="user" items="${posEntry.value}">
 										<li>
 											<span
-												class="employee-name ${user.isCurrent == 'Y' ? 'icon-blue' : 'icon-gray'}"
-												data-status="${user.workStatus}">
+												class="employee-name ${user.statusType == '勤務中' ? 'icon-blue' : 'icon-gray'}"
+												data-status="${user.statusType}">
 												👤 ${user.name}
 											</span>
 										</li>
