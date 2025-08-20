@@ -25,7 +25,7 @@
             </li>
         
         <li>
-            <a href="${pageContext.request.contextPath}/orgChart.do">
+            <a href="${pageContext.request.contextPath}/department.do">
                 <i class="ri-organization-chart"></i>
                 <span>組織図</span>
             </a>

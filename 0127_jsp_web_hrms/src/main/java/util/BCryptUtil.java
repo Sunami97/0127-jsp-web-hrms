@@ -3,6 +3,7 @@ package util;
 import org.mindrot.jbcrypt.BCrypt;
 
 
+
 // - 비밀번호를 안전하게 저장하고 검증하기 위한 유틸리티 클래스 // - パスワードを安全に保存し、検証するためのユーティリティクラス
 // - BCrypt 라이브러리를 사용하여 비밀번호를 암호화(해싱)하고, 비교하는 기능 제공 // - BCryptライブラリを使用してパスワードを暗号化（ハッシュ化）し、比較する機能を提供
 
@@ -35,5 +36,6 @@ public class BCryptUtil {
         if (plainPassword == null || hashedPassword == null) return false;
         return BCrypt.checkpw(plainPassword, hashedPassword);
     }
+
 
 }

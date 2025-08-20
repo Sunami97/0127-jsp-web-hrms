@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import user.model.UserDTO;
 
@@ -109,4 +111,17 @@ public class UserDAO {
 
         }
     }
+    
+	// 관리자
+	public List<String> getAdminUsernames(Connection conn) throws SQLException {
+		String sql = "SELECT user_id FROM user_tbl WHERE is_admin='Y'" ;
+		try (PreparedStatement pstmt = conn.prepareStatement(sql);
+			 ResultSet rs = pstmt.executeQuery()) {
+			List<String> names = new ArrayList<>();
+			while (rs.next()) {
+				names.add(rs.getString("user_id"));
+			}
+			return names;
+		}
+	}
 }
