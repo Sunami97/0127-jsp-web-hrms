@@ -4,17 +4,17 @@ public class DepartmentDTO {
 	private String departmentName; // 부서 이름 // 部署名
 	private String position;       // 직책 // 職位
 	private String name;           // 사용자 이름 // ユーザー名
-	private String workStatus;     // 근무중, 연차, 출장 등 // 勤務中、年休、出張など
+	private String statusType;     // 근무중, 연차, 출장 등 // 勤務中、年休、出張など
 
 	public DepartmentDTO() {
 		
 	}
 
-	public DepartmentDTO(String departmentName, String position, String name, String workStatus) {
+	public DepartmentDTO(String departmentName, String position, String name, String workStatus, String isCurrent) {
 		this.departmentName = departmentName;
 		this.position = position;
 		this.name = name;
-		this.workStatus = workStatus;
+		this.statusType = statusType;
 	}
 
 	public String getDepartmentName() {
@@ -41,12 +41,12 @@ public class DepartmentDTO {
 		this.name = name;
 	}
 
-	public String getWorkStatus() {
-		return workStatus;
+	public String getStatusType() {
+		return statusType;
 	}
 
-	public void setWorkStatus(String workStatus) {
-		this.workStatus = workStatus;
+	public void setStatusType(String statusType) {
+		this.statusType = statusType;
 	}
 
 }

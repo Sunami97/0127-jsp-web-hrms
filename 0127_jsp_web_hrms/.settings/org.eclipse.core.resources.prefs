@@ -1,2 +1,6 @@
 eclipse.preferences.version=1
+<<<<<<< HEAD
+=======
+encoding//src/main/webapp/WEB-INF/view/department.jsp=UTF-8
+>>>>>>> refs/heads/feature/department
 encoding/<project>=UTF-8
