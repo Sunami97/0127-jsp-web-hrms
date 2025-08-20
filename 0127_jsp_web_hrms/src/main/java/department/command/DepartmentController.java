@@ -27,6 +27,6 @@ public class DepartmentController implements CommandHandler {
             request.setAttribute("orgChartMap", orgChartMap);
         }
 
-        return "/WEB-INF/view/department/departmentList.jsp";
+        return "/WEB-INF/view/department.jsp";
     }
 }

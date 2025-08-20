@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>조직도 / 組織図</title>
+<title>組織図</title>
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <style>
 /* 조직도 컨테이너 / 組織図コンテナ */
@@ -123,9 +123,9 @@ input[type="checkbox"]:checked ~ ul {
 <body>
 
 	<div class="org-container">
-		<h2>📁 조직도 보기 / 組織図の表示</h2>
+		<h2>📁 組織図の表示</h2>
 		<!-- 전체 열기/닫기 버튼 / 全体開閉ボタン -->
-		<button type="button" class="toggle-btn" onclick="toggleAll()">전체 닫기</button>
+		<button type="button" class="toggle-btn" onclick="toggleAll()">全て閉じる</button>
 
 		<ul>
 			<c:forEach var="deptEntry" items="${orgChartMap}">
@@ -167,8 +167,7 @@ function toggleAll() {
 	
 	// 버튼 텍스트 변경 / ボタンテキスト変更
 	const btn = document.querySelector('.toggle-btn');
-	btn.textContent = allOpen ? "전체 열기" : "전체 닫기"; // 한국어
-	// btn.textContent = allOpen ? "全体を開く" : "全体を閉じる"; // 日本語バージョン에 맞추고 싶으면 이 줄 사용
+	btn.textContent = allOpen ? "全て開く" : "全て閉じる";
 
 	allOpen = !allOpen; // 상태 토글 / 状態を反転
 }
