@@ -50,7 +50,6 @@ public class ContactsDAO {
 
 
         	while (rs.next()) {
-                String loginStatus = "Y".equals(rs.getString("login_status")) ? "login" : "logout";
                 String statusType = rs.getString("status_type") != null
                         ? rs.getString("status_type") : "정상근무";
 
@@ -61,7 +60,6 @@ public class ContactsDAO {
                         rs.getString("phone"),
                         rs.getDate("join_date"),
                         rs.getString("position"),
-                        loginStatus,
                         statusType
                 ));
             }
