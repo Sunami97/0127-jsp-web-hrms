@@ -1,31 +1,38 @@
 package user.model;
 
-import java.sql.Date;
+import java.sql.Date; 
+
 
 public class UserDTO {
 	
-	private String user_id;
-    private String password;
-    private String name;
-    private String email; 
-    private String phone;
-    private Date birth_date;
-    private Date join_date;
-    private Date retire_date;
-    private String position;
-    private int department_id;
-    private String is_admin;
-    private String emp_status;
-    private String work_status;
-    private String login_status;
-	
+	// 사용자 기본 정보
+	private String user_id;       // 사용자 ID (Primary Key)
+    private String password;      // 비밀번호 (암호화 저장)
+    private String name;          // 이름
+    private String email;         // 이메일
+    private String phone;         // 전화번호
     
+    // 날짜 정보
+    private Date birth_date;      // 생년월일
+    private Date join_date;       // 입사일
+    private Date retire_date;     // 퇴사일 
+    
+    // 직무 및 부서 정보
+    private String position;      // 직급
+    private int department_id;    // 부서 ID 
+    
+    // 권한 및 상태 정보
+    private String is_admin;      // 관리자 여부 
+    private String emp_status;    // 재직 상태
+    private String work_status;   // 근무 상태
+    private String login_status;  // 로그인 상태 
+
+    // 기본 생성자
     public UserDTO() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-
+    // 모든 필드를 초기화하는 생성자
 	public UserDTO(String user_id, String password, String name, String email, String phone, Date birth_date,
 			Date join_date, Date retire_date, String position, int department_id, String is_admin, String emp_status,
 			String work_status, String login_status) {
@@ -46,147 +53,116 @@ public class UserDTO {
 		this.login_status = login_status;
 	}
 
-
+    // Getter & Setter 
 	public String getUser_id() {
 		return user_id;
 	}
-
 
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
 	}
 
-
 	public String getPassword() {
 		return password;
 	}
-
 
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
-
 	public String getName() {
 		return name;
 	}
-
 
 	public void setName(String name) {
 		this.name = name;
 	}
 
-
 	public String getEmail() {
 		return email;
 	}
-
 
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-
 	public String getPhone() {
 		return phone;
 	}
-
 
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
-
 	public Date getBirth_date() {
 		return birth_date;
 	}
-
 
 	public void setBirth_date(Date birth_date) {
 		this.birth_date = birth_date;
 	}
 
-
 	public Date getJoin_date() {
 		return join_date;
 	}
-
 
 	public void setJoin_date(Date join_date) {
 		this.join_date = join_date;
 	}
 
-
 	public Date getRetire_date() {
 		return retire_date;
 	}
-
 
 	public void setRetire_date(Date retire_date) {
 		this.retire_date = retire_date;
 	}
 
-
 	public String getPosition() {
 		return position;
 	}
-
 
 	public void setPosition(String position) {
 		this.position = position;
 	}
 
-
 	public int getDepartment_id() {
 		return department_id;
 	}
-
 
 	public void setDepartment_id(int department_id) {
 		this.department_id = department_id;
 	}
 
-
 	public String getIs_admin() {
 		return is_admin;
 	}
-
 
 	public void setIs_admin(String is_admin) {
 		this.is_admin = is_admin;
 	}
 
-
 	public String getEmp_status() {
 		return emp_status;
 	}
-
 
 	public void setEmp_status(String emp_status) {
 		this.emp_status = emp_status;
 	}
 
-
 	public String getWork_status() {
 		return work_status;
 	}
-
 
 	public void setWork_status(String work_status) {
 		this.work_status = work_status;
 	}
 
-
 	public String getLogin_status() {
 		return login_status;
 	}
 
-
 	public void setLogin_status(String login_status) {
 		this.login_status = login_status;
 	}
-    
-    
-    
-
 }
