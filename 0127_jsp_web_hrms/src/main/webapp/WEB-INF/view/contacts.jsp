@@ -29,7 +29,7 @@
 
         /* 로그인 상태 박스 / ログイン状態のボックス */
         .status-box { width: 15px; height: 15px; display: inline-block; border-radius: 3px; }
-        .online { background-color: #43a047; } /* 초록색(온라인) / 緑色（オンライン） */
+        .online { background-color: #1976d2; } /* 파란색(온라인) / 青色（オンライン） */
         .offline { background-color: #e53935; } /* 빨간색(오프라인) / 赤色（オフライン） */
 
         /* 부서 구분선 / 部署の区切り線 */
