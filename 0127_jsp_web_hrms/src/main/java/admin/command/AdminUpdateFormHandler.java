@@ -19,12 +19,15 @@ private AdminSelectService userService = new AdminSelectService();
 	
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
+		//가져온 사원아이디로 사원 정보 조회 もって来た社員IDで社員情報を照会
 		String userId = req.getParameter("userId");
 		AdminDto user = userService.userInfo(userId);
-		 // 職位 리스트
+		
+		
+		 //  직위 리스트 職位リスト
         List<String> positions = Arrays.asList("社員", "主任", "係長", "課長", "次長", "部長", "常務", "専務", "取締役", "代表取締役", "会長", "社長");
 
-        // 部署 맵
+        // 부서 맵 部署 マップ
         Map<Integer, String> departments = new LinkedHashMap<>();
         departments.put(1, "総務部");
         departments.put(2, "人事課");
@@ -41,17 +44,16 @@ private AdminSelectService userService = new AdminSelectService();
         departments.put(13, "法務部");
         departments.put(14, "企画部");
 
-        // 状態 리스트
+        // 상태 리스트 状態リスト
         List<String> empStatuss = Arrays.asList("在職", "休職", "退職");
         
-        
-		req.setAttribute("user", user);	//리퀘스트 객체에 count,user 저장 リクエストオブジェクトにcount、userを保存
+        //리퀘스트 객체에 count,user 저장 リクエストオブジェクトにcount、userを保存
+		req.setAttribute("user", user);	
 		req.setAttribute("positions", positions);
 		req.setAttribute("departments", departments);
 		req.setAttribute("empStatuss", empStatuss);
 			
 		return "WEB-INF/view/userUpdateForm.jsp"; //관리자 페이지로 리턴 管理者ページにリターン
-		//셀럭트서비스의 메소드 호출후 유저리스트에 담음 セレクトサービスのメソッド呼び出し後、ユーザーリストに入れる
 	
 		
 	}

@@ -48,8 +48,8 @@ public class AdminDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		if (!date.equals("null") && keyWord != null && keyWord != "") {	
-			//검색할 내용과 기간을 설정했는지 확인 検索する内容と期間を設定したか確認
+		//검색할 내용과 기간을 설정했는지 확인 検索する内容と期間を設定したか確認
+		if (!date.equals("null") && keyWord != null && keyWord != "") {		
 			try {
 			pstmt = conn.prepareStatement(
 					"Select u.*,d.department_name from user_tbl u, department_tbl d where u.department_id = d.department_id(+) and "
@@ -69,9 +69,9 @@ public class AdminDao {
 			JdbcUtil.close(rs);
 			JdbcUtil.close(pstmt);
 		}
-				
+			//검색할 내용이 있지만 기간을 설정하지 않았을 때 실행 検索する内容がありますが、期間を設定していない場合に実行		
 		} else if(date.equals("null")  && keyWord != null && keyWord != ""){
-			//검색할 내용이 있지만 기간을 설정하지 않았을 때 실행 検索する内容がありますが、期間を設定していない場合に実行
+			
 				try {pstmt = conn.prepareStatement("Select u.*,d.department_name from user_tbl u, department_tbl d where u.department_id = d.department_id(+) and "
 														+keyField+" = ? order by u.department_id");
 				pstmt.setString(1, keyWord);
@@ -86,9 +86,9 @@ public class AdminDao {
 				JdbcUtil.close(rs);
 				JdbcUtil.close(pstmt);
 			}
-				
-		} else if((keyWord == "" || keyWord == null) && !date.equals("null") ) {
 			//검색할 내용은 없지만 기간은 설정했을 때 실행 検索する内容はありませんが、期間は設定した時に実行
+		} else if((keyWord == "" || keyWord == null) && !date.equals("null") ) {
+			
 			try {
 				pstmt = conn.prepareStatement(
 						"Select u.*,d.department_name from user_tbl u, department_tbl d where u.department_id = d.department_id(+) and "+date+" between ? and ? order by u.department_id");
@@ -129,7 +129,7 @@ public class AdminDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			//모든 조건에 부합하지 않았을 경우 모두 조회 すべての条件を満たしていない場合、すべて照会
+			//모두 조회 すべて照会
 			pstmt = conn.prepareStatement("Select u.*,d.department_name from user_tbl u, department_tbl d where u.department_id = d.department_id(+) order by u.department_id");
 			rs = pstmt.executeQuery();
 			List<AdminDto> result = new ArrayList<>();
@@ -149,7 +149,7 @@ public class AdminDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			//모든 조건에 부합하지 않았을 경우 모두 조회 すべての条件を満たしていない場合、すべて照会
+			//ID와 일치하는 사원조회 IDと一致する社員照会
 			pstmt = conn.prepareStatement("Select u.*,d.department_name from user_tbl u, department_tbl d where u.department_id = d.department_id(+) and user_id = ?");
 			pstmt.setString(1, userId);
 			rs = pstmt.executeQuery();
@@ -190,8 +190,9 @@ public class AdminDao {
 	}
 
 	public void Delete(Connection conn, String[] userId) throws SQLException {
+		//요청 페이지에서 삭제 할 사원을 체크 했는지 확인 リクエストページで削除する社員をチェックしたか確認
 		if (userId != null && userId.length > 0) {
-			//요청 페이지에서 삭제 할 사원을 체크 했는지 확인 リクエストページで削除する社員をチェックしたか確認
+		
 			PreparedStatement pstmt = null;
 		
 			try {

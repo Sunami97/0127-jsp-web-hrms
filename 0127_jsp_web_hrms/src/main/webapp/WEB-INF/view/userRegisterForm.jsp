@@ -11,7 +11,7 @@
 	<form action="insert.do" method="post">
 		<div>
 	 		<div class="container">
-				<h2>사원 ID 생성을 위해<br>정보를 입력해주세요.</h2>
+				<h2>社員ID作成のため<br>情報を入力してください.</h2>
 				
 				<label>* ID <br><input type="text" name="userId" required="required"><br><br></label>
 				<label>* PW	<br><input type="password" name="password" required="required"><br><br></label>

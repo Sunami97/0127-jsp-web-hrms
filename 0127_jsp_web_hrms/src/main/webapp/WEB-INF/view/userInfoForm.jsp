@@ -12,6 +12,7 @@
 }
 </style>
 <script type="text/javascript">
+//사원삭제 알림창 및 제출 기능 社員削除通知ウィンドウと提出機能
 function deleteDo(){
 	
 	const aws = confirm("本当に削除しますか？");
@@ -29,6 +30,7 @@ function deleteDo(){
 	}
 	
 }
+//사원 수정 페이지로 이동 社員修正ページへ移動
 function updateForm(){
 	
 		const form = document.getElementById('userInfo');
@@ -39,8 +41,8 @@ function updateForm(){
 }
 </script>
 </head>
-<body>	<!-- 사원을 추가하기 위한 정보입력 폼 社員を追加するための情報入力フォーム -->
-	<form action="insert.do" method="post" id="userInfo">
+<body>	<!-- 사원을 정보입력 폼 社員を追加するための情報入力フォーム -->
+	<form method="post" id="userInfo">
 		<div>
 	 		<div class="container">
 				<h2>${user.name}様の詳細ページ</h2>
@@ -61,9 +63,9 @@ function updateForm(){
 							<br><br></label>
 							
 						
-						<!-- 위에서 체크박스에 선택한 사원 삭제 上でチェックボックスに選択した社員を削除  -->
+						<!-- 사원 삭제 社員を削除  -->
 						<button type="submit" onclick="deleteDo()">削除</button>
-						<!-- 위에서 라디오에 선택한 사원의 정보를 수정하는 페이지로 이동 ラジオで選択した社員の情報を修正するページに移動 -->
+						<!-- 사원수정페이지로 이동 社員修正ページに移動 -->
 						<button type="submit" onclick="updateForm()">修整</button>
 						
 					

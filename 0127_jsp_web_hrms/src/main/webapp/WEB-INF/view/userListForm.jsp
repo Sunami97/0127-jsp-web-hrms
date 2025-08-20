@@ -90,8 +90,8 @@ input[type="date"]:focus {
 </head>
 <body>
 	<h2 style="text-align: center;">📋社員管理画面</h2>
-	<!-- 조회한 총 수 照会した総数 -->
 	<form method="post" name="form" id="form" action="infoForm.do">
+	<!-- 조회한 총 수 照会した総数 -->
 		照会${count}件
 		<table class="board-table" id="user-table">
 			<thead>
@@ -125,8 +125,7 @@ input[type="date"]:focus {
 						<td>${user.joinDate}</td>
 						<td>
 							 <c:choose>
-								<c:when test="${empty user.retireDate}">
-								
+								<c:when test="${empty user.retireDate}">								
 										
 								</c:when>
 								<c:otherwise>

@@ -13,6 +13,7 @@ String userI = request.getParameter("updateId");
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/adminRegister.css">
 <title>Insert title here</title>
 <script type="text/javascript">
+//퇴사일 설정과 제출 기능 退社日の設定と提出機能
 function fire(){
 
 	var con = document.getElementById('dateForm');
@@ -40,7 +41,7 @@ function fire(){
 		}
 	}
 }
-
+/* 수정 알림창 및 제출 기능 修正通知ウィンドウと提出機能 */
 function update() {
 
 		const aws = confirm("本当に修正しますか？");
@@ -61,7 +62,7 @@ function update() {
 </script>
 </head>
 <body>
-	<form id="updateForm" action="update.do" method="post">
+	<form id="updateForm" method="post">
 		<div>
 			<div class="container">
 				<h2>社員情報修正ページ</h2>
@@ -92,12 +93,13 @@ function update() {
 								<option value="${emp}"<c:if test="${user.empStatus eq emp}">selected</c:if>>${emp}</option>
 							</c:forEach>
 					      </select> <br><br>
-				<!-- 만약 퇴사일이 없다면 버튼을 클릭했을때 지정한 날짜로 퇴사일을 업데이트
-										もし退社日がない場合、ボタンをクリックした時に指定した日に退社日をアップデート -->	
-					<input type="date" name="date" id="dateForm" style="display:none">	
-										
-					<button type="submit" onclick="fire()">退社</button>	      
-					<button type="submit" onclick="update()">修整</button>
+							<!-- 만약 퇴사일이 없다면 퇴사버튼 활성화, 버튼을 클릭했을때 지정한 날짜로 퇴사일을 업데이트
+										もし退社日がない場合ボタン活性化、ボタンをクリックした時に指定した日に退社日をアップデート -->	
+						<input type="date" name="date" id="dateForm" style="display:none">	
+							<c:if test="${empty user.retireDate }">				
+								<button type="submit" onclick="fire()">退社</button>	 
+							</c:if>	     
+								<button type="submit" onclick="update()">修整</button>
 			</div>
 		</div>
 	</form>
