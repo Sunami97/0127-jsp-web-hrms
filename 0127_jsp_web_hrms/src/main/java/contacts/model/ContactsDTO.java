@@ -10,7 +10,6 @@ public class ContactsDTO {
     private String phone;          // 연락처 / 連絡先
     private Date joinDate;         // 입사일 / 入社日
     private String position;       // 직급 / 職位
-    private String loginStatus;    // 로그인 상태 / ログイン状態
     private String statusType;     // 상태 유형(연차, 출장 등) / 状態タイプ（休暇、出張など）
     
     // 추가 필드 / 追加フィールド
@@ -20,15 +19,13 @@ public class ContactsDTO {
         // 기본 생성자 / デフォルトコンストラクタ
     }
 
-    public ContactsDTO(String departmentName, String name, String email, String phone, Date joinDate, String position,
-            String loginStatus, String statusType) {
+    public ContactsDTO(String departmentName, String name, String email, String phone, Date joinDate, String position, String statusType) {
         this.departmentName = departmentName;
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.joinDate = joinDate;
         this.position = position;
-        this.loginStatus = loginStatus;
         this.statusType = statusType;
     }
 
@@ -78,14 +75,6 @@ public class ContactsDTO {
 
     public void setPosition(String position) {
         this.position = position;
-    }
-
-    public String getLoginStatus() {
-        return loginStatus;
-    }
-
-    public void setLoginStatus(String loginStatus) {
-        this.loginStatus = loginStatus;
     }
 
     public String getStatusType() {

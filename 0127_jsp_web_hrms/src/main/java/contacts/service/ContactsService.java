@@ -47,18 +47,8 @@ public class ContactsService {
         // 4. 各連絡先を処理
         for (ContactsDTO contact : allContacts) {
 
-            // (A) 로그인 상태를 CSS 클래스명으로 변환
-            // (A) ログイン状態をCSSクラス名に変換
-            if ("login".equalsIgnoreCase(contact.getLoginStatus())) {
-                contact.setLoginStatus("online"); // 로그인 → 초록색 표시
-                                                 // ログイン → 緑色表示
-            } else {
-                contact.setLoginStatus("offline"); // 로그아웃 → 빨간색 표시
-                                                   // ログアウト → 赤色表示
-            }
-
-            // (B) 입사일(Date → yyyy-MM-dd 문자열 변환)
-            // (B) 入社日(Date → yyyy-MM-dd文字列に変換)
+            // 입사일(Date → yyyy-MM-dd 문자열 변환)
+            // 入社日(Date → yyyy-MM-dd文字列に変換)
             if (contact.getJoinDate() != null) {
                 String formattedDate = sdf.format(contact.getJoinDate());
                 contact.setJoinDateStr(formattedDate);
@@ -66,8 +56,8 @@ public class ContactsService {
                 contact.setJoinDateStr("");
             }
 
-            // (C) 부서별 그룹에 추가
-            // (C) 部署ごとのグループに追加
+            // 부서별 그룹에 추가
+            // 部署ごとのグループに追加
             grouped
                 .computeIfAbsent(contact.getDepartmentName(), k -> new ArrayList<>())
                 .add(contact);

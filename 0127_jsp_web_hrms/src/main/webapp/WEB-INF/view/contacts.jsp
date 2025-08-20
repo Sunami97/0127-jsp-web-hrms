@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>연락망 / 連絡網</title>
+    <title>連絡網</title>
     <style>
         /* 전체 페이지 기본 스타일 / ページ全体の基本スタイル */
         body { font-family: Arial, sans-serif; background-color: #f4f8fc; margin: 0; padding: 0; }
@@ -27,11 +27,6 @@
         /* 행에 마우스를 올렸을 때 효과 / 行にマウスを乗せたときの効果 */
         tbody tr:hover { background-color: #e3f2fd; }
 
-        /* 로그인 상태 박스 / ログイン状態のボックス */
-        .status-box { width: 15px; height: 15px; display: inline-block; border-radius: 3px; }
-        .online { background-color: #43a047; } /* 초록색(온라인) / 緑色（オンライン） */
-        .offline { background-color: #e53935; } /* 빨간색(오프라인) / 赤色（オフライン） */
-
         /* 부서 구분선 / 部署の区切り線 */
         hr { border: 0; height: 1px; background-color: #1976d2; width: 95%; margin: 20px auto; }
     </style>
@@ -39,7 +34,7 @@
 <body>
 
 <!-- 페이지 제목 / ページタイトル -->
-<h2>📇 연락망 보기 / 連絡網の表示</h2>
+<h2>📇 連絡網の表示</h2>
 
 <!-- groupedContacts(Map)의 각 부서별 데이터 반복 / groupedContacts(Map)の各部署データを繰り返し表示 -->
 <c:forEach var="entry" items="${groupedContacts}">
@@ -51,13 +46,12 @@
     <table>
         <thead>
         <tr>
-            <th>이름 / 名前</th>
-            <th>이메일 / メール</th>
-            <th>연락처 / 連絡先</th>
-            <th>입사일 / 入社日</th>
-            <th>직급 / 職位</th>
-            <th>상태 유형 / 状態タイプ</th>
-            <th>로그인 상태 / ログイン状態</th>
+            <th>名前</th>
+            <th>メール</th>
+            <th>連絡先</th>
+            <th>入社日</th>
+            <th>職位</th>
+            <th>状態タイプ</th>
         </tr>
         </thead>
         <tbody>
@@ -71,11 +65,6 @@
                 <td>${contact.joinDateStr}</td> <!-- 입사일(포맷 완료) / 入社日（フォーマット済み） -->
                 <td>${contact.position}</td> <!-- 직급 / 職位 -->
                 <td>${contact.statusType}</td> <!-- 상태 유형 / 状態タイプ -->
-
-                <!-- 로그인 상태 (online/offline) CSS 클래스 적용 / ログイン状態（online/offline）をCSSクラスとして適用 -->
-                <td>
-                    <span class="status-box ${contact.loginStatus}"></span>
-                </td>
             </tr>
         </c:forEach>
         </tbody>
