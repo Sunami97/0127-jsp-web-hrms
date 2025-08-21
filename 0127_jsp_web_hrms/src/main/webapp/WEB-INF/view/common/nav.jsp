@@ -17,6 +17,13 @@
 
 <nav class="side-nav">
     <ul>
+    		<li>
+                <a href="${pageContext.request.contextPath}/attendance.do">
+                    <i class="ri-time-fill"></i>
+                    <span>出退勤 管理</span>
+                </a>
+            </li>
+            
             <li>
                 <a href="${pageContext.request.contextPath}/myInfo.do">
                     <i class="ri-user-3-fill"></i>

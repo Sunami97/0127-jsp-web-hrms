@@ -19,6 +19,12 @@
 </head>
 <body>
 <div class="menu-container">
+		
+		<a href="attendance.do" class="menu-box">
+            <i class="ri-time-fill"></i>
+            <span>出退勤 管理</span>
+        </a>
+
         <a href="myInfo.do" class="menu-box">
             <i class="ri-user-3-fill"></i>
             <span>マイページ</span>
