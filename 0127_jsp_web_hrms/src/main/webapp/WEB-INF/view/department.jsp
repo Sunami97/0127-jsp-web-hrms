@@ -142,8 +142,8 @@ input[type="checkbox"]:checked ~ ul {
 									<c:forEach var="user" items="${posEntry.value}">
 										<li>
 											<span
-												class="employee-name ${user.statusType == '勤務中' ? 'icon-blue' : 'icon-gray'}"
-												data-status="${user.statusType}">
+												class="employee-name ${user.workStatus == '勤務中' ? 'icon-blue' : 'icon-gray'}"
+												data-status="${user.workStatus}">
 												👤 ${user.name}
 											</span>
 										</li>

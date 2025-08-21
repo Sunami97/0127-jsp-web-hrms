@@ -18,10 +18,9 @@ public class DepartmentDAO {
         // 결과를 담을 리스트 생성
         // 結果を格納するリストを作成
 
-        String sql = "SELECT d.department_name, u.position, u.name, s.status_type " +
+        String sql = "SELECT d.department_name, u.position, u.name, u.work_status " +
                 "FROM user_tbl u " +
                 "LEFT JOIN department_tbl d ON u.department_id = d.department_id " +
-                "LEFT JOIN user_status_tbl s ON u.user_id = s.user_id " +
                 "WHERE u.emp_status = '在職' " + // 재직자만 추출 / 在職者のみ
                 "ORDER BY d.department_name, u.position, u.name";
         // 조직도에 필요한 정보들을 조인하여 조회
@@ -39,7 +38,7 @@ public class DepartmentDAO {
                 dto.setDepartmentName(rs.getString("department_name")); // 부서명 설정 // 部署名を設定
                 dto.setPosition(rs.getString("position"));               // 직책 설정   // 職位を設定
                 dto.setName(rs.getString("name"));                       // 이름 설정   // 名前を設定
-                dto.setStatusType(rs.getString("status_type"));          // 근무중, 연차, 출장 등 설정 // 勤務中、年休、出張などを設定
+                dto.setWorkStatus(rs.getString("work_status"));          // 근무중, 연차, 출장 등 설정 // 勤務中、年休、出張などを設定
                 list.add(dto); // 리스트에 추가 // リストに追加
             }
         }
