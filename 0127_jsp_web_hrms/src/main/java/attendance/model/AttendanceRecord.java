@@ -9,6 +9,7 @@ public class AttendanceRecord {
 	private Date statusStart;
 	private Date statusEnd;
 	private boolean current;
+	private String userName;
 
 	public long getStatusId() {
 		return statusId;
@@ -56,5 +57,13 @@ public class AttendanceRecord {
 
 	public void setCurrent(boolean current) {
 		this.current = current;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 }

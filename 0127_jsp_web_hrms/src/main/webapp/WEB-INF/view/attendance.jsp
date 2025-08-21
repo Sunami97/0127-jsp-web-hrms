@@ -88,7 +88,7 @@
             <table class="att-table">
               <thead>
                 <tr>
-                  <th>상태 고유 번호</th>
+                  
                   <th>사원명</th>
                   <th>근무 상태</th>
                   <th>출근</th>
@@ -100,8 +100,8 @@
               <tbody>
                 <c:forEach var="r" items="${history}">
                   <tr>
-                    <td><c:out value="${r.statusId}" /></td>
-                    <td><c:out value="${r.userId}" /></td>
+                    
+                    <td><c:out value="${r.userName}" /></td>
                     <td><c:out value="${r.current ? r.statusType : '-'}" /></td>
                     <td><fmt:formatDate value="${r.statusStart}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
                     <td>
@@ -112,7 +112,7 @@
                         <c:otherwise>-</c:otherwise>
                       </c:choose>
                     </td>
-                    <td><c:out value="${r.current ? 'Y' : 'N'}" /></td>
+                    <td><c:out value="${r.current ? '出勤' : '退勤'}" /></td>
                     <td>
                       <form method="post" action="${pageContext.request.contextPath}/attendance.do" style="display:inline;">
                         <input type="hidden" name="action" value="out"/>
