@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
-  request.setCharacterEncoding("UTF-8");
-  String userI = request.getParameter("updateId");
+request.setCharacterEncoding("UTF-8");
+String userI = request.getParameter("updateId");
 %>
 
 <html>
@@ -11,53 +12,95 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/adminRegister.css">
 <title>Insert title here</title>
+<script type="text/javascript">
+//퇴사일 설정과 제출 기능 退社日の設定と提出機能
+function fire(){
+
+	var con = document.getElementById('dateForm');
+	if(con.style.display == "none"){
+		
+		con.style.display = "block";
+		event.preventDefault();
+		
+	} else{
+		if(document.getElementById('dateForm').value){
+		let form = document.getElementById("userInfo");
+		form.action = 'fire.do';
+		form.mothod = 'post';
+		const a = confirm("本当に退社処理しますか?");
+			if(a){
+				alert("処理しました");
+				form.submit();
+			} else{
+				alert("キャンセルしました");
+				event.preventDefault();
+			}
+		} else {
+			alert("日付を設定してください");
+			event.preventDefault();
+		}
+	}
+}
+/* 수정 알림창 및 제출 기능 修正通知ウィンドウと提出機能 */
+function update() {
+
+		const aws = confirm("本当に修正しますか？");
+		if (aws) {
+
+			const form = document.getElementById('updateForm')
+			form.action = "update.do";
+			form.method = "post";
+			form.submit();
+
+		} else {
+
+			event.preventDefault();
+
+		}
+
+}
+</script>
 </head>
 <body>
-	<form action="update.do" method="post">
+	<form id="updateForm" method="post">
 		<div>
-	 		<div class="container">
-		メール<br><input type="text" name="email"><br><br>
-		連絡先<br><input type="text" name="phone"><br><br>
-		職位	<br><select name="position">
-					<option value="社員">社員</option>
-					<option value="主任">主任</option>
-					<option value="係長">係長</option>
-					<option value="課長">課長</option>
-					<option value="次長">次長</option>
-					<option value="部長">部長</option>
-					<option value="常務">常務</option>
-					<option value="専務">専務</option>
-					<option value="取締役">取締役</option>
-					<option value="代表取締役">代表取締役</option>
-					<option value="会長">会長</option>
-					<option value="社長">社長</option>
-				</select><br><br>			
-		部署	<br><select name="departmentId">
-					<option value="1">総務部</option>
-					<option value="2">人事課</option>
-					<option value="3">経理部</option>
-					<option value="4">財務部</option>
-					<option value="5">営業部</option>
-					<option value="6">販売部</option>
-					<option value="7">マーケティング部</option>
-					<option value="8">開発部</option>
-					<option value="9">技術部</option>
-					<option value="10">情報システム部</option>
-					<option value="11">生産部</option>
-					<option value="12">品質管理部</option>
-					<option value="13">法務部</option>
-					<option value="14">企画部</option>
-				</select><br><br>			
-		管理者 権限  <br>N<input type="radio" name="isAdmin" checked="checked" value="N">
-				  Y<input type="radio" name="isAdmin" value="Y"><br><br>
-		状態		<br><select name="empStatus">
-					<option value="在職">在職</option>
-					<option value="休職">休職</option>
-					<option value="退職">退職</option>
-				</select><br><br>	
-				<input type="hidden" name="updateId" value="<%=userI %>">
-		<button type="submit">修整</button>
-		</div>
+			<div class="container">
+				<h2>社員情報修正ページ</h2>
+				<input type="hidden" name="userId" value="${user.userId }">
+				* 名前 <br><input type="text" name="name" value="${user.name}"><br><br> 
+				* メール<br><input type="text" name="email" value="${user.email}"><br><br>
+				* 連絡先<br><input type="text" name="phone" value="${user.phone}"><br><br> 
+				* 職位 <br><select name="position">
+							<c:forEach var="pos" items="${positions}">
+								<option value="${pos}"<c:if test="${user.position eq pos}">selected</c:if>>${pos}</option>
+							</c:forEach>
+						  </select><br><br>
+				<!-- 部署 -->
+				* 部署 <br><select name="departmentId">
+							<c:forEach var="entry" items="${departments}">
+								<option value="${entry.key}"<c:if test="${user.departmentId eq entry.key}">selected</c:if>>${entry.value}</option>
+							</c:forEach>
+						  </select><br><br>
+			    <!-- 管理者権限 -->
+				* 管理者 権限<br> N 
+							<input type="radio"name="isAdmin" value="N"<c:if test="${user.isAdmin eq 'N'}">checked</c:if> /> 
+							   Y 
+							<input type="radio" name="isAdmin" value="Y"<c:if test="${user.isAdmin eq 'Y'}">checked</c:if> /> 
+							<br><br>
+				<!-- 状態 -->
+				* 状態 <br><select name="empStatus">
+							<c:forEach var="emp" items="${empStatuss}">
+								<option value="${emp}"<c:if test="${user.empStatus eq emp}">selected</c:if>>${emp}</option>
+							</c:forEach>
+					      </select> <br><br>
+							<!-- 만약 퇴사일이 없다면 퇴사버튼 활성화, 버튼을 클릭했을때 지정한 날짜로 퇴사일을 업데이트
+										もし退社日がない場合ボタン活性化、ボタンをクリックした時に指定した日に退社日をアップデート -->	
+						<input type="date" name="date" id="dateForm" style="display:none">	
+							<c:if test="${empty user.retireDate }">				
+								<button type="submit" onclick="fire()">退社</button>	 
+							</c:if>	     
+								<button type="submit" onclick="update()">修整</button>
+			</div>
 		</div>
 	</form>
 </body>

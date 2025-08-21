@@ -11,7 +11,7 @@
 	<form action="insert.do" method="post">
 		<div>
 	 		<div class="container">
-				<h2>사원 ID 생성을 위해<br>정보를 입력해주세요.</h2>
+				<h2>社員ID作成のため<br>情報を入力してください.</h2>
 				
 				<label>* ID <br><input type="text" name="userId" required="required"><br><br></label>
 				<label>* PW	<br><input type="password" name="password" required="required"><br><br></label>
@@ -34,7 +34,7 @@
 							<option value="会長">会長</option>
 							<option value="社長">社長</option>
 						</select><br><br></label>			
-				<label for="email">* 部署 <br><select name="departmentId">
+				<label>* 部署 <br><select name="departmentId">
 							<option value="1">総務部</option>
 							<option value="2">人事課</option>
 							<option value="3">経理部</option>
@@ -50,20 +50,18 @@
 							<option value="13">法務部</option>
 							<option value="14">企画部</option>
 						</select><br><br></label>
-				<label for="email">* 管理者 権限 <br> N<input type="radio" name="isAdmin" checked="checked" value="N">
+				<label>* 管理者 権限 <br> N<input type="radio" name="isAdmin" checked="checked" value="N">
 						  Y<input type="radio" name="isAdmin" value="Y"><br><br></label>
-				<label for="email">* 状態 <br><select name="empStatus">
+				<label>* 状態 <br><select name="empStatus">
 							<option value="在職">在職</option>
 							<option value="休職">休職</option>
 							<option value="退職">退職</option>
 						</select><br><br></label>
-				<label for="email">* 勤務状態	<br><select name="workStatus">
+				<label>* 勤務状態	<br><select name="workStatus">
 							<option value="勤務中">勤務中</option>
 							<option value="年休">年休</option>
 							<option value="出張">出張</option>
-						</select><br><br></label>	
-				<label for="email">* ログイン状態<br>	N<input type="radio" name="loginStatus" checked="checked" value="N">
-							Y<input type="radio" name="loginStatus" value="Y"><br><br></label>
+						</select><br><br></label>
 						<button type="submit">追加</button>
 						</div>
 					</div>	

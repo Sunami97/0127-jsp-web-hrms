@@ -28,10 +28,11 @@ public class AdminSelectHandler implements CommandHandler{
 		return FORM_VIEW;
 	}
 	private String processSubmit(HttpServletRequest req, HttpServletResponse res) {
+		//검색할 키워드,속성,날짜유형,날짜 범위 받아옴検索するキーワード、属性、日付タイプ、日付範囲保存
 		String keyWord = req.getParameter("keyWord");	
 		String keyField = req.getParameter("keyField");
 		String date = req.getParameter("date");				
-		String[] sDate = req.getParameterValues("sDate");	//검색할 키워드,속성,날짜유형,날짜 범위 받아옴
+		String[] sDate = req.getParameterValues("sDate");	
 		
 		//조회가 되었는지 확인하고 없다면 그대로 리턴 照会ができているか確認していない場合は、そのままリターン
 		if(userService.Select(keyWord,keyField,date,sDate) != null) {

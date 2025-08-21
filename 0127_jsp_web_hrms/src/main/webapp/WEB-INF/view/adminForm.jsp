@@ -7,6 +7,33 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+.btn {
+  	  position : relative;
+  	  top : -37px;
+  	  left : 620px;
+      padding: 4px 10px;
+      font-size: 13px;
+      color: #333;
+      background-color: transparent;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+    }
+.btn-add{
+	  position : relative;
+  	  top : 90px;
+  	  left : 1440px;
+  	  padding: 4px 10px;
+      font-size: 13px;
+      color: #333;
+      background-color: transparent;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+}    
+
 </style>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/adminForm.css">
@@ -46,15 +73,16 @@
 											name="sDate">
 										</div> 
 									</div>
-										<button type="submit">照会</button>
+										<button type="submit" class="btn">照会</button>
 				</td>
 			</tr>
 		</table>
 	</form>
+	<button type="button" onclick="registerForm()" class="btn-add">社員登録</button>
 	<!-- 결과을 출력한 jsp페이지를 불러옴 結果を出力したjspページを読み込む -->
 	<jsp:include page="/WEB-INF/view/userListForm.jsp" flush="false" />
 	<!-- 사원 추가 command 호출 社員追加command呼び出し -->
-	<button type="button" onclick="registerForm()">追加</button>
+	
 </body>
 </html>
 

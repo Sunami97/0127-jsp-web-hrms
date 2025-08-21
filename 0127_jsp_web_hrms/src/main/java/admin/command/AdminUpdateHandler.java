@@ -30,51 +30,35 @@ public class AdminUpdateHandler implements CommandHandler {
 	}
 
 	private String processSubmit(HttpServletRequest req, HttpServletResponse res) {
-		String userId = req.getParameter("updateId");
-		String[] reqVal = new String[6];
-		String[] updateList = new String[6];	//넣을 항목과 값을 담을 배열 객체 入れる項目と数値を入れる配列オブジェクト
-		int i;// 반복문에 사용할 변수 反復文に使用する変数
-
-		//  입력한 값이 있다면 그 항목과 값을 배열에 넣음 그걸 반복문으로 반복 入力した数値があれば、その項目と数値を配列に入れて、それを繰り返します
-		for (i = 0; i < 6; i++) {
-			if (req.getParameter("email") != "" && req.getParameter("email") != null
-					&& !Arrays.toString(updateList).contains("email")) {
-				reqVal[i] = req.getParameter("email");
-				updateList[i] = "email";
-				continue;
-			} else if (req.getParameter("phone") != "" && req.getParameter("phone") != null
-					&& !Arrays.toString(updateList).contains("phone")) {
-				reqVal[i] = req.getParameter("phone");
-				updateList[i] = "phone";
-				continue;
-			} else if (req.getParameter("position") != "" && req.getParameter("position") != null
-					&& !Arrays.toString(updateList).contains("position")) {
-				reqVal[i] = req.getParameter("position");
-				updateList[i] = "position";
-				continue;
-			} else if (req.getParameter("departmentId") != "" && req.getParameter("departmentId") != null
-					&& !Arrays.toString(updateList).contains("department_id")) {
-				reqVal[i] = req.getParameter("departmentId");
-				updateList[i] = "department_id";
-				continue;
-			} else if (req.getParameter("isAdmin") != "" && req.getParameter("isAdmin") != null
-					&& !Arrays.toString(updateList).contains("is_admin")) {
-				reqVal[i] = req.getParameter("isAdmin");
-				updateList[i] = "is_admin";
-				continue;
-			} else if (req.getParameter("empStatus") != "" && req.getParameter("empStatus") != null
-					&& !Arrays.toString(updateList).contains("emp_status")) {
-				reqVal[i] = req.getParameter("empStatus");
-				updateList[i] = "emp_status";
-				continue;
-			} else {
-				break;
-			}
-		}
-		String[] resizedArray = Arrays.copyOf(updateList, i);
-		String[] reqArray = Arrays.copyOf(reqVal, i);	//반복한 횟수에 맞쳐 배열 수 조절 繰り返した回数に合わせて配列数を調節
+		String userId = req.getParameter("userId");
+		//넣을 항목과 값을 담을 배열 객체 入れる項目と数値を入れる配列オブジェクト
+		String[] reqVal = new String[7];
+		String[] updateList = new String[7];	
 		
-		userService.userUpdate(userId, resizedArray, reqArray);	//수정서비스의 메소드 호출 修正サービスのメソッド呼び出し
+				//수정할 수치를 배열에 저장 修正する数値を配列に保存
+				reqVal[0] = req.getParameter("email");
+				updateList[0] = "email";
+			
+				reqVal[1] = req.getParameter("phone");
+				updateList[1] = "phone";
+			
+				reqVal[2] = req.getParameter("position");
+				updateList[2] = "position";
+			
+				reqVal[3] = req.getParameter("departmentId");
+				updateList[3] = "department_id";
+				
+				reqVal[4] = req.getParameter("isAdmin");
+				updateList[4] = "is_admin";
+			
+				reqVal[5] = req.getParameter("empStatus");
+				updateList[5] = "emp_status";
+			
+				reqVal[6] = req.getParameter("name");
+				updateList[6] = "name";
+			
+		
+		userService.userUpdate(userId, updateList, reqVal);	//수정서비스의 메소드 호출 修正サービスのメソッド呼び出し
 
 		return "WEB-INF/view/adminForm.jsp"; //관리자 페이지로 리턴 管理者ページにリターン
 	}

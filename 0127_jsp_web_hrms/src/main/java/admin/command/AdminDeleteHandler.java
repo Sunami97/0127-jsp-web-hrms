@@ -25,7 +25,7 @@ public class AdminDeleteHandler implements CommandHandler{
 		return FORM_VIEW;
 	}
 	private String processSubmit(HttpServletRequest req, HttpServletResponse res) {
-		String[] userId = req.getParameterValues("deleteId"); //유저아이디를 담아둘 배열객체 ユーザーIDを入れる配列オブジェクト   
+		String[] userId = req.getParameterValues("userId"); //유저아이디를 담아둘 배열객체 ユーザーIDを入れる配列オブジェクト   
 		
 		 userService.Delete(userId);	//딜리트 서비스의 딜리트 메서드 호출 デリートサービスのデリートメソッド呼び出し
 		

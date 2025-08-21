@@ -31,4 +31,44 @@ public class AdminSelectService {
 		}
 		return null;
 	}
+	
+	public List<AdminDto> AllSelect() {
+		Connection conn = null;
+		try {
+			conn = ConnectionProvider.getConnection();
+			conn.setAutoCommit(false);
+			
+			List<AdminDto> user = userDao.AllSelect(conn); //dao 조회 메소드 호출 daoメソッド呼び出し
+			
+			conn.commit();
+			return user; //객체 리턴 オブジェクト·リターン
+		}catch(SQLException e) {
+			JdbcUtil.rollback(conn);
+			System.out.print(e.getMessage());
+			e.printStackTrace();
+		}finally {
+			JdbcUtil.close(conn);
+		}
+		return null;
+	}
+	
+	public AdminDto userInfo(String userId) {
+		Connection conn = null;
+		try {
+			conn = ConnectionProvider.getConnection();
+			conn.setAutoCommit(false);
+			
+			AdminDto user = userDao.userInfo(conn, userId); //dao 조회 메소드 호출 daoメソッド呼び出し
+			
+			conn.commit();
+			return user; //객체 리턴 オブジェクト·リターン
+		}catch(SQLException e) {
+			JdbcUtil.rollback(conn);
+			System.out.print(e.getMessage());
+			e.printStackTrace();
+		}finally {
+			JdbcUtil.close(conn);
+		}
+		return null;
+	}
 }
