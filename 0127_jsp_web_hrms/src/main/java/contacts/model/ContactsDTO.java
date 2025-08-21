@@ -10,7 +10,7 @@ public class ContactsDTO {
     private String phone;          // 연락처 / 連絡先
     private Date joinDate;         // 입사일 / 入社日
     private String position;       // 직급 / 職位
-    private String statusType;     // 상태 유형(연차, 출장 등) / 状態タイプ（休暇、出張など）
+    private String workStatus;     // 상태 유형(연차, 출장 등) / 状態タイプ（休暇、出張など）
     
     // 추가 필드 / 追加フィールド
     private String joinDateStr;     // 가공된 입사일(yyyy-MM-dd 문자열) / 加工された入社日(yyyy-MM-dd文字列)
@@ -19,14 +19,14 @@ public class ContactsDTO {
         // 기본 생성자 / デフォルトコンストラクタ
     }
 
-    public ContactsDTO(String departmentName, String name, String email, String phone, Date joinDate, String position, String statusType) {
+    public ContactsDTO(String departmentName, String name, String email, String phone, Date joinDate, String position, String workStatus) {
         this.departmentName = departmentName;
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.joinDate = joinDate;
         this.position = position;
-        this.statusType = statusType;
+        this.workStatus = workStatus;
     }
 
     public String getDepartmentName() {
@@ -77,12 +77,12 @@ public class ContactsDTO {
         this.position = position;
     }
 
-    public String getStatusType() {
-        return statusType;
+    public String getWorkStatus() {
+        return workStatus;
     }
 
-    public void setStatusType(String statusType) {
-        this.statusType = statusType;
+    public void setWorkStatus(String workStatus) {
+        this.workStatus = workStatus;
     }
     
     // 가공된 입사일 문자열 Getter/Setter

@@ -64,7 +64,7 @@
                 <td>${contact.phone}</td> <!-- 연락처 / 連絡先 -->
                 <td>${contact.joinDateStr}</td> <!-- 입사일(포맷 완료) / 入社日（フォーマット済み） -->
                 <td>${contact.position}</td> <!-- 직급 / 職位 -->
-                <td>${contact.statusType}</td> <!-- 상태 유형 / 状態タイプ -->
+                <td>${contact.workStatus}</td> <!-- 상태 유형 / 状態タイプ -->
             </tr>
         </c:forEach>
         </tbody>

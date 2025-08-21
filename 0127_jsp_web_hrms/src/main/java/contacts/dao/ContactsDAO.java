@@ -35,10 +35,9 @@ public class ContactsDAO {
                      "u.join_date, " +
                      "u.position, " +
                      "u.login_status, " +
-                     "s.status_type " +
+                     "u.work_status " +
                      "FROM user_tbl u " +
                      "JOIN department_tbl d ON u.department_id = d.department_id " +
-                     "LEFT JOIN user_status_tbl s ON u.user_id = s.user_id AND s.is_current = 'Y' " +
                      "WHERE u.retire_date IS NULL " +
                      "ORDER BY d.department_name, u.name";
 
@@ -50,8 +49,8 @@ public class ContactsDAO {
 
 
         	while (rs.next()) {
-                String statusType = rs.getString("status_type") != null
-                        ? rs.getString("status_type") : "정상근무";
+                String workStatus = rs.getString("work_status") != null
+                        ? rs.getString("work_status") : "정상근무";
 
                 list.add(new ContactsDTO(
                         rs.getString("department_name"),
@@ -60,7 +59,7 @@ public class ContactsDAO {
                         rs.getString("phone"),
                         rs.getDate("join_date"),
                         rs.getString("position"),
-                        statusType
+                        workStatus
                 ));
             }
         } catch (Exception e) {
