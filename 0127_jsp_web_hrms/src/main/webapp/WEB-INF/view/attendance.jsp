@@ -63,7 +63,7 @@
     <form id="formIn" method="post" action="${pageContext.request.contextPath}/attendance.do">
       <input type="hidden" name="action" value="in"/>
       <input type="hidden" name="page" value="${currentPage}"/>
-      <button type="submit" id="btnIn" class="att-btn att-btn-in" <%= hasOpen ? "disabled" : "" %>>출근</button>
+      <button type="submit" id="btnIn" class="att-btn att-btn-in" <%= hasOpen ? "disabled" : "" %>>出勤</button>
     </form>
 
     <!-- 현재 상태 뱃지 -->
@@ -71,17 +71,17 @@
           style="background:<%= hasOpen ? "#e8f5e9" : "#fff3e0" %>;
                  color:<%= hasOpen ? "#2e7d32" : "#ef6c00" %>;
                  border:1px solid <%= hasOpen ? "#c8e6c9" : "#ffe0b2" %>;">
-      현재 상태: <b><%= hasOpen ? "근무 중" : "퇴근" %></b>
+      現状: <b><%= hasOpen ? "勤務中" : "退勤" %></b>
     </span>
   </div>
 
   <!-- 하단: 출퇴근 내역 (최신순, 모든 컬럼 + 우측에 퇴근 버튼) -->
   <div class="att-card">
-    <div class="att-card-hd">출퇴근 내역</div>
+    <div class="att-card-hd">出退勤内訳</div>
     <div class="att-card-bd">
       <c:choose>
         <c:when test="${empty history}">
-          <div style="color:#888;">표시할 내역이 없습니다.</div>
+          <div style="color:#888;">表示する内訳がありません.</div>
         </c:when>
         <c:otherwise>
           <div style="overflow:auto;">
@@ -89,11 +89,11 @@
               <thead>
                 <tr>
                   
-                  <th>사원명</th>
-                  <th>근무 상태</th>
-                  <th>출근</th>
-                  <th>퇴근</th>
-                  <th>현재 상태</th>
+                  <th>社員名</th>
+                  <th>勤務状態</th>
+                  <th>出勤時間</th>
+                  <th>退勤時間</th>
+                  <th>現在</th>
                   <th></th>
                 </tr>
               </thead>
@@ -118,7 +118,7 @@
                         <input type="hidden" name="action" value="out"/>
                         <input type="hidden" name="statusId" value="${r.statusId}"/>
                         <input type="hidden" name="page" value="${currentPage}"/>
-                        <button type="submit" class="att-out-btn" <c:if test="${!r.current}">disabled</c:if>>퇴근</button>
+                        <button type="submit" class="att-out-btn" <c:if test="${!r.current}">disabled</c:if>>退勤</button>
                       </form>
                     </td>
                   </tr>
@@ -143,7 +143,7 @@
 
 <div class="att-paging">
   <a class="att-page-btn" href="${pageContext.request.contextPath}/attendance.do?page=${currentPage - 1}"
-     aria-disabled="${!hasPrev}">이전</a>
+     aria-disabled="${!hasPrev}">前</a>
 
   <c:forEach var="p" begin="${startPage}" end="${endPage}">
     <a class="att-page-num ${p == currentPage ? 'active' : ''}"
@@ -151,7 +151,7 @@
   </c:forEach>
 
   <a class="att-page-btn" href="${pageContext.request.contextPath}/attendance.do?page=${currentPage + 1}"
-     aria-disabled="${!hasNext}">다음</a>
+     aria-disabled="${!hasNext}">次</a>
 </div>
 
 <script>
@@ -161,7 +161,7 @@
     var btnIn  = document.getElementById('btnIn');
     if (btnIn) {
       btnIn.addEventListener('click', function(e){
-        alert('출근합니다');
+        alert('出勤します');
       });
     }
     // 각 행의 퇴근 버튼은 form submit 직전에 alert
@@ -170,7 +170,7 @@
       if (form && form.tagName === 'FORM') {
         var actionField = form.querySelector('input[name="action"]');
         if (actionField && actionField.value === 'out') {
-          alert('퇴근합니다');
+          alert('退勤します');
         }
       }
     }, true);
