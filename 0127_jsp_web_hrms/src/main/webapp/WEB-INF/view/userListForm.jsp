@@ -40,9 +40,12 @@ input[type="date"]:focus {
 }
 
 .board-table th {
+	display:fixed;
+	color:#f2f2f2;
+	background-color: #79baf2;
 	white-space: nowrap;
 	padding: 10px 20px;
-	border: 1px solid #dee2e6;
+	border: 1px solid #3071f2;
 	text-align: center;
 	height: auto;
 	line-height: 30px;
@@ -62,30 +65,8 @@ input[type="date"]:focus {
 .board-table thead {
 	background-color: #f1f3f5;
 }
-   .button {
-      padding: 4px 10px;
-      font-size: 13px;
-      color: #333;
-      background-color: transparent;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background-color 0.2s ease, border-color 0.2s ease;
-    }
+ 
 
-    .button:hover {
-      background-color: #f0f0f0;
-      border-color: #aaa;
-    }
-
-    .button:active {
-      background-color: #e0e0e0;
-    }
-
-    .button:focus {
-      outline: none;
-      border-color: #555;
-    }
 </style>
 </head>
 <body>
