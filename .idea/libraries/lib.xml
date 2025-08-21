@@ -6,6 +6,7 @@
       <root url="jar://$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/ojdbc6.jar!/" />
       <root url="jar://$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/commons-dbcp2-2.1.jar!/" />
       <root url="jar://$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/commons-logging-1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/jbcrypt-0.4.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
