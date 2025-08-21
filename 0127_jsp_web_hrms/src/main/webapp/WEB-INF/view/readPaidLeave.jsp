@@ -6,9 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="common/header.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="u" tagdir="/WEB-INF/tags" %>
-<%@ include file="common/header.jsp" %>
 <%
     user.model.UserDTO User = (user.model.UserDTO) session.getAttribute("loginUser");
     boolean isAdmin = User != null && "Y".equals(user.getIs_admin());
@@ -17,7 +17,7 @@
 <html>
 <head>
     <title>有給休暇申請詳細</title>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+      <link rel="stylesheet" type="text/css" href="<c:url value='/css/style.css'/>">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     <style>
         body {
@@ -31,6 +31,7 @@
             border-collapse: collapse;
             width: 60%;
             margin: 30px auto;
+            margin-top: 100px;
             background-color: #fff;
             border: 1px solid #79BAF2;
             border-radius: 8px;

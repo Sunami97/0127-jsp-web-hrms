@@ -5,18 +5,7 @@
 <%
 // [서버에서 user 객체 받기.!]
 UserDepartmentDTO userDepartment = (UserDepartmentDTO) request.getAttribute("user");
-// [로그인 or 세션 없으면 안내]
-if (userDepartment == null) {
-%>
-<h2>개인정보</h2>
-<p style="color: red;">
-	회원 정보가 없습니다.<br> 세션이 만료되었거나, 로그인 정보가 올바르지 않습니다.<br> <a
-		href="<%=request.getContextPath()%>/login.jsp" style="color: #007bff;">로그인
-		페이지로 이동</a>
-</p>
-<%
-return;
-}
+
 String position = userDepartment.getPosition() == null ? "" : userDepartment.getPosition();
 String borderColor = "#16a34a"; // 기본 (초록)
 String bgColor = "#bbf7d0"; // 얼굴 배경 (밝은 초록)

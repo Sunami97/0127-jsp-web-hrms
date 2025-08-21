@@ -23,7 +23,7 @@
     </div>
     <div class="header-right">
         <span><%= user.getName() %> 様、歓迎します.</span>
-        <form action="logout.do" method="post" style="display:inline;">
+        <form action="${pageContext.request.contextPath}/logout.do" method="post" style="display:inline;">
             <button type="submit" class="logout-btn">ログアウト</button>
         </form>
     </div>
