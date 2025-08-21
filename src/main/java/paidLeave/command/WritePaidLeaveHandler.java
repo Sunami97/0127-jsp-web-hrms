@@ -63,6 +63,9 @@ public class WritePaidLeaveHandler implements CommandHandler {
             req.setAttribute("newPaidLeaveNo", newPaidLeaveNo);
 
             return "/WEB-INF/view/paidLeaveList.jsp";
+        } catch (IllegalArgumentException e) {
+        errors.put("dateError", true); // JSP에서 ${errors.dateError} 체크 가능
+        return FORM_VIEW;
         } catch (Exception e) {
             e.printStackTrace();
             errors.put("submitFailed", true);
@@ -89,8 +92,13 @@ public class WritePaidLeaveHandler implements CommandHandler {
             Date startDate = sdf.parse(startDateStr);
             Date endDate = sdf.parse(endDateStr);
 
+            if (endDate.before(startDate)) {
+                throw new IllegalArgumentException("終了日は開始日以降でなければなりません。");
+            }
+
             // 使用日数を double 型に変換
-            double days = Double.parseDouble(daysStr);
+            long diffMillis = endDate.getTime() - startDate.getTime();
+            double days = diffMillis / (1000.0 * 60 * 60 * 24) + 1;
 
             // 申請情報をまとめてオブジェクト化
             return new PaidLeaveRequest(userId, startDate, endDate, days, reason, approvedBy);
