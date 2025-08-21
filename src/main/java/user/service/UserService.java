@@ -20,6 +20,11 @@ public class UserService {
         return userDAO.isUserExist(conn, user_id);
     }
 
+    
+    public void updateLoginStatus(Connection conn, String userId, String status) throws SQLException {
+        userDAO.updateLoginStatus(conn, userId, status);
+    }
+    
     public List<String> getAdminUsernames() {
         try (Connection conn = ConnectionProvider.getConnection()) {
             return userDAO.getAdminUsernames(conn);
@@ -28,4 +33,4 @@ public class UserService {
             return new ArrayList<>();
         }
     }
-}
+} 

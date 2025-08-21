@@ -55,6 +55,11 @@
         <url-pattern>*.do</url-pattern>
     </servlet-mapping>
 
+    <listener>
+        <listener-class>session.SessionListener</listener-class>
+    </listener>
+
+
     <filter>
         <filter-name>LoginCheckFilter</filter-name>
         <filter-class>filter.LoginCheckFilter</filter-class>
@@ -64,7 +69,7 @@
         <url-pattern>/orgChart.do</url-pattern>
         <url-pattern>/myInfo.do</url-pattern>
         <url-pattern>/contactList.do</url-pattern>
-        <url-pattern>/paidleave/*</url-pattern>
+        <url-pattern>/leaveManage.do</url-pattern>
         <url-pattern>/empManage.do</url-pattern>
     </filter-mapping>
 
@@ -77,5 +82,3 @@
         <welcome-file>default.htm</welcome-file>
     </welcome-file-list>
 </web-app>
-
-
