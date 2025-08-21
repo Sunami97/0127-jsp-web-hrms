@@ -94,7 +94,7 @@
     </tr>
     <tr>
         <th>申請者</th>
-        <td>${paidLeaveData.paidLeave.userId}, ${loginUser.position}</td>
+        <td>${paidLeaveData.paidLeave.name}, ${loginUser.position}</td>
     </tr>
     <tr>
         <th>申請日</th>

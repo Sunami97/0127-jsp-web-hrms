@@ -77,7 +77,29 @@ public class PaidLeaveDao {
         ResultSet rs = null;
         try {
             // ROWNUMを利用したページネーションSQL
-            pstmt = conn.prepareStatement("select * from (select inner_query.*, rownum as rnum from(select * from paid_leave_tbl order by leave_id desc) inner_query where rownum <= ?) where rnum > ?");
+            pstmt = conn.prepareStatement(
+                    "SELECT * FROM ( " +
+                            "    SELECT inner_query.*, ROWNUM AS rnum " +
+                            "    FROM ( " +
+                            "        SELECT p.leave_id, " +
+                            "               p.user_id, " +
+                            "               u.name," +
+                            "               p.start_date, " +
+                            "               p.end_date, " +
+                            "               p.days, " +
+                            "               p.status, " +
+                            "               p.reason, " +
+                            "               p.applied_at, " +
+                            "               p.approved_by, " +
+                            "               p.approved_at " +
+                            "        FROM paid_leave_tbl p " +
+                            "        JOIN user_tbl u ON p.user_id = u.user_id " +
+                            "        ORDER BY p.leave_id DESC " +
+                            "    ) inner_query " +
+                            "    WHERE ROWNUM <= ? " +
+                            ") " +
+                            "WHERE rnum > ?"
+            );
 
             int endRow = startRow + size;
             pstmt.setInt(1, endRow);
@@ -99,7 +121,7 @@ public class PaidLeaveDao {
 
     private PaidLeave convertPaidLeave(ResultSet rs) throws SQLException {
         return new PaidLeave(rs.getInt("leave_id"),
-                rs.getString("user_id"),
+                rs.getString("name"),
                 rs.getDate("start_date"),
                 rs.getDate("end_date"),
                 rs.getDouble("days"),
@@ -132,7 +154,21 @@ public class PaidLeaveDao {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         try {
-            pstmt = conn.prepareStatement("SELECT * FROM paid_leave_tbl WHERE leave_id = ?");
+            pstmt = conn.prepareStatement(
+                        "SELECT p.leave_id, " +
+                            "       p.user_id, " +
+                            "       u.name, " +
+                            "       p.start_date, " +
+                            "       p.end_date, " +
+                            "       p.days, " +
+                            "       p.status, " +
+                            "       p.reason, " +
+                            "       p.applied_at, " +
+                            "       p.approved_by, " +
+                            "       p.approved_at " +
+                            "FROM paid_leave_tbl p " +
+                            "JOIN user_tbl u ON p.user_id = u.user_id " +
+                            "WHERE p.leave_id = ?");
             pstmt.setInt(1, no);
             rs = pstmt.executeQuery();
             PaidLeave paidLeave = null;
