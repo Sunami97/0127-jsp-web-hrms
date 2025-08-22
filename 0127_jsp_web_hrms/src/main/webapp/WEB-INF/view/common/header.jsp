@@ -5,7 +5,7 @@
 <%
     UserDTO user = (UserDTO) session.getAttribute("loginUser");
     if (user == null) {
-        response.sendRedirect("../index.jsp");
+        response.sendRedirect("/");
         return;
     }
 %>

@@ -152,7 +152,7 @@
             <c:forEach var="leave" items="${paidLeavePage.content}">
                 <tr onclick="goToDetail(${leave.leaveId}, ${paidLeavePage.currentPage})">
                     <td>${leave.leaveId}</td>
-                    <td>${leave.userId}</td>
+                    <td>${leave.name}</td>
                     <td>${leave.startDate} ~ ${leave.endDate}</td>
                     <td>${leave.days}日</td>
                     <td>
