@@ -50,6 +50,7 @@ public class PaidLeaveDao {
                             // DBに保存された情報を元にPaidLeaveオブジェクトを返す
                             leaveId,
                             paidleave.getUserId(),
+                            null,
                             paidleave.getStartDate(),
                             paidleave.getEndDate(),
                             paidleave.getDays(),
@@ -121,6 +122,7 @@ public class PaidLeaveDao {
 
     private PaidLeave convertPaidLeave(ResultSet rs) throws SQLException {
         return new PaidLeave(rs.getInt("leave_id"),
+                rs.getString("user_id"),
                 rs.getString("name"),
                 rs.getDate("start_date"),
                 rs.getDate("end_date"),

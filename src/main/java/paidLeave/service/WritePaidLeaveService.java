@@ -49,6 +49,7 @@ public class WritePaidLeaveService {
         return new PaidLeave(
                 null,           // ID（自動採番）
                 req.getUserId(),       // ユーザーID
+                null,
                 req.getStartDate(),    // 開始日
                 req.getEndDate(),      // 終了日
                 req.getDays(),         // 使用日数
