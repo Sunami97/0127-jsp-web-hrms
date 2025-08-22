@@ -34,13 +34,13 @@
         <i class="ri-organization-chart"></i>
         <span>組織図</span>
     </a>
-    <a href="contactList.do" class="menu-box">
+    <a href="contacts.do" class="menu-box">
         <i class="ri-contacts-book-fill"></i>
         <span>連絡網</span>
     </a>
     <a href="paidleave.do" class="menu-box">
         <i class="ri-calendar-check-fill"></i>
-        <span>年次管理</span>
+        <span>有給管理</span>
     </a>
     <% if (isAdmin) { %>
         <a href="empManage.do" class="menu-box">

@@ -46,7 +46,7 @@
         <li>
             <a href="${pageContext.request.contextPath}/paidleave.do">
                 <i class="ri-calendar-check-fill"></i>
-                <span>年次管理</span>
+                <span>有給管理</span>
             </a>
         </li>
         <% if (navIsAdmin) { %>
