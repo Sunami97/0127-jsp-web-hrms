@@ -62,7 +62,7 @@
 							<option value="年休">年休</option>
 							<option value="出張">出張</option>
 						</select><br><br></label>
-						<button type="submit">追加</button>
+						<button type="submit">登録</button>
 						</div>
 					</div>	
 	</form>

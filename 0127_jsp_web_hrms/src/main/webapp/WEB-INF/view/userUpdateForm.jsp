@@ -24,7 +24,7 @@ function fire(){
 		
 	} else{
 		if(document.getElementById('dateForm').value){
-		let form = document.getElementById("userInfo");
+		let form = document.getElementById("updateForm");
 		form.action = 'fire.do';
 		form.mothod = 'post';
 		const a = confirm("本当に退社処理しますか?");
@@ -99,7 +99,7 @@ function update() {
 							<c:if test="${empty user.retireDate }">				
 								<button type="submit" onclick="fire()">退社</button>	 
 							</c:if>	     
-								<button type="submit" onclick="update()">修整</button>
+								<button type="submit" onclick="update()">修正</button>
 			</div>
 		</div>
 	</form>
