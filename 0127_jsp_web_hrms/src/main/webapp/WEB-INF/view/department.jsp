@@ -1,5 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file="common/header.jsp"%>
+<%@ include file="common/nav.jsp"%>
 
 <!DOCTYPE html>
 <html>
@@ -7,11 +9,13 @@
 <meta charset="UTF-8">
 <title>組織図</title>
 <link rel="stylesheet" type="text/css" href="css/style.css">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 <style>
 /* 조직도 컨테이너 / 組織図コンテナ */
 .org-container {
 	background-color: #fff;
-	margin: 100px auto 60px 220px; /* nav, header 고려 여백 / nav, header の余白考慮 */
+	margin: 100px auto 60px 220px;
+	/* nav, header 고려 여백 / nav, header の余白考慮 */
 	padding: 20px;
 	max-width: 900px;
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -32,6 +36,7 @@
 	cursor: pointer;
 	font-size: 14px;
 }
+
 .toggle-btn:hover {
 	background-color: #1565c0;
 }
@@ -131,33 +136,31 @@ input[type="checkbox"]:checked ~ ul {
 			<c:forEach var="deptEntry" items="${orgChartMap}">
 				<li>
 					<!-- 모든 트리가 처음부터 열려있도록 checked 추가 / すべてのツリーを最初から開いた状態にするため checked を追加 -->
-					<input type="checkbox" id="dept-${deptEntry.key.hashCode()}" checked />
-					<label for="dept-${deptEntry.key.hashCode()}">📂 ${deptEntry.key}</label>
+					<input type="checkbox" id="dept-${deptEntry.key.hashCode()}"
+					checked /> <label for="dept-${deptEntry.key.hashCode()}">📂
+						${deptEntry.key}</label>
 					<ul>
 						<c:forEach var="posEntry" items="${deptEntry.value}">
-							<li>
-								<input type="checkbox" id="pos-${posEntry.key.hashCode()}-${deptEntry.key.hashCode()}" checked />
-								<label for="pos-${posEntry.key.hashCode()}-${deptEntry.key.hashCode()}">📌 ${posEntry.key}</label>
+							<li><input type="checkbox"
+								id="pos-${posEntry.key.hashCode()}-${deptEntry.key.hashCode()}"
+								checked /> <label
+								for="pos-${posEntry.key.hashCode()}-${deptEntry.key.hashCode()}">📌
+									${posEntry.key}</label>
 								<ul>
 									<c:forEach var="user" items="${posEntry.value}">
-										<li>
-											<span
-												class="employee-name ${user.workStatus == '勤務中' ? 'icon-blue' : 'icon-gray'}"
-												data-status="${user.workStatus}">
-												👤 ${user.name}
-											</span>
-										</li>
+										<li><span
+											class="employee-name ${user.workStatus == '勤務中' ? 'icon-blue' : 'icon-gray'}"
+											data-status="${user.workStatus}"> 👤 ${user.name} </span></li>
 									</c:forEach>
-								</ul>
-							</li>
+								</ul></li>
 						</c:forEach>
 					</ul>
 				</li>
 			</c:forEach>
 		</ul>
 	</div>
-
-<script>
+	<%@ include file="common/footer.jsp"%>
+	<script>
 /* 전체 열기/닫기 제어 함수 / 全体開閉制御関数 */
 let allOpen = true; // 현재 상태를 기억 / 現在の状態を記憶
 

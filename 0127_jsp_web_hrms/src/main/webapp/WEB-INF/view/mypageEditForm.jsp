@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="common/header.jsp" %>
+<%@ include file="common/nav.jsp" %>
 <%@ page import="myPage.model.UserDepartmentDTO"%>
 <%
     // [컨트롤러에서 전달받은 유저 정보] 
@@ -44,6 +45,7 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <!-- 아이콘 폰트 라이브러리 (FontAwesome 등) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     <style>
         /* [페이지 전체 배경 및 폰트] */
         body {

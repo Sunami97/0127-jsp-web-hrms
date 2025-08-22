@@ -15,8 +15,9 @@ public class PaidLeave {
     private String approvedBy;      // 承認者ID（null可）
     private Date approvedAt;        // 承認日（null可）
 
-    public PaidLeave(Integer leaveId, String name, Date startDate, Date endDate, double days, String status, String reason, Date appliedAt, String approvedBy, Date approvedAt) {
+    public PaidLeave(Integer leaveId, String userId, String name, Date startDate, Date endDate, double days, String status, String reason, Date appliedAt, String approvedBy, Date approvedAt) {
         this.leaveId = leaveId;
+        this.userId = userId;
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;

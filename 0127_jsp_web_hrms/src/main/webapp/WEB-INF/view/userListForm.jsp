@@ -90,7 +90,7 @@ input[type="date"]:focus {
 					<th class="text-center">管理者 権限</th>
 					<th class="text-center">状態</th>
 					<th class="text-center">勤務状態</th>
-					<th class="text-center">ログイン状態</th>
+					<!-- <th class="text-center">ログイン状態</th> -->
 				</tr>
 			</thead>
 			<tbody>
@@ -119,7 +119,7 @@ input[type="date"]:focus {
 						<td>${user.isAdmin}</td>
 						<td>${user.empStatus}</td>
 						<td>${user.workStatus}</td>
-						<td>${user.loginStatus}</td>
+						<%-- <td>${user.loginStatus}</td> --%>
 					</tr>
 				</c:forEach>
 

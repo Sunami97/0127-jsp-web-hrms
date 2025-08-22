@@ -13,10 +13,11 @@ body {
   min-height: 100vh;
 }
 
-form {
+.register-form {
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  margin-top:30px;
 }
 
 .container {
@@ -60,7 +61,7 @@ input[type="radio"] {
   margin-right: 5px;
 }
 
-button {
+.admin-button {
   width: 50%;
   height: 45px;
   background-color: #ffffff;

@@ -5,132 +5,150 @@
   Time: 오후 2:28
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ include file="common/header.jsp" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ include file="common/header.jsp"%>
+<%@ include file="common/nav.jsp"%>
 <html>
 <head>
-    <title>有給休暇申請</title>
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="<c:url value='/css/style.css'/>">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f8ff;
-            color: #333;
-        }
+<title>有給休暇申請</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+	rel="stylesheet">
+<link rel="stylesheet" type="text/css"
+	href="<c:url value='/css/style.css'/>">
+	<link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+<style>
+body {
+	font-family: Arial, sans-serif;
+	background-color: #f5f8ff;
+	color: #333;
+}
 
-        h2 {
-            text-align: center;
-            color: #2E83F2;
-            margin-top: 100px;
-        }
+.container {
+	background-color: #fff;
+	margin: 30px auto 60px 220px;
+	/* nav, header 고려 여백 / nav, header の余白考慮 */
+	padding: 20px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	border-radius: 8px;
+	position: relative; /* 버튼 위치를 컨테이너 기준으로 */
+}
 
-        #paidLeaveform {
-            width: 60%;
-            margin: 30px auto;
-            margin-bottom: 100px;
-            padding: 20px;
-            background-color: #ffffff;
-            border: 1px solid #79BAF2;
-            border-radius: 8px;
-        }
+h2 {
+	text-align: center;
+	color: #2E83F2;
+	margin-top: 100px;
+}
 
-        label {
-            display: block;
-            margin-top: 15px;
-            font-weight: bold;
-            color: #2E83F2;
-        }
+#paidLeaveform {
+	width: 60%;
+	margin: 30px auto;
+	margin-bottom: 100px;
+	padding: 20px;
+	background-color: #ffffff;
+	border: 1px solid #79BAF2;
+	border-radius: 8px;
+}
 
-        input[type="text"],
-        input[type="date"],
-        input[type="number"],
-        textarea,
-        select {
-            width: 100%;
-            padding: 10px;
-            margin-top: 6px;
-            border: 1px solid #79BAF2;
-            border-radius: 5px;
-            box-sizing: border-box;
-            background-color: #f9faff;
-        }
+label {
+	display: block;
+	margin-top: 15px;
+	font-weight: bold;
+	color: #2E83F2;
+}
 
-        textarea {
-            resize: none;
-        }
+input[type="text"], input[type="date"], input[type="number"], textarea,
+	select {
+	width: 100%;
+	padding: 10px;
+	margin-top: 6px;
+	border: 1px solid #79BAF2;
+	border-radius: 5px;
+	box-sizing: border-box;
+	background-color: #f9faff;
+}
 
-        input[type="submit"] {
-            display: block;
-            margin: 25px auto 0;
-            padding: 10px 20px;
-            background-color: #2E83F2;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 15px;
-            cursor: pointer;
-        }
+textarea {
+	resize: none;
+}
 
-        input[type="submit"]:hover {
-            background-color: #3071F2;
-        }
+input[type="submit"] {
+	display: block;
+	margin: 25px auto 0;
+	padding: 10px 20px;
+	background-color: #2E83F2;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	font-size: 15px;
+	cursor: pointer;
+}
 
-        p {
-            text-align: center;
-            font-size: 14px;
-            color: #666;
-        }
+input[type="submit"]:hover {
+	background-color: #3071F2;
+}
 
-        .date-card {
-            border: 1px solid #79BAF2;
-            border-radius: 6px;
-            background: #f9faff;
-            padding: 10px 15px;
-            margin: 8px 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+p {
+	text-align: center;
+	font-size: 14px;
+	color: #666;
+}
 
-        .date-label {
-            font-weight: bold;
-            color: #2E83F2;
-        }
+.date-card {
+	border: 1px solid #79BAF2;
+	border-radius: 6px;
+	background: #f9faff;
+	padding: 10px 15px;
+	margin: 8px 0;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
 
-        .date-options label {
-            margin-left: 10px;
-            color: #333;
-            font-size: 14px;
-        }
-    </style>
+.date-label {
+	font-weight: bold;
+	color: #2E83F2;
+}
+
+.date-options label {
+	margin-left: 10px;
+	color: #333;
+	font-size: 14px;
+}
+</style>
 </head>
 <body>
-    <h2>有給休暇申請書</h2>
-    <p><strong>ユーザーID:</strong> ${sessionScope.loginUser.user_id}</p>
-    <form id="paidLeaveform" action="write.do" method="post">
-        <input type="hidden" name="name" value="${name}" />
-        <input type="hidden" name="status" value="申請中" />
-        <input type="hidden" name="appliedAt" value="<%= new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date()) %>" />
+	<div class="container">
+	<h2>有給休暇申請書</h2>
+	<p>
+		<strong>ユーザーID:</strong> ${sessionScope.loginUser.user_id}
+	</p>
+	<form id="paidLeaveform" action="write.do" method="post">
+		<input type="hidden" name="name" value="${name}" /> <input
+			type="hidden" name="status" value="申請中" /> <input type="hidden"
+			name="appliedAt"
+			value="<%=new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date())%>" />
 
-        <label>有給休暇開始日:</label>
-        <input type="date" id="startDate" name="startDate" value="${param.startDate}" required /><br/><br/>
+		<label>有給休暇開始日:</label> <input type="date" id="startDate"
+			name="startDate" value="${param.startDate}" required /><br />
+		<br /> <label>有給休暇終了日:</label> <input type="date" id="endDate"
+			name="endDate" value="${param.endDate}" required /><br />
+		<br />
 
-        <label>有給休暇終了日:</label>
-        <input type="date" id="endDate" name="endDate" value="${param.endDate}" required /><br/><br/>
+		<c:if test="${errors.dateError}">
+			<p style="color: red;">終了日は開始日以降でなければなりません。</p>
+		</c:if>
 
-        <c:if test="${errors.dateError}">
-            <p style="color:red;">終了日は開始日以降でなければなりません。</p>
-        </c:if>
+		<div id="halfDayContainer"></div>
 
-        <div id="halfDayContainer"></div>
+		<label>使用日数（例: 0.5、1）:</label> <input type="number" name="days"
+			id="days" readonly /><br />
+		<br />
 
-        <label>使用日数（例: 0.5、1）:</label>
-        <input type="number" name="days" id="days" readonly /><br/><br/>
-
-        <script>
+		<script>
             const startDateInput = document.getElementById("startDate");
             const endDateInput = document.getElementById("endDate");
             const container = document.getElementById("halfDayContainer");
@@ -208,19 +226,19 @@
             endDateInput.addEventListener("change", createHalfDayUI);
         </script>
 
-        <label>申請理由:</label><br/>
-        <textarea name="reason" rows="4" cols="50" required>${param.reason}</textarea><br/><br/>
-
-        <label for="approvedBy">承認者選択</label>
-        <select name="approvedBy" id="approvedBy" required>
-            <option value="">-- 承認者を選択してください --</option>
-            <c:forEach var="admin" items="${adminnames}">
-                <option value="${admin}">${admin}</option>
-            </c:forEach>
-        </select><br/><br/>
-
-        <input type="submit" value="申請" />
-    </form>
-    <%@ include file="common/footer.jsp" %>
+		<label>申請理由:</label><br />
+		<textarea name="reason" rows="4" cols="50" required>${param.reason}</textarea>
+		<br />
+		<br /> <label for="approvedBy">承認者選択</label> <select name="approvedBy"
+			id="approvedBy" required>
+			<option value="">-- 承認者を選択してください --</option>
+			<c:forEach var="admin" items="${adminnames}">
+				<option value="${admin}">${admin}</option>
+			</c:forEach>
+		</select><br />
+		<br /> <input type="submit" value="申請" />
+	</form>
+	</div>
+	<%@ include file="common/footer.jsp"%>
 </body>
 </html>

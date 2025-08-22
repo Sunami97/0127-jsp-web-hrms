@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="common/header.jsp"%>
+<%@ include file="common/nav.jsp"%>
 <%@ page import="myPage.model.UserDepartmentDTO"%>
 <%
 // [서버에서 user 객체 받기.!]
@@ -14,20 +15,20 @@ String bodyColor = "#fbbf24"; // 옷색
 
 // 직급별 컬러만 변경
 if ("部長".equals(position)) {
-borderColor = "#d4af37";
-bgColor = "#fef3c7";
-hairColor = "#78350f";
-bodyColor = "#fde68a";
+	borderColor = "#d4af37";
+	bgColor = "#fef3c7";
+	hairColor = "#78350f";
+	bodyColor = "#fde68a";
 } else if ("課長".equals(position)) {
-borderColor = "#2563eb";
-bgColor = "#dbeafe";
-hairColor = "#334155";
-bodyColor = "#3b82f6";
+	borderColor = "#2563eb";
+	bgColor = "#dbeafe";
+	hairColor = "#334155";
+	bodyColor = "#3b82f6";
 } else if ("社長".equals(position)) {
-borderColor = "#0f172a";
-bgColor = "#f1f5f9";
-hairColor = "#0f172a";
-bodyColor = "#94a3b8";
+	borderColor = "#0f172a";
+	bgColor = "#f1f5f9";
+	hairColor = "#0f172a";
+	bodyColor = "#94a3b8";
 }
 String displayPosition = position.isEmpty() ? "직원" : position;
 %>
@@ -40,6 +41,9 @@ String displayPosition = position.isEmpty() ? "직원" : position;
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<link
+	href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+	rel="stylesheet">
 <style>
 body {
 	font-family: 'Segoe UI', Arial, sans-serif;
@@ -266,7 +270,7 @@ body {
         <text x="70" y="120" text-anchor="middle" font-size="17"
 						font-weight="bold" fill="<%=borderColor%>"><%=displayPosition%></text>
     </svg>
-				
+
 			</div>
 			<div class="profile-name"><%=userDepartment.getName()%></div>
 			<div class="profile-pos">

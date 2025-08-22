@@ -38,7 +38,7 @@
             </a>
         </li>
         <li>
-            <a href="${pageContext.request.contextPath}/contactList.do">
+            <a href="${pageContext.request.contextPath}/contacts.do">
                 <i class="ri-contacts-book-fill"></i>
                 <span>連絡網</span>
             </a>
