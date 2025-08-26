@@ -1,11 +1,14 @@
 package admin.command;
 
 import java.util.Arrays;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import admin.dto.AdminDto;
 import admin.service.AdminInsertService;
+import admin.service.AdminSelectService;
 import mvc.command.CommandHandler;
 import util.BCryptUtil;
 
@@ -13,6 +16,7 @@ public class AdminInsertHandler implements CommandHandler {
 
 	private static final String FORM_VIEW = "/WEB-INF/adminForm.jsp";
 	private AdminInsertService userService = new AdminInsertService();
+	private AdminSelectService userSelectService = new AdminSelectService();
 
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
@@ -109,8 +113,12 @@ public class AdminInsertHandler implements CommandHandler {
 		String[] resizedArray = Arrays.copyOf(insertList, i);
 		String[] reqArray = Arrays.copyOf(reqVal, i);	//반복한 횟수에 맞쳐 배열 수 조절 繰り返した回数に合わせて配列数を調節
 
-
 		userRequest.serviceInsert(resizedArray, reqArray); //추가서비스의 메소드 호출 追加サービスのメソッド呼び出し
+		List<AdminDto> user = userSelectService.AllSelect();
+		int count = user.size();	//count변수에 검색된 인원 수를 담음 count変数に検索された人数を含める
+		req.setAttribute("count", count);
+		req.setAttribute("user", user);	//리퀘스트 객체에 count,user 저장 リクエストオブジェクトにcount、userを保存
+	
 		return "WEB-INF/view/adminForm.jsp"; //관리자 페이지로 리턴 管理者ページにリターン
 	}
 }
