@@ -152,8 +152,7 @@ td {
 			<c:if
 				test="${loginUser.user_id == paidLeaveData.paidLeave.userId
                   && paidLeaveData.paidLeave.status != '承認'}">
-				<a href="delete.do?leaveId=${paidLeaveData.paidLeave.leaveId}"
-					onclick="return confirm('本当に削除しますか？');">削除</a>
+				
 			</c:if>
 		</div>
 
