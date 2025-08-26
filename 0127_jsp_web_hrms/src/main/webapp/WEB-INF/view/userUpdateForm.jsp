@@ -1,14 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="common/header.jsp"%>
 <%@ include file="common/nav.jsp"%>
-<!DOCTYPE html>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 request.setCharacterEncoding("UTF-8");
 String userI = request.getParameter("updateId");
 %>
-
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -69,9 +68,10 @@ String userI = request.getParameter("updateId");
 </script>
 </head>
 <body>
+	<div class="container">
 	<form id="updateForm" method="post">
 		<div>
-			<div class="container">
+			<div>
 				<h2>社員情報修正ページ</h2>
 				<input type="hidden" name="userId" value="${user.userId }">
 				* 名前 <br> <input type="text" name="name" value="${user.name}"><br>
@@ -113,6 +113,7 @@ String userI = request.getParameter("updateId");
 			</div>
 		</div>
 	</form>
+	</div>
 	<%@ include file="common/footer.jsp"%>
 </body>
 </html>
