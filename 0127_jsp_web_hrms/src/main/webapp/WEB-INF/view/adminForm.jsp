@@ -91,6 +91,7 @@
 			</tr>
 		</table>
 	</form>
+	<!-- 사원 추가 command 호출 社員追加command呼び出し -->
 	<button type="button" onclick="registerForm()" class="btn-add">社員登録</button>
 	<!-- 결과을 출력한 jsp페이지를 불러옴 結果を出力したjspページを読み込む -->
 	<jsp:include page="/WEB-INF/view/userListForm.jsp" flush="false" />

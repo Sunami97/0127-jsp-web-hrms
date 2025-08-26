@@ -67,22 +67,10 @@
 						<option value="13">法務部</option>
 						<option value="14">企画部</option>
 				</select><br>
-				<br></label> <label>* 管理者 権限 <br> N<input type="radio"
-					name="isAdmin" checked="checked" value="N"> Y<input
-					type="radio" name="isAdmin" value="Y"><br>
-				<br></label> <label>* 状態 <br>
-				<select name="empStatus">
-						<option value="在職">在職</option>
-						<option value="休職">休職</option>
-						<option value="退職">退職</option>
-				</select><br>
-				<br></label> <label>* 勤務状態 <br>
-				<select name="workStatus">
-						<option value="勤務中">勤務中</option>
-						<option value="年休">年休</option>
-						<option value="出張">出張</option>
-				</select><br>
-				<br></label>
+				<br></label> <label>* 管理者 権限 <br> 
+				N<input type="radio" name="isAdmin" checked="checked" value="N"> 
+				Y<input type="radio" name="isAdmin" value="Y"><br>
+				<br></label> 
 				<button type="submit" class="admin-button">登録</button>
 			</div>
 		</div>

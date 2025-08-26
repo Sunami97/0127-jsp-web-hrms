@@ -21,7 +21,6 @@ String userI = request.getParameter("updateId");
 <script type="text/javascript">
 	//퇴사일 설정과 제출 기능 退社日の設定と提出機能
 	function fire() {
-
 		var con = document.getElementById('dateForm');
 		if (con.style.display == "none") {
 
